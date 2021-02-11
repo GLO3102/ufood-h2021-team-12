@@ -1,0 +1,41 @@
+h3 {
+  margin: 0;
+}
+
+.restaurantBannerCore {
+  background-color: darkgray;
+}
+
+.restaurantBannerName {
+  margin: 0;
+  font-size: 45px;
+}
+
+.colorSchemeFriend {
+  color: cyan;
+}
+
+.colorSchemeGlobal {
+  color: gold;
+}
+
+.ratingFormat {
+  display: flex;
+  flex-direction: row;
+}
+
+.restaurantBannerRatings {
+  display: flex;
+  flex-direction: row;
+}
+
+.ratingHeader {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.whatDoesThisMean {
+  font-size: 9px;
+  padding: 0 1% 0 1%;
+}
