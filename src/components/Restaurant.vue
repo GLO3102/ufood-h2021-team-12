@@ -2,11 +2,19 @@
   <div>
     <div class="restaurantBannerCore">
       <h1 class="restaurantBannerName">Normandin Duberger</h1>
-      <a class="restaurantBannerFoodChain" href="https://restaurantnormandin.com/en/">Normandin</a>
+      <div class="restaurantBannerFoodChainBlock">
+        <a class="restaurantBannerFoodChain" href="https://restaurantnormandin.com/en/">Normandin</a>
+        <img class="restaurantBannerFoodChainLogo" src="https://restaurantnormandin.com/img/logo.svg" alt="Normandin Logo">
+      </div>
       <div class="restaurantBannerAddressInfo">
-        <div><a href="https://www.google.com/maps/place/Restaurant+Normandin/@46.8114671,-71.2968759,15z/data=!4m5!3m4!1s0x0:0x472d926e469834b8!8m2!3d46.8114671!4d-71.2968759">2185 Boulevard Père-Lelièvre, Québec, QC G1P 2X2</a></div>
-        <div><a href="callto:4186834967">call (418) 683-4967</a></div>
-        <div><a class="restaurantDescriptorTag" href="">Dine-in</a> | <a class="restaurantDescriptorTag" href="">Curbside pickup</a> | <a class="restaurantDescriptorTag" href="">No-contact delivery</a></div>
+        <div class="restaurantBannerAddressInfoUpper">
+          <div><a href="https://www.google.com/maps/place/Restaurant+Normandin/@46.8114671,-71.2968759,15z/data=!4m5!3m4!1s0x0:0x472d926e469834b8!8m2!3d46.8114671!4d-71.2968759">2185 Boulevard Père-Lelièvre, Québec, QC G1P 2X2</a></div>
+          <div class="flexSeparator"></div>
+          <div><a href="callto:4186834967">call (418) 683-4967</a></div>
+        </div>
+        <div class="restaurantBannerAddressInfoLower">
+          <a class="restaurantDescriptorTag" href="">Dine-in</a> | <a class="restaurantDescriptorTag" href="">Curbside pickup</a> | <a class="restaurantDescriptorTag" href="">No-contact delivery</a>
+        </div>
       </div>
       <div class="restaurantBannerRatings">
         <div class="ratingBlock">
@@ -53,37 +61,37 @@
           <div class="restaurantHoursTimeTable">
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Monday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Thursday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Friday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Saturday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Sunday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
           </div>
@@ -91,37 +99,37 @@
           <div class="restaurantHoursTimeTable">
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Monday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Thursday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Friday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Saturday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Sunday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
           </div>
@@ -129,37 +137,37 @@
           <div class="restaurantHoursTimeTable">
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Monday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Thursday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Friday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Saturday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Sunday</div>
-              <div class="restaurantHoursTimeSlotSeparator"></div>
+              <div class="flexSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
           </div>

@@ -2,21 +2,51 @@ h3 {
   margin: 0;
 }
 
+.flexSeparator {
+  display: flex;
+  flex-grow: 1;
+}
+
 .restaurantBannerCore {
   background-color: darkgray;
 }
 
+.restaurantBannerFoodChainBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
 .restaurantBannerName {
+  display: flex;
+  justify-content: center;
+  align-content: center;
   margin: 0;
   font-size: 45px;
 }
 
-.colorSchemeFriend {
-  color: gold;
+.restaurantBannerFoodChainLogo {
+  justify-content: center;
+  align-content: center;
+  width: 50%;
+  margin: 0;
 }
 
-.colorSchemeGlobal {
-  color: cyan;
+.restaurantBannerAddressInfo {
+  padding: 0 5% 0 5%;
+}
+
+.restaurantBannerAddressInfoUpper {
+  display: flex;
+  flex-direction: row;
+}
+
+.restaurantBannerAddressInfoLower {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
 }
 
 .ratingFormat {
@@ -27,6 +57,14 @@ h3 {
 .restaurantBannerRatings {
   display: flex;
   flex-direction: row;
+}
+
+.colorSchemeFriend {
+  color: gold;
+}
+
+.colorSchemeGlobal {
+  color: cyan;
 }
 
 .ratingHeader {
@@ -70,11 +108,6 @@ h3 {
   flex-direction: row;
   justify-content: center;
   align-content: center;
-}
-
-.restaurantHoursTimeSlotSeparator {
-  display: flex;
-  flex-grow: 1;
 }
 
 .restaurantHoursTimeSlotHeader {
