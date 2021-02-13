@@ -2,10 +2,6 @@ h3 {
   margin: 0;
 }
 
-h4 {
-  margin: 0;
-}
-
 .restaurantBannerCore {
   background-color: darkgray;
 }
@@ -16,11 +12,11 @@ h4 {
 }
 
 .colorSchemeFriend {
-  color: cyan;
+  color: gold;
 }
 
 .colorSchemeGlobal {
-  color: gold;
+  color: cyan;
 }
 
 .ratingFormat {
@@ -49,7 +45,41 @@ h4 {
   flex-direction: row;
 }
 
+.restaurantHoursCore {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+}
+
+.restaurantHoursHeader {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0;
+}
+
+.restaurantHoursTimeTable {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
 .restaurantHoursTimeSlot {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.restaurantHoursTimeSlotSeparator {
+  display: flex;
+  flex-grow: 1;
+}
+
+.restaurantHoursTimeSlotHeader {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0;
 }

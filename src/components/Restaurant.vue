@@ -10,31 +10,31 @@
       </div>
       <div class="restaurantBannerRatings">
         <div class="ratingBlock">
-          <div class="restaurantRating colorSchemeGlobal">
-            <div class="ratingHeader">
-              <h3>Restaurant rating</h3> <a class="whatDoesThisMean" href="">what does this mean?</a>
-            </div>
-            <div class="ratingElementFormat">★ ★ ★</div>
-          </div>
           <div class="restaurantRating colorSchemeFriend">
             <div class="ratingHeader">
               <h3>Restaurant rating</h3> <a class="whatDoesThisMean" href="">what does this mean?</a>
             </div>
             <div class="ratingElementFormat">★ ★ ★ ★</div>
           </div>
-        </div>
-        <div class="ratingBlock">
           <div class="restaurantRating colorSchemeGlobal">
             <div class="ratingHeader">
-              <h3>Cost rating</h3> <a class="whatDoesThisMean" href="">what does this mean?</a>
+              <h3>Restaurant rating</h3> <a class="whatDoesThisMean" href="">what does this mean?</a>
             </div>
-            <div class="ratingElementFormat">$$</div>
+            <div class="ratingElementFormat">★ ★ ★</div>
           </div>
+        </div>
+        <div class="ratingBlock">
           <div class="restaurantRating colorSchemeFriend">
             <div class="ratingHeader">
               <h3>Cost rating</h3> <a class="whatDoesThisMean" href="">what does this mean?</a>
             </div>
             <div class="ratingElementFormat">$</div>
+          </div>
+          <div class="restaurantRating colorSchemeGlobal">
+            <div class="ratingHeader">
+              <h3>Cost rating</h3> <a class="whatDoesThisMean" href="">what does this mean?</a>
+            </div>
+            <div class="ratingElementFormat">$$</div>
           </div>
         </div>
       </div>
@@ -48,97 +48,118 @@
           Oh no it's grid time
         </div>
         <div class="restaurantHoursCore">
-          <h3>Hours</h3>
+          <h3 class="restaurantHoursHeader">Hours</h3>
+          <h4 class="restaurantHoursTimeSlotHeader">At location</h4>
           <div class="restaurantHoursTimeTable">
-            <h4>At location</h4>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Monday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Thursday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Friday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Saturday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Sunday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
           </div>
+          <h4 class="restaurantHoursTimeSlotHeader">Delivery</h4>
           <div class="restaurantHoursTimeTable">
-            <h4>Delivery</h4>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Monday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Thursday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Friday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Saturday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-22:00</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Sunday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-21:00</div>
             </div>
           </div>
+          <h4 class="restaurantHoursTimeSlotHeader">Takeout</h4>
           <div class="restaurantHoursTimeTable">
-            <h4>Takeout</h4>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Monday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Thursday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Friday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Saturday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
             <div class="restaurantHoursTimeSlot">
               <div class="restaurantHoursDayOfTheWeek">Sunday</div>
+              <div class="restaurantHoursTimeSlotSeparator"></div>
               <div class="restaurantHoursOpen">9:00-19:30</div>
             </div>
           </div>
