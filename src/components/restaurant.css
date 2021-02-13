@@ -2,6 +2,10 @@ h3 {
   margin: 0;
 }
 
+h4 {
+  margin: 0;
+}
+
 .restaurantBannerCore {
   background-color: darkgray;
 }
@@ -41,6 +45,11 @@ h3 {
 }
 
 .restaurantInfoDualPanel {
+  display: flex;
+  flex-direction: row;
+}
+
+.restaurantHoursTimeSlot {
   display: flex;
   flex-direction: row;
 }

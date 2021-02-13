@@ -48,7 +48,100 @@
           Oh no it's grid time
         </div>
         <div class="restaurantHoursCore">
-          All hours stuff
+          <h3>Hours</h3>
+          <div class="restaurantHoursTimeTable">
+            <h4>At location</h4>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Monday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Thursday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Friday</div>
+              <div class="restaurantHoursOpen">9:00-22:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Saturday</div>
+              <div class="restaurantHoursOpen">9:00-22:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Sunday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+          </div>
+          <div class="restaurantHoursTimeTable">
+            <h4>Delivery</h4>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Monday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Thursday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Friday</div>
+              <div class="restaurantHoursOpen">9:00-22:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Saturday</div>
+              <div class="restaurantHoursOpen">9:00-22:00</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Sunday</div>
+              <div class="restaurantHoursOpen">9:00-21:00</div>
+            </div>
+          </div>
+          <div class="restaurantHoursTimeTable">
+            <h4>Takeout</h4>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Monday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Tuesday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Wednesday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Thursday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Friday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Saturday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+            <div class="restaurantHoursTimeSlot">
+              <div class="restaurantHoursDayOfTheWeek">Sunday</div>
+              <div class="restaurantHoursOpen">9:00-19:30</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="restaurantMapCore">
