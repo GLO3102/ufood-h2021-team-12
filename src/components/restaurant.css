@@ -39,3 +39,8 @@ h3 {
   font-size: 9px;
   padding: 0 1% 0 1%;
 }
+
+.restaurantInfoDualPanel {
+  display: flex;
+  flex-direction: row;
+}
