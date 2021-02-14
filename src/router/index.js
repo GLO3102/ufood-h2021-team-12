@@ -14,7 +14,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/restaurant",
+      path: "/restaurant/normandin/duberger",
       name: "Restaurant",
       component: Restaurant
     },

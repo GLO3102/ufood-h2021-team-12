@@ -1,5 +1,7 @@
-h3 {
+body {
   margin: 0;
+  color: #FFF;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .flexSeparator {
@@ -13,15 +15,21 @@ h3 {
 
 .restaurantBannerFoodChainBlock {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.restaurantBannerFoodChain {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-content: center;
 }
 
 .restaurantBannerName {
   display: flex;
-  justify-content: center;
-  align-content: center;
+  align-self: center;
   margin: 0;
   font-size: 45px;
 }
@@ -34,6 +42,7 @@ h3 {
 }
 
 .restaurantBannerAddressInfo {
+  background-color: #CCC;
   padding: 0 5% 0 5%;
 }
 
@@ -44,6 +53,40 @@ h3 {
 
 .restaurantBannerAddressInfoLower {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.ratingBlock {
+  display: flex;
+  background-color: #555;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  min-width: 170px;
+  width: 17%;
+}
+
+.restaurantRating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.ratingHeader {
+  display: inline;
+  align-self: center;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  margin: 0;
+}
+
+.ratingElementFormat {
+  display: inline;
+  align-self: center;
   flex-direction: row;
   justify-content: center;
   align-content: center;
@@ -67,26 +110,101 @@ h3 {
   color: cyan;
 }
 
-.ratingHeader {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-}
-
 .whatDoesThisMean {
   font-size: 9px;
   padding: 0 1% 0 1%;
 }
 
+.restaurantBannerTags {
+  display: flex;
+  background-color: #CCC;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
 .restaurantInfoDualPanel {
   display: flex;
   flex-direction: row;
+  background-color: #555;
+  padding: 0 2% 0 2%;
+}
+
+.restaurantPhotoGalleryCore {
+  display: flex;
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.column {
+  flex: 32%;
+  max-width: 32%;
+  margin: 0.5%;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 49%;
+    max-width: 49%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 99%;
+    max-width: 99%;
+  }
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
 }
 
 .restaurantHoursCore {
   display: flex;
   flex-direction: column;
-  width: 170px;
+  align-content: center;
+  justify-content: center;
+}
+
+.restaurantHoursColumn {
+  align-self: center;
+  justify-content: center;
+  width: 200px;
+  color: black;
+  border: solid 5px #333;
+  border-bottom: 0;
+  background-color: darkgray;
+  padding: 5px 10px;
+}
+
+.restaurantHoursColumnSetter {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 800px) {
+  .restaurantInfoDualPanel {
+    flex-direction: column;
+  }
+  .restaurantHoursColumnSetter {
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .restaurantHoursColumnSetter {
+    flex-direction: column;
+  }
 }
 
 .restaurantHoursHeader {
@@ -115,4 +233,64 @@ h3 {
   justify-content: center;
   align-content: center;
   margin: 0;
+}
+
+.map {
+  width: 100%;
+}
+
+.restaurantReview {
+  display: flex;
+  flex-direction: row;
+  border: 5px solid #333;
+  border-bottom-width: 0;
+  background-color: #555;
+}
+
+.restaurantReviewRight {
+  flex-direction: column;
+  flex: 1;
+}
+
+.restaurantReviewHeader {
+  background-color: #555;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: center;
+}
+
+.restaurantReviewProfileName {
+  margin: 0;
+}
+
+.restaurantReviewName {
+  margin: 0;
+}
+
+.restaurantReviewSpacer0 {
+  display: flex;
+  flex: 1;
+  max-width: 1%;
+  min-width: 5px;
+}
+
+.restaurantReviewSpacer1 {
+  display: flex;
+  flex: 1;
+  max-width: 1%;
+  min-width: 10px;
+}
+
+.restaurantReviewSpacer2 {
+  display: flex;
+  flex: 1;
+  max-width: 5%;
+  min-width: 5px;
+}
+
+.restaurantReviewContent {
+  padding: 3px;
+  min-height: 100px;
+  background-color: darkgray;
 }
