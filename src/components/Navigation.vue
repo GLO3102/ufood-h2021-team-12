@@ -3,7 +3,7 @@
   <nav>
     <!-- The navigation menu -->
 <div class="navbar">
-  <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+  <router-link to="/" tag="div"><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link>
   <a href="#"><input type="text" placeholder="Search..">
     <i class="fa fa-fw fa-search"></i></a>
   <div class="dropdown">
