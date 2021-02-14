@@ -2,8 +2,8 @@
   <div>
     <div class="restaurantBannerCore">
       <h1 class="restaurantBannerName">Normandin Duberger</h1>
-      <div class="restaurantBannerFoodChainBlock">
-        <a class="restaurantBannerFoodChain" href="https://restaurantnormandin.com/en/restaurant/duberger/">
+      <div class="restaurantBannerFoodChainBlock contentFlexCentered">
+        <a class="restaurantBannerFoodChain contentFlexCentered" href="https://restaurantnormandin.com/en/restaurant/duberger/">
           <img class="restaurantBannerFoodChainLogo" src="https://restaurantnormandin.com/img/logo.svg" alt="Normandin Logo">
         </a>
       </div>
@@ -13,18 +13,18 @@
           <div class="flexSeparator"></div>
           <div><a href="callto:4186834967">call (418) 683-4967</a></div>
         </div>
-        <div class="restaurantBannerAddressInfoLower">
+        <div class="restaurantBannerAddressInfoLower contentFlexCentered">
           <a class="restaurantDescriptorTag" href="../../public/restaurant/search/s=?dine_in">Dine-in</a> | <a class="restaurantDescriptorTag" href="../../public/restaurant/search/s=?curbside_pickup">Curbside pickup</a> | <a class="restaurantDescriptorTag" href="../../public/restaurant/search/s=?no_contact_delivery">No-contact delivery</a>
         </div>
       </div>
       <div class="restaurantBannerRatings">
         <div class="flexSeparator"></div>
         <div class="ratingBlock">
-          <div class="restaurantRating colorSchemeFriend">
+          <div class="restaurantRating colorSchemeFriend contentFlexCentered">
             <h3 class="ratingHeader">Restaurant rating</h3>
             <div class="ratingElementFormat">★★★★</div>
           </div>
-          <div class="restaurantRating colorSchemeGlobal">
+          <div class="restaurantRating colorSchemeGlobal contentFlexCentered">
             <h3 class="ratingHeader">Restaurant rating</h3>
             <div class="ratingElementFormat">★★★</div>
           </div>
@@ -32,18 +32,18 @@
         <div class="flexSeparator"></div>
         <div class="flexSeparator"></div>
         <div class="ratingBlock">
-          <div class="restaurantRating colorSchemeFriend">
+          <div class="restaurantRating colorSchemeFriend contentFlexCentered">
             <h3 class="ratingHeader">Cost rating</h3>
             <div class="ratingElementFormat">$</div>
           </div>
-          <div class="restaurantRating colorSchemeGlobal">
+          <div class="restaurantRating colorSchemeGlobal contentFlexCentered">
             <h3 class="ratingHeader">Cost rating</h3>
             <div class="ratingElementFormat">$$</div>
           </div>
         </div>
         <div class="flexSeparator"></div>
       </div>
-      <div class="restaurantBannerTags">
+      <div class="restaurantBannerTags contentFlexCentered">
         <a class="restaurantDescriptorTag" href="../../public/restaurant/search/f=?pizza">Pizza</a>,
         <a class="restaurantDescriptorTag" href="../../public/restaurant/search/t=?family_restaurant">Family Restaurant</a>,
         <a class="restaurantDescriptorTag" href="../../public/restaurant/search/t=?sports_bar">Sports Bar</a>
@@ -64,12 +64,12 @@
             </div>
           </div>
         </div>
-        <div class="restaurantHoursCore">
-          <h3 class="restaurantHoursHeader">Hours</h3>
+        <div class="restaurantHoursCore contentFlexCentered">
+          <h3 class="restaurantHoursHeader contentFlexCentered">Hours</h3>
           <div class="restaurantHoursColumnSetter">
             <div class="restaurantHoursColumn">
-              <h4 class="restaurantHoursTimeSlotHeader">At location</h4>
-              <div class="restaurantHoursTimeTable">
+              <h4 class="restaurantHoursTimeSlotHeader contentFlexCentered">At location</h4>
+              <div class="restaurantHoursTimeTable contentFlexCentered">
                 <div class="restaurantHoursTimeSlot">
                   <div class="restaurantHoursDayOfTheWeek">Monday</div>
                   <div class="flexSeparator"></div>
@@ -108,8 +108,8 @@
               </div>
             </div>
             <div class="restaurantHoursColumn">
-              <h4 class="restaurantHoursTimeSlotHeader">Delivery</h4>
-              <div class="restaurantHoursTimeTable">
+              <h4 class="restaurantHoursTimeSlotHeader contentFlexCentered">Delivery</h4>
+              <div class="restaurantHoursTimeTable contentFlexCentered">
                 <div class="restaurantHoursTimeSlot">
                   <div class="restaurantHoursDayOfTheWeek">Monday</div>
                   <div class="flexSeparator"></div>
@@ -148,8 +148,8 @@
               </div>
             </div>
             <div class="restaurantHoursColumn">
-              <h4 class="restaurantHoursTimeSlotHeader">Takeout</h4>
-              <div class="restaurantHoursTimeTable">
+              <h4 class="restaurantHoursTimeSlotHeader contentFlexCentered">Takeout</h4>
+              <div class="restaurantHoursTimeTable contentFlexCentered">
                 <div class="restaurantHoursTimeSlot">
                   <div class="restaurantHoursDayOfTheWeek">Monday</div>
                   <div class="flexSeparator"></div>

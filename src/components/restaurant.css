@@ -9,22 +9,18 @@ body {
   flex-grow: 1;
 }
 
+.contentFlexCentered {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+/* <----------------- Banner ----------------->*/
 .restaurantBannerCore {
   background-color: darkgray;
 }
 
-.restaurantBannerFoodChainBlock {
-  display: flex;
+.restaurantBannerFoodChainBlock .contentFlexCentered{
   flex-direction: row;
-  justify-content: center;
-  align-content: center;
-}
-
-.restaurantBannerFoodChain {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
 }
 
 .restaurantBannerName {
@@ -35,8 +31,7 @@ body {
 }
 
 .restaurantBannerFoodChainLogo {
-  justify-content: center;
-  align-content: center;
+  align-self: center;
   width: 50%;
   margin: 0;
 }
@@ -51,11 +46,8 @@ body {
   flex-direction: row;
 }
 
-.restaurantBannerAddressInfoLower {
-  display: flex;
+.restaurantBannerAddressInfoLower .contentFlexCentered{
   flex-direction: row;
-  justify-content: center;
-  align-content: center;
 }
 
 .ratingBlock {
@@ -69,27 +61,18 @@ body {
 }
 
 .restaurantRating {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-content: center;
 }
 
 .ratingHeader {
   display: inline;
   align-self: center;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
   margin: 0;
 }
 
 .ratingElementFormat {
-  display: inline;
   align-self: center;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
 }
 
 .ratingFormat {
@@ -115,12 +98,9 @@ body {
   padding: 0 1% 0 1%;
 }
 
-.restaurantBannerTags {
-  display: flex;
+.restaurantBannerTags .contentFlexCentered{
   background-color: #CCC;
   flex-direction: row;
-  align-content: center;
-  justify-content: center;
 }
 
 .restaurantInfoDualPanel {
@@ -169,15 +149,11 @@ body {
 }
 
 .restaurantHoursCore {
-  display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
 }
 
 .restaurantHoursColumn {
   align-self: center;
-  justify-content: center;
   width: 200px;
   color: black;
   border: solid 5px #333;
@@ -208,17 +184,11 @@ body {
 }
 
 .restaurantHoursHeader {
-  display: flex;
-  justify-content: center;
-  align-content: center;
   margin: 0;
 }
 
 .restaurantHoursTimeTable {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
 }
 
 .restaurantHoursTimeSlot {
@@ -229,9 +199,6 @@ body {
 }
 
 .restaurantHoursTimeSlotHeader {
-  display: flex;
-  justify-content: center;
-  align-content: center;
   margin: 0;
 }
 
@@ -249,11 +216,13 @@ body {
 
 .restaurantReviewRight {
   flex-direction: column;
+  border-left: 5px solid #333;
   flex: 1;
 }
 
 .restaurantReviewHeader {
   background-color: #555;
+  border-bottom: solid 5px #333;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -262,6 +231,8 @@ body {
 
 .restaurantReviewProfileName {
   margin: 0;
+  padding: 5px;
+  border-right: solid 5px #333;
 }
 
 .restaurantReviewName {
