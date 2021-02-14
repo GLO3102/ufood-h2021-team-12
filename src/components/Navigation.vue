@@ -7,7 +7,7 @@
   <a href="#"><input type="text" placeholder="Search..">
     <i class="fa fa-fw fa-search"></i></a>
   <div class="dropdown">
-    <button class="dropbtn">User 
+    <button class="dropbtn">User
       <i class="fa fa-fw fa-user"></i>
       <i class="fa fa-caret-down"></i>
     </button>
@@ -15,10 +15,10 @@
       <router-link to="/user" tag="div"><a>Profile</a> </router-link>
       <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
     </div>
-  </div> 
+  </div>
 </div>
 
-  </nav> 
+  </nav>
 </template>
 
 
@@ -53,7 +53,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   font-size: 17px;
 }
 .dropdown {
-  float: center;
+  float: initial;
   text-align: center;
   overflow: hidden;
 }
@@ -61,7 +61,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   background-color: #000;
 }
 .dropdown .dropbtn {
-  font-size: 16px;  
+  font-size: 16px;
   border: none;
   outline: none;
   color: white;
