@@ -4,53 +4,53 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.flexSeparator {
+.flex-separator {
   display: flex;
   flex-grow: 1;
 }
 
-.contentFlexCentered {
+.content-flex-centered {
   display: flex;
   justify-content: center;
   align-content: center;
 }
 /* <----------------- Banner ----------------->*/
-.restaurantBannerCore {
+.restaurant-banner-core {
   background-color: darkgray;
 }
 
-.restaurantBannerFoodChainBlock .contentFlexCentered{
+.restaurant-banner-food-chain-block .content-flex-centered{
   flex-direction: row;
 }
 
-.restaurantBannerName {
+.restaurant-banner-name {
   display: flex;
   align-self: center;
   margin: 0;
   font-size: 45px;
 }
 
-.restaurantBannerFoodChainLogo {
+.restaurant-banner-food-chain-logo {
   align-self: center;
   width: 50%;
   margin: 0;
 }
 
-.restaurantBannerAddressInfo {
+.restaurant-banner-address-info {
   background-color: #CCC;
   padding: 0 5% 0 5%;
 }
 
-.restaurantBannerAddressInfoUpper {
+.restaurant-banner-address-info-upper {
   display: flex;
   flex-direction: row;
 }
 
-.restaurantBannerAddressInfoLower .contentFlexCentered{
+.restaurant-banner-address-info-lower {
   flex-direction: row;
 }
 
-.ratingBlock {
+.rating-block {
   display: flex;
   background-color: #555;
   flex-direction: column;
@@ -60,57 +60,55 @@ body {
   width: 17%;
 }
 
-.restaurantRating {
+.restaurant-rating {
   flex-direction: column;
   align-content: center;
 }
 
-.ratingHeader {
+.rating-header {
   display: inline;
   align-self: center;
   margin: 0;
 }
 
-.ratingElementFormat {
+.rating-element-format {
   align-self: center;
 }
 
-.ratingFormat {
+.rating-format {
   display: flex;
   flex-direction: row;
 }
 
-.restaurantBannerRatings {
+.restaurant-banner-ratings {
   display: flex;
   flex-direction: row;
 }
 
-.colorSchemeFriend {
+.color-scheme-friend {
   color: gold;
 }
 
-.colorSchemeGlobal {
+.color-scheme-global {
   color: cyan;
 }
 
-.whatDoesThisMean {
-  font-size: 9px;
-  padding: 0 1% 0 1%;
-}
-
-.restaurantBannerTags .contentFlexCentered{
+.restaurant-banner-tags {
   background-color: #CCC;
   flex-direction: row;
 }
 
-.restaurantInfoDualPanel {
-  display: flex;
-  flex-direction: row;
+.restaurant-info-core {
   background-color: #555;
   padding: 0 2% 0 2%;
 }
 
-.restaurantPhotoGalleryCore {
+.restaurant-info-dual-panel {
+  display: flex;
+  flex-direction: row;
+}
+
+.restaurant-photo-gallery-core {
   display: flex;
   flex: 1;
 }
@@ -148,11 +146,11 @@ body {
   width: 100%;
 }
 
-.restaurantHoursCore {
+.restaurant-hours-core {
   flex-direction: column;
 }
 
-.restaurantHoursColumn {
+.restaurant-hours-column {
   align-self: center;
   width: 200px;
   color: black;
@@ -162,43 +160,43 @@ body {
   padding: 5px 10px;
 }
 
-.restaurantHoursColumnSetter {
+.restaurant-hours-column-setter {
   display: flex;
   align-self: center;
   flex-direction: column;
 }
 
 @media screen and (max-width: 800px) {
-  .restaurantInfoDualPanel {
+  .restaurant-info-dual-panel {
     flex-direction: column;
   }
-  .restaurantHoursColumnSetter {
+  .restaurant-hours-column-setter {
     flex-direction: row;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .restaurantHoursColumnSetter {
+  .restaurant-hours-column-setter {
     flex-direction: column;
   }
 }
 
-.restaurantHoursHeader {
+.restaurant-hours-header {
   margin: 0;
 }
 
-.restaurantHoursTimeTable {
+.restaurant-hours-time-table {
   flex-direction: column;
 }
 
-.restaurantHoursTimeSlot {
+.restaurant-hours-time-slot {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-content: center;
 }
 
-.restaurantHoursTimeSlotHeader {
+.restaurant-hours-time-slot-header {
   margin: 0;
 }
 
@@ -206,7 +204,7 @@ body {
   width: 100%;
 }
 
-.restaurantReview {
+.restaurant-review {
   display: flex;
   flex-direction: row;
   border: 5px solid #333;
@@ -214,13 +212,13 @@ body {
   background-color: #555;
 }
 
-.restaurantReviewRight {
+.restaurant-review-right {
   flex-direction: column;
   border-left: 5px solid #333;
   flex: 1;
 }
 
-.restaurantReviewHeader {
+.restaurant-review-header {
   background-color: #555;
   border-bottom: solid 5px #333;
   display: flex;
@@ -229,38 +227,49 @@ body {
   align-content: center;
 }
 
-.restaurantReviewProfileName {
+.restaurant-review-profile-name {
   margin: 0;
   padding: 5px;
   border-right: solid 5px #333;
 }
 
-.restaurantReviewName {
+.restaurant-review-name {
   margin: 0;
 }
 
-.restaurantReviewSpacer0 {
+.restaurant-review-profile-icon-holder {
+  flex-direction: column;
+}
+
+.restaurant-review-profile-icon {
+  align-content: center;
+  height: 70px;
+  width: 70px;
+}
+
+.restaurant-review-spacer0 {
   display: flex;
   flex: 1;
   max-width: 1%;
   min-width: 5px;
 }
 
-.restaurantReviewSpacer1 {
+.restaurant-review-spacer1 {
   display: flex;
   flex: 1;
   max-width: 1%;
   min-width: 10px;
 }
 
-.restaurantReviewSpacer2 {
+.restaurant-review-spacer2 {
   display: flex;
   flex: 1;
   max-width: 5%;
   min-width: 5px;
 }
 
-.restaurantReviewContent {
+.restaurant-review-content {
+  text-align: left;
   padding: 3px;
   min-height: 100px;
   background-color: darkgray;
