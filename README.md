@@ -1,7 +1,9 @@
 # Pour livrable 1:
-Le restaurant se trouve à l'addresse https://\<ip\>:\<port\>/#/restaurant/normandin/duberger
+Le restaurant se trouve à l'addresse https://\<ip\>:\<port\>/#/restaurant/
 
 (attention au /#/)
+
+Directions vers le restaurant <- cliquez sur la map
 
 # vue-starter
 
