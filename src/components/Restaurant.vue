@@ -52,15 +52,9 @@
     <div class="restaurant-info-core">
       <div class="restaurant-info-dual-panel">
         <div class="restaurant-photo-gallery-core">
-          <div class="row">
-            <div class="column">
-              <img src="https://lh5.googleusercontent.com/p/AF1QipOr8dUAebLIx7dinVJ0zT1HCVxnv4UhfMhWAxZT=w254-h179-k-no" alt="egg bacon fries">
-            </div>
-            <div class="column">
-              <img src="https://lh5.googleusercontent.com/p/AF1QipMkhyIYtVRcYwmbgr0ZLXonfXPVGaZwrYFfb1ux=w254-h190-k-no" alt="egg hash potatoes">
-            </div>
-            <div class="column">
-              <img src="https://lh5.googleusercontent.com/p/AF1QipM5U8fcBZNtV7zplEndROKyXBSB0PQdIZX8bvf9=w254-h169-k-no" alt="Chicken general tao salad">
+          <div class="row" v-for="photoRow in restaurant.photos">
+            <div class="column" v-for="photoColumn in photoRow">
+              <img :src="photoColumn.src" :alt="photoColumn.alt">
             </div>
           </div>
         </div>
@@ -82,7 +76,7 @@
       </div>
       <!-- will embed google api-->
       <div class="restaurant-map-core">
-        <a :href="restaurant.map.href"><img class=map :src="restaurant.map.src" alt="map" id="map"></a>
+        <a :href="restaurant.map.href"><img class=map src="@/assets/dummyMap.png" alt="map" id="map"></a>
       </div>
     </div>
     <!-- Hardcoded social directly in the template for now, it will pull data from another location-->
@@ -182,18 +176,20 @@ export default {
           ]
         },
         photos: [
-          {
-            src: "https://lh5.googleusercontent.com/p/AF1QipOr8dUAebLIx7dinVJ0zT1HCVxnv4UhfMhWAxZT=w254-h179-k-no",
-            alt: "egg bacon fries"
-          },
-          {
-            src: "https://lh5.googleusercontent.com/p/AF1QipMkhyIYtVRcYwmbgr0ZLXonfXPVGaZwrYFfb1ux=w254-h190-k-no",
-            alt: "egg hash potatoes"
-          },
-          {
-            src: "https://lh5.googleusercontent.com/p/AF1QipM5U8fcBZNtV7zplEndROKyXBSB0PQdIZX8bvf9=w254-h169-k-no",
-            alt: "Chicken general tao salad"
-          }
+          [
+            {
+              src: "https://lh5.googleusercontent.com/p/AF1QipOr8dUAebLIx7dinVJ0zT1HCVxnv4UhfMhWAxZT=w254-h179-k-no",
+              alt: "egg bacon fries"
+            },
+            {
+              src: "https://lh5.googleusercontent.com/p/AF1QipMkhyIYtVRcYwmbgr0ZLXonfXPVGaZwrYFfb1ux=w254-h190-k-no",
+              alt: "egg hash potatoes"
+            },
+            {
+              src: "https://lh5.googleusercontent.com/p/AF1QipM5U8fcBZNtV7zplEndROKyXBSB0PQdIZX8bvf9=w254-h169-k-no",
+              alt: "Chicken general tao salad"
+            }
+          ]
         ],
         hours: [
           {
