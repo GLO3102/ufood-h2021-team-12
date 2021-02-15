@@ -1,22 +1,21 @@
-
 <template>
   <nav>
     <!-- The navigation menu -->
-<div class="navbar">
-  <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-  <a href="#"><input type="text" placeholder="Search..">
-    <i class="fa fa-fw fa-search"></i></a>
-  <div class="dropdown">
-    <button class="dropbtn">User
-      <i class="fa fa-fw fa-user"></i>
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <router-link to="/user" tag="div"><a>Profile</a> </router-link>
-      <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
+    <div class="navbar">
+      <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+      <a href="#"><input type="text" placeholder="Search..">
+        <i class="fa fa-fw fa-search"></i></a>
+      <div class="dropdown">
+        <button class="dropbtn">User
+          <i class="fa fa-fw fa-user"></i>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <router-link to="/user" tag="div"><a>Profile</a> </router-link>
+          <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
   </nav>
 </template>
