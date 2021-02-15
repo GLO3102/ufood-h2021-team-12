@@ -1,3 +1,8 @@
+# Pour livrable 1:
+Le restaurant se trouve à l'addresse https://\<ip\>:\<port\>/#/restaurant/normandin/duberger
+
+(attention au /#/)
+
 # vue-starter
 
 Kit de départ préconfiguré utilisant [vue-cli](https://cli.vuejs.org/), [ESLint](https://eslint.org/) avec [Prettier](https://prettier.io/) et [Jest](https://jestjs.io/).
