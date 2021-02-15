@@ -189,6 +189,20 @@ export default {
               src: "https://lh5.googleusercontent.com/p/AF1QipM5U8fcBZNtV7zplEndROKyXBSB0PQdIZX8bvf9=w254-h169-k-no",
               alt: "Chicken general tao salad"
             }
+          ],
+          [
+            {
+              src: "https://lh5.googleusercontent.com/p/AF1QipOx7Jdh8Ov0mtw4pkTQmCzhtXZ9gSHG-Uvmxps=w203-h152-k-no",
+              alt: "interior shot"
+            },
+            {
+              src: "https://lh5.googleusercontent.com/p/AF1QipM1JRJgdEwoVciyT9bP9yIAmpB_3rouYU0JlYRK=w203-h152-k-no",
+              alt: "exterior shot"
+            },
+            {
+              src: "https://lh5.googleusercontent.com/p/AF1QipOz1GqvVrseQ9f8EvSHFf-mTQ1DLFtZk-2TxI4_=w203-h152-k-no",
+              alt: "terrace"
+            }
           ]
         ],
         hours: [

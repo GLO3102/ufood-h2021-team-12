@@ -110,11 +110,14 @@ body {
 
 .restaurant-photo-gallery-core {
   display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
 .row {
   display: flex;
+  align-content: center;
+  justify-content: center;
   flex: 1;
   flex-wrap: wrap;
   padding: 0;
