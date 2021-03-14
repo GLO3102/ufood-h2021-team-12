@@ -2,7 +2,7 @@
   <div id="app-home">
     <div class="homePage">
       <div class="homeImage">
-        <img src="@/assets/homePicture.jpg" alt="Image">
+        <img src="@/assets/homePicture.jpg" alt="Image" />
         <div class="visit-restaurant-button">
           <button class="list-button">View the restaurant list</button>
         </div>
@@ -14,20 +14,23 @@
           <div class="media">
             <div class="media-left">
               <div class="image">
-                <img :src="restaurant.img" alt="Image">
+                <img :src="restaurant.img" alt="Image" />
               </div>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>{{ restaurant.name }}</strong>  <small>{{ restaurant.handle }}</small>
-                  <br>
+                  <strong>{{ restaurant.name }}</strong>
+                  <small>{{ restaurant.handle }}</small>
+                  <br />
                   {{ restaurant.moto }}
                 </p>
               </div>
               <div class="visit-button">
                 <button class="take-visit-button">Visit this restaurant</button>
-                <button class="add-favorite-button" v-on:click="counter += 1">Add to favorite</button>
+                <button class="add-favorite-button" v-on:click="counter += 1">
+                  Add to favorite
+                </button>
               </div>
               <div class="level-left">
                 <a class="level-item">
@@ -201,7 +204,7 @@ export default {
           likes: 18
         }
       ]
-    }
+    };
   }
 };
 </script>
@@ -221,11 +224,11 @@ body {
   margin: auto;
 }
 
-#app-home .container{
+#app-home .container {
   display: block;
 }
 
-#app-home .restaurant{
+#app-home .restaurant {
   width: 100vw;
   height: 20vh;
   padding: 5px 5px 4px;
@@ -243,7 +246,7 @@ body {
   position: relative;
 }
 
-#app-home .box:hover{
+#app-home .box:hover {
   background-color: #73cb73;
 }
 
@@ -259,13 +262,13 @@ body {
   height: 100%;
 }
 
-#app-home .homeImage img{
+#app-home .homeImage img {
   width: 100%;
   height: 100%;
   border-radius: 0;
 }
 
-#app-home .image{
+#app-home .image {
   margin: auto;
   padding: 10px;
   float: left;
@@ -286,7 +289,7 @@ body {
   float: right;
 }
 
-#app-home .level-left{
+#app-home .level-left {
   width: 10vw;
   float: right;
 }
@@ -303,13 +306,13 @@ body {
   font-weight: bold;
 }
 
-#app-home .visit-button button{
+#app-home .visit-button button {
   width: 28%;
   height: 20%;
   border-radius: 35px;
 }
 
-#app-home .visit-restaurant-button button{
+#app-home .visit-restaurant-button button {
   width: 35%;
   height: 10%;
   border-radius: 35px;
@@ -317,33 +320,33 @@ body {
   font-size: 15px;
 }
 
-#app-home .take-visit-button{
+#app-home .take-visit-button {
   position: absolute;
   bottom: 0;
   left: 23%;
   background-color: #93ee67;
 }
 
-#app-home .take-visit-button:hover{
+#app-home .take-visit-button:hover {
   height: 25%;
   width: 30%;
   background-color: #08ee34;
 }
 
-#app-home .add-favorite-button{
+#app-home .add-favorite-button {
   position: absolute;
   bottom: 0;
   right: 20%;
   background-color: #e0c359;
 }
 
-#app-home .add-favorite-button:hover{
+#app-home .add-favorite-button:hover {
   height: 25%;
   width: 30%;
   background-color: #facb20;
 }
 
-#app-home .list-button{
+#app-home .list-button {
   position: absolute;
   bottom: 0;
   right: 30%;
