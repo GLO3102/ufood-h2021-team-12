@@ -1,12 +1,10 @@
-export async function getRestaurantList(){
+export async function getRestaurantList() {
+  const URL = `http://ufoodapi.herokuapp.com/unsecure/restaurants`;
+  const response = await fetch(URL);
+  const json = await response.json();
 
-    const URL = `http://ufoodapi.herokuapp.com/unsecure/restaurants`
-    const response = await fetch(URL)
-    const json = await response.json()
-    
-    return json
-    
-    }
-    export default {
-        getForecastList,
-    }
+  return json;
+}
+export default {
+  getRestaurantList
+};

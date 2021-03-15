@@ -5,10 +5,9 @@
       <router-link to="/" tag="div"
         ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
       >
-      <a href="#"
-        ><input type="text" placeholder="Search.."/>
-        <i class="fa fa-fw fa-search"></i
-      ></a>
+      <div><s href="#"
+        ><SearchBar class="searchbar"> </SearchBar></s> </div>
+      
       <div class="dropdown">
         <button class="dropbtn">
           User
@@ -24,6 +23,15 @@
   </nav>
 </template>
 
+<script>
+import SearchBar from "./SearchBar";
+export default {
+  components: { SearchBar }
+};
+
+
+</script>
+
 <style>
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
 * {
@@ -33,31 +41,55 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
 .navbar {
   width: 100%;
   background-color: #555;
   overflow: auto;
 }
+.navbar u {
 
-.navbar a {
   float: left;
   padding: 12px;
   color: white;
   text-decoration: none;
   font-size: 17px;
-  width: 33%; /* Four links of equal widths */
+  width:  16.5%; 
+  text-align: center;
+}
+.navbar s {
+
+  float: left;
+  padding: 1px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width:  33%; 
+  text-align: center;
+}
+.navbar a {
+
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 33%; 
   text-align: center;
 }
 
-.navbar a:hover {
-  background-color: #000;
+.searchbar{
+  position:absolute;
+  width: inherit;
 }
 
-.navbar input[type="text"] {
-  float: left;
-  border: none;
-  font-size: 17px;
+.navbar a:hover {
+  background-color: #000;;
 }
+.navbar u:hover {
+  background-color: #000;;
+}
+
 .dropdown {
   float: initial;
   text-align: center;
@@ -77,6 +109,7 @@ body {
   margin: 0;
 }
 .dropdown-content {
+   width: 33%; 
   display: none;
   position: absolute;
   background-color: #555;
