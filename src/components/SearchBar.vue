@@ -27,6 +27,7 @@ export default {
   methods: {
     setSelected(selected) {
       window.location.href = `/#/restaurant?id=${selected.id}`;
+      window.location.reload(true);
     }
   }
 };
