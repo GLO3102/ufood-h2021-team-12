@@ -1,5 +1,11 @@
 <template>
-  <v-select class="searchbar" label="name" :options="this.nameList"></v-select>
+  <v-select
+    class="searchbar"
+    label="name"
+    :options="this.nameList"
+    :value="selected"
+    @input="setSelected"
+  ></v-select>
 </template>
 
 <script>
@@ -11,11 +17,17 @@ Vue.component("v-select", vSelect);
 export default {
   data: () => ({
     name: "",
-    nameList: []
+    nameList: [],
+    selected:""
   }),
   async created() {
     const response = await RestaurantList.getRestaurantList();
     this.nameList = response.items;
+  },
+  methods: {
+    setSelected(selected) {
+      window.location.href = `/#/restaurant?id=${selected.id}`;
+    }
   }
 };
 </script>

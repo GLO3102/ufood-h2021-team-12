@@ -5,9 +5,10 @@
       <router-link to="/" tag="div"
         ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
       >
-      <div><s href="#"
-        ><SearchBar class="searchbar"> </SearchBar></s> </div>
-      
+      <div>
+        <s href="#"><SearchBar class="searchbar"> </SearchBar></s>
+      </div>
+
       <div class="dropdown">
         <button class="dropbtn">
           User
@@ -28,8 +29,6 @@ import SearchBar from "./SearchBar";
 export default {
   components: { SearchBar }
 };
-
-
 </script>
 
 <style>
@@ -41,53 +40,49 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .navbar {
   width: 100%;
   background-color: #555;
   overflow: auto;
 }
 .navbar u {
-
   float: left;
   padding: 12px;
   color: white;
   text-decoration: none;
   font-size: 17px;
-  width:  16.5%; 
+  width: 16.5%;
   text-align: center;
 }
 .navbar s {
-
   float: left;
   padding: 1px;
   color: white;
   text-decoration: none;
   font-size: 17px;
-  width:  33%; 
+  width: 33%;
   text-align: center;
 }
 .navbar a {
-
   float: left;
   padding: 12px;
   color: white;
   text-decoration: none;
   font-size: 17px;
-  width: 33%; 
+  width: 33%;
   text-align: center;
 }
 
-.searchbar{
-  position:absolute;
+.searchbar {
+  position: absolute;
   width: inherit;
 }
 
 .navbar a:hover {
-  background-color: #000;;
+  background-color: #000;
 }
 .navbar u:hover {
-  background-color: #000;;
+  background-color: #000;
 }
 
 .dropdown {
@@ -109,7 +104,7 @@ body {
   margin: 0;
 }
 .dropdown-content {
-   width: 33%; 
+  width: 33%;
   display: none;
   position: absolute;
   background-color: #555;
