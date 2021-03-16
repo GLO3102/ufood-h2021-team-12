@@ -13,6 +13,7 @@ export default {
     "nav-menu": Navigation
   }
 };
+
 </script>
 
 <style></style>

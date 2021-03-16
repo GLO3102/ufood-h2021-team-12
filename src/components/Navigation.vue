@@ -1,57 +1,90 @@
-
 <template>
   <nav>
     <!-- The navigation menu -->
-<div class="navbar">
-  <router-link to="/" tag="div"><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link>
-  <a href="#"><input type="text" placeholder="Search..">
-    <i class="fa fa-fw fa-search"></i></a>
-  <div class="dropdown">
-    <button class="dropbtn">User
-      <i class="fa fa-fw fa-user"></i>
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <router-link to="/user" tag="div"><a>Profile</a> </router-link>
-      <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
-    </div>
-  </div>
-</div>
+    <div class="navbar">
+      <router-link to="/" tag="div"
+        ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
+      >
+      <div>
+        <s href="#"><SearchBar class="searchbar"> </SearchBar></s>
+      </div>
 
+      <div class="dropdown">
+        <button class="dropbtn">
+          User
+          <i class="fa fa-fw fa-user"></i>
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <router-link to="/user" tag="div"><a>Profile</a> </router-link>
+          <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
+        </div>
+      </div>
+    </div>
   </nav>
 </template>
 
+<script>
+import SearchBar from "./SearchBar";
+export default {
+  components: { SearchBar }
+};
+</script>
 
 <style>
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
-* {box-sizing: border-box}
-body {font-family: Arial, Helvetica, sans-serif;}
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .navbar {
   width: 100%;
   background-color: #555;
   overflow: auto;
 }
-
+.navbar u {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 16.5%;
+  text-align: center;
+}
+.navbar s {
+  float: left;
+  padding: 1px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 33%;
+  text-align: center;
+}
 .navbar a {
   float: left;
   padding: 12px;
   color: white;
   text-decoration: none;
   font-size: 17px;
-  width: 33%; /* Four links of equal widths */
+  width: 33%;
   text-align: center;
+}
+
+.searchbar {
+  position: absolute;
+  width: inherit;
 }
 
 .navbar a:hover {
   background-color: #000;
 }
-
-.navbar input[type=text] {
-  float:left;
-  border: none;
-  font-size: 17px;
+.navbar u:hover {
+  background-color: #000;
 }
+
 .dropdown {
   float: initial;
   text-align: center;
@@ -71,22 +104,23 @@ body {font-family: Arial, Helvetica, sans-serif;}
   margin: 0;
 }
 .dropdown-content {
+  width: 33%;
   display: none;
-  position:absolute;
+  position: absolute;
   background-color: #555;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 .dropdown-content a {
-  float:left;
+  float: left;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   text-align: center;
-   width: 100%;
-   color: white;
+  width: 100%;
+  color: white;
 }
 .dropdown:hover .dropdown-content {
   display: block;
