@@ -54,6 +54,7 @@
           |<a
             class="restaurantDescriptorTag"
             v-for="tag in this.rawApiInfo.genres"
+            v-bind:key="tag"
             :href="tag.href"
             >{{ tag }}|</a
           >
@@ -62,8 +63,8 @@
       <div class="restaurant-info-core">
         <div class="restaurant-info-dual-panel">
           <div class="restaurant-photo-gallery-core">
-            <div class="row" v-for="photoRow in this.formattedPhoto">
-              <div class="column" v-for="photoColumn in photoRow">
+            <div class="row" v-for="photoRow in this.formattedPhoto" v-bind:key="photoRow">
+              <div class="column" v-for="photoColumn in photoRow" v-bind:key="photoColumn">
                 <img :src="photoColumn" :alt="''" />
               </div>
             </div>
@@ -80,6 +81,7 @@
                   <div
                     class="restaurant-hours-time-slot"
                     v-for="(hourTimeSlot, day) in this.rawApiInfo.opening_hours"
+                    v-bind:key="day"
                   >
                     <div class="restaurant-hours-day-of-the-week">{{ day }}</div>
                     <div class="flex-separator"></div>
