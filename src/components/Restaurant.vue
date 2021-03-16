@@ -3,29 +3,53 @@
     <div class="restaurant-banner-core">
       <h1 class="restaurant-banner-name">{{ restaurant.name }}</h1>
       <div class="restaurant-banner-food-chain-block content-flex-centered">
-        <a class="restaurant-banner-food-chain content-flex-centered" :href="restaurant.contact.branchWebsiteHref">
-          <img class="restaurant-banner-food-chain-logo" :src="restaurant.contact.branchOnlineLogo" alt="Logo">
+        <a
+          class="restaurant-banner-food-chain content-flex-centered"
+          :href="restaurant.contact.branchWebsiteHref"
+        >
+          <img
+            class="restaurant-banner-food-chain-logo"
+            :src="restaurant.contact.branchOnlineLogo"
+            alt="Logo"
+          />
         </a>
       </div>
       <div class="restaurant-banner-address-info">
         <div class="restaurant-banner-address-info-upper">
-          <div><a :href="restaurant.contact.branchAddressHref">{{restaurant.contact.branchAddressLocation}}</a></div>
+          <div>
+            <a :href="restaurant.contact.branchAddressHref">{{
+              restaurant.contact.branchAddressLocation
+            }}</a>
+          </div>
           <div class="flex-separator"></div>
-          <div><a :href="restaurant.contact.branchPhoneHref">call {{restaurant.contact.branchPhoneFormatted}}</a></div>
+          <div>
+            <a :href="restaurant.contact.branchPhoneHref"
+              >call {{ restaurant.contact.branchPhoneFormatted }}</a
+            >
+          </div>
         </div>
         <div class="restaurant-banner-address-info-lower content-flex-centered">
-          |<a class="restaurantDescriptorTag" v-for="tag in restaurant.tag.addressDescriptors" :href="tag.href">{{tag.name}}|</a>
+          |<a
+            class="restaurantDescriptorTag"
+            v-for="tag in restaurant.tag.addressDescriptors"
+            :href="tag.href"
+            >{{ tag.name }}|</a
+          >
         </div>
       </div>
       <!-- Hardcoded social directly in the template for now, it will pull data from another location-->
       <div class="restaurant-banner-ratings">
         <div class="flex-separator"></div>
         <div class="rating-block">
-          <div class="restaurant-rating color-scheme-friend content-flex-centered">
+          <div
+            class="restaurant-rating color-scheme-friend content-flex-centered"
+          >
             <h3 class="rating-header">Restaurant rating</h3>
             <div class="rating-element-format">★★★★</div>
           </div>
-          <div class="restaurant-rating color-scheme-global content-flex-centered">
+          <div
+            class="restaurant-rating color-scheme-global content-flex-centered"
+          >
             <h3 class="rating-header">Restaurant rating</h3>
             <div class="rating-element-format">★★★</div>
           </div>
@@ -33,11 +57,15 @@
         <div class="flex-separator"></div>
         <div class="flex-separator"></div>
         <div class="rating-block">
-          <div class="restaurant-rating color-scheme-friend content-flex-centered">
+          <div
+            class="restaurant-rating color-scheme-friend content-flex-centered"
+          >
             <h3 class="rating-header">Cost rating</h3>
             <div class="rating-element-format">$</div>
           </div>
-          <div class="restaurant-rating color-scheme-global content-flex-centered">
+          <div
+            class="restaurant-rating color-scheme-global content-flex-centered"
+          >
             <h3 class="rating-header">Cost rating</h3>
             <div class="rating-element-format">$$</div>
           </div>
@@ -46,7 +74,12 @@
       </div>
       <!-- endOf Hardcoded social -->
       <div class="restaurant-banner-tags content-flex-centered">
-        |<a class="restaurantDescriptorTag" v-for="tag in restaurant.tag.genericDescriptors" :href="tag.href">{{tag.name}}|</a>
+        |<a
+          class="restaurantDescriptorTag"
+          v-for="tag in restaurant.tag.genericDescriptors"
+          :href="tag.href"
+          >{{ tag.name }}|</a
+        >
       </div>
     </div>
     <div class="restaurant-info-core">
@@ -54,20 +87,34 @@
         <div class="restaurant-photo-gallery-core">
           <div class="row" v-for="photoRow in restaurant.photos">
             <div class="column" v-for="photoColumn in photoRow">
-              <img :src="photoColumn.src" :alt="photoColumn.alt">
+              <img :src="photoColumn.src" :alt="photoColumn.alt" />
             </div>
           </div>
         </div>
         <div class="restaurant-hours-core content-flex-centered">
           <h3 class="restaurant-hours-header content-flex-centered">Hours</h3>
           <div class="restaurant-hours-column-setter">
-            <div class="restaurant-hours-column" v-for="hourColumn in restaurant.hours">
-              <h4 class="restaurant-hours-time-slot-header content-flex-centered">{{hourColumn.name}}</h4>
+            <div
+              class="restaurant-hours-column"
+              v-for="hourColumn in restaurant.hours"
+            >
+              <h4
+                class="restaurant-hours-time-slot-header content-flex-centered"
+              >
+                {{ hourColumn.name }}
+              </h4>
               <div class="restaurant-hours-time-table content-flex-centered">
-                <div class="restaurant-hours-time-slot" v-for="hourTimeSlot in hourColumn.timeSlots">
-                  <div class="restaurant-hours-day-of-the-week">{{ hourTimeSlot.dayOfTheWeek }}</div>
+                <div
+                  class="restaurant-hours-time-slot"
+                  v-for="hourTimeSlot in hourColumn.timeSlots"
+                >
+                  <div class="restaurant-hours-day-of-the-week">
+                    {{ hourTimeSlot.dayOfTheWeek }}
+                  </div>
                   <div class="flex-separator"></div>
-                  <div class="restaurant-hours-open">{{hourTimeSlot.hoursOpenFormatted}}</div>
+                  <div class="restaurant-hours-open">
+                    {{ hourTimeSlot.hoursOpenFormatted }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,7 +123,9 @@
       </div>
       <!-- will embed google api-->
       <div class="restaurant-map-core">
-        <a :href="restaurant.map.href"><img class=map src="@/assets/dummyMap.png" alt="map" id="map"></a>
+        <a :href="restaurant.map.href"
+          ><img class="map" src="@/assets/dummyMap.png" alt="map" id="map"
+        /></a>
       </div>
     </div>
     <!-- Hardcoded social directly in the template for now, it will pull data from another location-->
@@ -84,8 +133,14 @@
       <div class="restaurant-review-core">
         <div class="restaurant-review-block color-scheme-friend">
           <div class="restaurant-review">
-            <div class="restaurant-review-profile-icon-holder content-flex-centered">
-              <img class="restaurant-review-profile-icon" src="@/assets/defaultIcon.png" alt="Profile Icon">
+            <div
+              class="restaurant-review-profile-icon-holder content-flex-centered"
+            >
+              <img
+                class="restaurant-review-profile-icon"
+                src="@/assets/defaultIcon.png"
+                alt="Profile Icon"
+              />
             </div>
             <div class="restaurant-review-right">
               <div class="restaurant-review-header">
@@ -103,8 +158,14 @@
         </div>
         <div class="restaurant-review-block color-scheme-global">
           <div class="restaurant-review">
-            <div class="restaurant-review-profile-icon-holder content-flex-centered">
-              <img class="restaurant-review-profile-icon" src="@/assets/defaultIcon.png" alt="Profile Icon">
+            <div
+              class="restaurant-review-profile-icon-holder content-flex-centered"
+            >
+              <img
+                class="restaurant-review-profile-icon"
+                src="@/assets/defaultIcon.png"
+                alt="Profile Icon"
+              />
             </div>
             <div class="restaurant-review-right">
               <div class="restaurant-review-header">
@@ -132,10 +193,13 @@ export default {
       restaurant: {
         name: "Normandin Duberger",
         contact: {
-          branchWebsiteHref: "https://restaurantnormandin.com/en/restaurant/duberger/",
+          branchWebsiteHref:
+            "https://restaurantnormandin.com/en/restaurant/duberger/",
           branchOnlineLogo: "https://restaurantnormandin.com/img/logo.svg",
-          branchAddressHref: "https://www.google.com/maps/place/Restaurant+Normandin/@46.8114671,-71.2968759,15z/data=!4m5!3m4!1s0x0:0x472d926e469834b8!8m2!3d46.8114671!4d-71.2968759",
-          branchAddressLocation: "2185 Boulevard Père-Lelièvre, Québec, QC G1P 2X2",
+          branchAddressHref:
+            "https://www.google.com/maps/place/Restaurant+Normandin/@46.8114671,-71.2968759,15z/data=!4m5!3m4!1s0x0:0x472d926e469834b8!8m2!3d46.8114671!4d-71.2968759",
+          branchAddressLocation:
+            "2185 Boulevard Père-Lelièvre, Québec, QC G1P 2X2",
           branchPhoneHref: "callto:4186834967",
           branchPhoneFormatted: "(418) 683-4967"
         },
@@ -178,29 +242,35 @@ export default {
         photos: [
           [
             {
-              src: "https://lh5.googleusercontent.com/p/AF1QipOr8dUAebLIx7dinVJ0zT1HCVxnv4UhfMhWAxZT=w254-h179-k-no",
+              src:
+                "https://lh5.googleusercontent.com/p/AF1QipOr8dUAebLIx7dinVJ0zT1HCVxnv4UhfMhWAxZT=w254-h179-k-no",
               alt: "egg bacon fries"
             },
             {
-              src: "https://lh5.googleusercontent.com/p/AF1QipMkhyIYtVRcYwmbgr0ZLXonfXPVGaZwrYFfb1ux=w254-h190-k-no",
+              src:
+                "https://lh5.googleusercontent.com/p/AF1QipMkhyIYtVRcYwmbgr0ZLXonfXPVGaZwrYFfb1ux=w254-h190-k-no",
               alt: "egg hash potatoes"
             },
             {
-              src: "https://lh5.googleusercontent.com/p/AF1QipM5U8fcBZNtV7zplEndROKyXBSB0PQdIZX8bvf9=w254-h169-k-no",
+              src:
+                "https://lh5.googleusercontent.com/p/AF1QipM5U8fcBZNtV7zplEndROKyXBSB0PQdIZX8bvf9=w254-h169-k-no",
               alt: "Chicken general tao salad"
             }
           ],
           [
             {
-              src: "https://lh5.googleusercontent.com/p/AF1QipOx7Jdh8Ov0mtw4pkTQmCzhtXZ9gSHG-Uvmxps=w203-h152-k-no",
+              src:
+                "https://lh5.googleusercontent.com/p/AF1QipOx7Jdh8Ov0mtw4pkTQmCzhtXZ9gSHG-Uvmxps=w203-h152-k-no",
               alt: "interior shot"
             },
             {
-              src: "https://lh5.googleusercontent.com/p/AF1QipM1JRJgdEwoVciyT9bP9yIAmpB_3rouYU0JlYRK=w203-h152-k-no",
+              src:
+                "https://lh5.googleusercontent.com/p/AF1QipM1JRJgdEwoVciyT9bP9yIAmpB_3rouYU0JlYRK=w203-h152-k-no",
               alt: "exterior shot"
             },
             {
-              src: "https://lh5.googleusercontent.com/p/AF1QipOz1GqvVrseQ9f8EvSHFf-mTQ1DLFtZk-2TxI4_=w203-h152-k-no",
+              src:
+                "https://lh5.googleusercontent.com/p/AF1QipOz1GqvVrseQ9f8EvSHFf-mTQ1DLFtZk-2TxI4_=w203-h152-k-no",
               alt: "terrace"
             }
           ]
@@ -308,12 +378,13 @@ export default {
         ],
         map: {
           src: "@/assets/dummyMap.png",
-          href: "https://www.google.com/maps/dir//normandin+p%C3%A8re+leli%C3%A8vre/@46.8541618,-71.3135585,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x4cb897a0a256f51d:0x472d926e469834b8!2m2!1d-71.2968759!2d46.8114671"
+          href:
+            "https://www.google.com/maps/dir//normandin+p%C3%A8re+leli%C3%A8vre/@46.8541618,-71.3135585,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x4cb897a0a256f51d:0x472d926e469834b8!2m2!1d-71.2968759!2d46.8114671"
         }
       }
-    }
+    };
   }
-}
+};
 </script>
 
 <style>
