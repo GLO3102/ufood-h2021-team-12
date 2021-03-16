@@ -1,5 +1,6 @@
 <template>
   <div id="app-home">
+
     <div class="homePage">
       <div class="homeImage">
         <img src="@/assets/homePicture.jpg" alt="Image" />
@@ -64,6 +65,12 @@
                 >
                   Visit this restaurant's page
                 </button>
+                <button
+                  class="take-visit-button"
+                  v-on:click="modal"
+                >
+                  Visit this restaurant's page
+                </button>
               </div>
               <div class="level-left">
                 <a class="level-item">
@@ -86,6 +93,10 @@
   </div>
 </template>
 <script>
+import Modal from './Modal'
+import VModal from 'vue-js-modal'
+import Vue from "vue";
+Vue.use(VModal)
 import RestaurantList from "../services/RestaurantList";
 export default {
   data: () => {
@@ -103,6 +114,9 @@ export default {
   methods: {
     visitRestaurant: function(id) {
       window.location.href = `/#/restaurant?id=${id}`;
+    },
+    modal: function() {
+      this.$modal.show(Modal);
     },
     bottom: function() {
       document.getElementById("list").scrollIntoView({ behavior: "smooth" });
