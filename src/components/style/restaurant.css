@@ -241,7 +241,9 @@ body {
 }
 
 .restaurant-review-name {
+  padding: 5px;
   margin: 0;
+  border-right: solid 5px #333;
 }
 
 .restaurant-review-profile-icon-holder {

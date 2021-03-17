@@ -14,12 +14,12 @@
         <h3 class="restaurant-review-profile-name">
           {{ this.name }}
         </h3>
-        <div class="restaurant-review-spacer1"></div>
+        <h3 class="restaurant-review-name">
+          {{this.review.date}}
+        </h3>
         <h3 class="restaurant-review-name">
           {{ this.review.rating.toFixed(2) }}
         </h3>
-        <div class="restaurant-review-spacer2"></div>
-        <h3 class="restaurant-review-name"></h3>
       </div>
       <div class="restaurant-review-content">
         <div class="restaurant-review-content-text">
