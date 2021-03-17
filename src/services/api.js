@@ -26,7 +26,10 @@ export default class Api {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     return await response.json();
   }
-
+  async getRestaurant(id) {
+    const response = await fetch(`${this.baseURL}/restaurants/${id}`);
+    return await response.json();
+  }
   async getFollowers() {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     const json = await response.json();
@@ -87,7 +90,7 @@ export default class Api {
     return response.json();
   }
 
-  async createRestaurant(listId, name) {
+  async createRestaurant(listId) {
     const response = await fetch(
       `${this.baseURL}/favorites/${listId}/restaurants`,
       {
@@ -96,8 +99,7 @@ export default class Api {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          id: "5f31fc8655d7790550c08b07",
-          name: `${name}`
+          id: "5f31fc8655d7790550c08b07"
         })
       }
     );
@@ -111,7 +113,7 @@ export default class Api {
     });
   }
   async deleteRestaurant(listId, restaurantId) {
-    return fetch(`${this.baseURL}/${listId}/restaurants/${restaurantId}`, {
+    return fetch(`${this.baseURL}/favorites/${listId}/restaurants/${restaurantId}`, {
       method: "DELETE"
     });
   }

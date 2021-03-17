@@ -62,6 +62,9 @@
           <button type="button" v-on:click="deleteList(favorite.id)">
             Delete this list
           </button>
+          <button type="button" v-on:click="setDeleteActive(favorite.id)">
+            Active Deletion of a restaurant
+          </button>
           <input
             v-model="list_name"
             v-if="addingRestaurant"
@@ -125,7 +128,10 @@
               <div class="content">
                 <p>
                   <strong>{{ restaurant.name }}</strong
-                  ><small>{{ restaurant.handle }}</small>
+                  >
+                  <button type="button" v-if="activeDeletion" v-on:click="deleteRestaurants(restaurant.id)">
+                    Delete this Restaurant
+                  </button>
                   <br />
                   <br />
                   Last Visit: {{ restaurant.Date }}
@@ -155,11 +161,13 @@ export default {
     list_name: "",
     addingList: false,
     addingRestaurant: false,
-    updateName: false
+    updateName: false,
+    activeDeletion: false,
+    currentFavorite: false,
   }),
   methods: {
-    async setRestaurant(listId, name) {
-      const restaurant = await api.createRestaurant(listId, name);
+    async setRestaurant(listId) {
+      const restaurant = await api.createRestaurant(listId);
       this.restaurants.push(restaurant);
     },
     async onCreate(name) {
@@ -192,12 +200,15 @@ export default {
     deleteList(id) {
       this.onDelete(id);
     },
+    deleteRestaurants(restaurantId) {
+      this.onDeleteRestaurant(restaurantId);
+    },
     addRestaurant(favorite) {
       if (this.list_name.trim() === "") {
         this.addingRestaurant = false;
         return;
       }
-      this.setRestaurant(favorite.id, this.list_name);
+      this.setRestaurant(favorite.id);
       this.list_name = "";
       this.addingRestaurant = false;
     },
@@ -217,7 +228,18 @@ export default {
       this.onUpdate(favorite.id, this.list_name);
       this.list_name = "";
       this.updateName = false;
-    }
+    },
+    async onDeleteRestaurant(restaurantId){
+      await api.deleteRestaurant(this.currentFavorite, restaurantId);
+      this.restaurants = this.restaurants.filter(
+        restaurant => restaurant.id !== restaurantId
+      );
+    },
+    setDeleteActive(favoriteId) {
+      this.activeDeletion = !this.activeDeletion;
+      this.currentFavorite = favoriteId;
+    },
+
   },
   async created() {
     const randomUser = await api.getRandomUser();
