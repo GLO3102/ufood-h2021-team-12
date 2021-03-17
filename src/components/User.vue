@@ -10,8 +10,21 @@
           <progress max="100" value="40"></progress>
         </div>
       </div>
-      <input v-model = "list_name" v-if="addingList" type="text" class = "list_input" placeholder="Enter a new list ..." />
-      <button type = "button"  v-if="addingList" v-on:click="addList" class = "list_inputOK"> Create a new list</button>
+      <input
+        v-model="list_name"
+        v-if="addingList"
+        type="text"
+        class="list_input"
+        placeholder="Enter a new list ..."
+      />
+      <button
+        type="button"
+        v-if="addingList"
+        v-on:click="addList"
+        class="list_inputOK"
+      >
+        Create a new list
+      </button>
       <div class="profile" v-for="(profile, id) in profiles" :key="id">
         <div class="identification">Personal information</div>
         <div class="information">{{ profile.name }}</div>
@@ -25,12 +38,41 @@
       </div>
       <div class="profile">
         <div class="identification">Favorite list</div>
-        <button type = "button" v-on:click="addingList = !addingList"> Add a new list</button>
-        <div class="information" v-for="(favorite, id) in favorites_restaurants" :key="id">Name: {{ favorite.name }}</div>
-<!--        <div class="information">followers: {{ profile.followers.length }}</div>-->
-<!--        <div class="information">Best Restaurant: {{ profile.best }}</div>-->
-<!--        <div class="information">User rate: {{ profile.rating }}</div>-->
-<!--        <div class="information">Number of share: {{ profile.share }}</div>-->
+        <button type="button" v-on:click="addingList = !addingList">
+          Add a new list
+        </button>
+        <div
+          class="information"
+          v-for="(favorite, id) in favorites_restaurants"
+          :key="id"
+        >
+          Name: {{ favorite.name }}
+          <button type="button" v-on:click="addingRestaurant = !addingRestaurant">
+            Add a restaurant
+          </button>
+          <button type="button" v-on:click="setView(favorite)">
+            view all restaurant
+          </button>
+          <input
+            v-model="list_name"
+            v-if="addingRestaurant"
+            type="text"
+            class="list_input"
+            placeholder="Enter a new restaurant"
+          />
+          <button
+            type="button"
+            v-if="addingRestaurant"
+            v-on:click="addRestaurant(favorite)"
+            class="list_inputOK"
+          >
+            Add a new restaurant to list
+          </button>
+        </div>
+        <!--        <div class="information">followers: {{ profile.followers.length }}</div>-->
+        <!--        <div class="information">Best Restaurant: {{ profile.best }}</div>-->
+        <!--        <div class="information">User rate: {{ profile.rating }}</div>-->
+        <!--        <div class="information">Number of share: {{ profile.share }}</div>-->
         <div class="profile-button">
           <button>More</button>
         </div>
@@ -45,7 +87,7 @@
         </div>
       </div>
     </div>
-    <h1>Your favorite list</h1>
+    <h1>Restaurant of favorite list</h1>
     <div class="container">
       <div class="restaurant" v-for="(restaurant, id) in restaurants" :key="id">
         <div class="box">
@@ -88,18 +130,45 @@ export default {
     restaurants: [],
     list_name: "",
     addingList: false,
+    addingRestaurant: false,
+    currentSee: ""
   }),
   methods: {
-    async onCreate(name){
+    async setRestaurant(listId, name) {
+      const restaurant = await api.createRestaurant(listId, name);
+      this.restaurants.push(restaurant);
+    },
+    async onCreate(name) {
       const favorite = await api.createFavorite(name);
       this.favorites_restaurants.push(favorite);
     },
-    addList(){
-      if(this.list_name.trim() === "") {return ;}
+    addList() {
+      if (this.list_name.trim() === "") {
+        this.addingList = false;
+        return;
+      }
       this.onCreate(this.list_name);
       this.list_name = "";
       this.addingList = false;
-    }
+    },
+    addRestaurant(favorite) {
+      if (this.list_name.trim() === "") {
+        this.addingRestaurant = false;
+        return;
+      }
+      this.setRestaurant(favorite.id, this.list_name);
+      this.list_name = "";
+      this.addingRestaurant = false;
+    },
+    setView(favorite) {
+      this.restaurants = [];
+      const restaurants = favorite.restaurants;
+      for (let y = 0; y < restaurants.length; y++) {
+        console.log(restaurants[y]);
+        this.restaurants.push(restaurants[y]);
+      }
+    },
+
   },
   async created() {
     const randomUser = await api.getRandomUser();
@@ -108,12 +177,12 @@ export default {
     this.profiles.push(profile);
     const favorites = await api.getFavorites(5);
     console.log(favorites);
-    for(let i = 0; i< favorites.total; i++){
-      const restaurants = favorites.items[i].restaurants;
-      for(let y = 0; y < restaurants.length; y++){
-        console.log(restaurants[i])
-        this.restaurants.push(restaurants[i]);
-      }
+    for (let i = 0; i < favorites.total; i++) {
+      // const restaurants = favorites.items[i].restaurants;
+      // for (let y = 0; y < restaurants.length; y++) {
+      //   console.log(restaurants[i]);
+      //   this.restaurants.push(restaurants[i]);
+      // }
       this.favorites_restaurants.push(favorites.items[i]);
     }
     // console.log(api.getUser().id);
@@ -155,7 +224,7 @@ body {
 /*  background-color: #4b9ffd;*/
 /*  bottom: 0;*/
 /*}*/
-.list_inputOK{
+.list_inputOK {
   position: absolute;
   left: 60vw;
   top: 40vh;
@@ -285,7 +354,7 @@ body {
 #app-user input {
   font-weight: bold;
 }
-.list_input{
+.list_input {
   position: absolute;
   left: 50vw;
   top: 40vh;

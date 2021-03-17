@@ -15,27 +15,32 @@ export default class Api {
   registerUser(user) {
     this.user = user;
   }
+
   async getRandomUser() {
     const response = await fetch(`${this.baseURL}/users?limit=20`);
     const listUsers = await response.json();
     return listUsers.items[10];
   }
+
   async getUser() {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     return await response.json();
   }
+
   async getFollowers() {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     const json = await response.json();
 
     return json.followers;
   }
+
   async getFollowing() {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     const json = await response.json();
 
     return json.following;
   }
+
   async getFavorites(max) {
     const response = await fetch(
       `${this.baseURL}/users/${this.user.id}/favorites?limit=${max}`
@@ -44,6 +49,7 @@ export default class Api {
 
     return json;
   }
+
   // async getTask() {
   //   const response = await fetch(`${this.baseURL}/${this.user.id}/tasks`);
   //   const json = await response.json();
@@ -65,6 +71,25 @@ export default class Api {
 
     return response.json();
   }
+
+  async createRestaurant(listId, name) {
+    const response = await fetch(
+      `${this.baseURL}/favorites/${listId}/restaurants`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: "5f31fc8655d7790550c08b07",
+          name: `${name}`
+        })
+      }
+    );
+
+    return response.json();
+  }
+}
   //
   // async updateTask(taskId, name) {
   //   const response = await fetch(
@@ -88,4 +113,3 @@ export default class Api {
   //     method: "DELETE"
   //   });
   // }
-}
