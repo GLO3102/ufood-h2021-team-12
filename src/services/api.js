@@ -26,6 +26,11 @@ export default class Api {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     return await response.json();
   }
+  async getRestaurants() {
+    const response = await fetch(`${this.baseURL}/restaurants`);
+    const listRestaurant = await response.json();
+    return listRestaurant.items;
+  }
   async getRestaurant() {
     const response = await fetch(`${this.baseURL}/restaurants/${this.restaurantId}`);
     return await response.json();
@@ -91,7 +96,8 @@ export default class Api {
   }
 
   async createRestaurant(listId) {
-    this.restaurantId = "5f31fc8655d7790550c08b07";
+    const items = await this.getRestaurants();
+    this.restaurantId = items[Math.floor(Math.random() * items.length)].id;
     const response = await fetch(
       `${this.baseURL}/favorites/${listId}/restaurants`,
       {

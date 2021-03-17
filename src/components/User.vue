@@ -96,10 +96,6 @@
             OK
           </button>
         </div>
-        <!--        <div class="information">followers: {{ profile.followers.length }}</div>-->
-        <!--        <div class="information">Best Restaurant: {{ profile.best }}</div>-->
-        <!--        <div class="information">User rate: {{ profile.rating }}</div>-->
-        <!--        <div class="information">Number of share: {{ profile.share }}</div>-->
         <div class="profile-button">
           <button>More</button>
         </div>
@@ -134,7 +130,7 @@
                   </button>
                   <br />
                   <br />
-                  Last Visit: {{ restaurant.Date }}
+                  Address: {{ restaurant.address }}
                 </p>
               </div>
               <div class="level-left">
@@ -315,7 +311,7 @@ body {
 
 .profile .information {
   width: 100%;
-  height: 12vh;
+  height: 15vh;
   border: 2px solid lightgray;
   padding-top: 2vh;
   font-weight: bold;
