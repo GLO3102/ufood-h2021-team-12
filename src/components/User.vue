@@ -10,6 +10,8 @@
           <progress max="100" value="40"></progress>
         </div>
       </div>
+      <input v-model = "list_name" v-if="addingList" type="text" class = "list_input" placeholder="Enter a new list ..." />
+      <button type = "button"  v-if="addingList" v-on:click="addList" class = "list_inputOK"> Create a new list</button>
       <div class="profile" v-for="(profile, id) in profiles" :key="id">
         <div class="identification">Personal information</div>
         <div class="information">{{ profile.name }}</div>
@@ -21,15 +23,16 @@
           <button v-on:click="counter += 1">Edit Information</button>
         </div>
       </div>
-      <div class="profile" v-for="(profile, id) in profiles" :key="id">
-        <div class="identification">{{ profile.handle }}</div>
-        <div class="information">Following: {{ profile.following.length }}</div>
-        <div class="information">followers: {{ profile.followers.length }}</div>
-        <div class="information">Best Restaurant: {{ profile.best }}</div>
-        <div class="information">User rate: {{ profile.rating }}</div>
-        <div class="information">Number of share: {{ profile.share }}</div>
+      <div class="profile">
+        <div class="identification">Favorite list</div>
+        <button type = "button" v-on:click="addingList = !addingList"> Add a new list</button>
+        <div class="information" v-for="(favorite, id) in favorites_restaurants" :key="id">Name: {{ favorite.name }}</div>
+<!--        <div class="information">followers: {{ profile.followers.length }}</div>-->
+<!--        <div class="information">Best Restaurant: {{ profile.best }}</div>-->
+<!--        <div class="information">User rate: {{ profile.rating }}</div>-->
+<!--        <div class="information">Number of share: {{ profile.share }}</div>-->
         <div class="profile-button">
-          <button>Share</button>
+          <button>More</button>
         </div>
       </div>
       <div class="user-type">
@@ -42,7 +45,7 @@
         </div>
       </div>
     </div>
-    <h1>Your last visit Information</h1>
+    <h1>Your favorite list</h1>
     <div class="container">
       <div class="restaurant" v-for="(restaurant, id) in restaurants" :key="id">
         <div class="box">
@@ -81,41 +84,38 @@ const api = new Api();
 export default {
   data: () => ({
     profiles: [],
-    restaurants: [
-      {
-        id: 3,
-        name: "Sushi shop",
-        handle: "@dino",
-        img:
-          "https://pixabay.com/get/g91d3306a35c38c28cb7c6e7d11c381676b68f9b408bff70ece19ac0b6127c79d34c177fc241099fb3a00af831bee9425_640.jpg",
-        Date: "2020-02-14 10h45 A.M",
-        visit: 15
-      },
-      {
-        id: 2,
-        name: "Vegetarians area",
-        handle: "@dino",
-        img:
-          "https://pixabay.com/get/g0895c39ed696538396bbdf053f507a28989f435aa930dc3ddd2aa57bf4ea085dccb8e099a69fcbccbbaa94ee78e87a28_640.jpg",
-        Date: "2020-04-01 2h45 P.M",
-        visit: 5
-      },
-      {
-        id: 1,
-        name: "Jon's Pizza",
-        handle: "@dino",
-        img:
-          "https://pixabay.com/get/gca85462d2f7d493f4b966710b07bb55ca292ffd13164a98b83dfbea43240892fd29b20fada50ef59c1a1bfcda80f2a0c_640.jpg",
-        Date: "2020-12-19 2h45 P.M",
-        visit: 4
-      }
-    ]
+    favorites_restaurants: [],
+    restaurants: [],
+    list_name: "",
+    addingList: false,
   }),
+  methods: {
+    // async onCreate(name){
+    //   const task = await api.createTask(name);
+    //   this.tasks.push(task);
+    // },
+    addList(){
+      if(this.list_name.trim() === "") {return ;}
+      // this.onCreate(this.list_name);
+      this.list_name = "";
+      this.addingList = false;
+    }
+  },
   async created() {
     const randomUser = await api.getRandomUser();
     api.registerUser(randomUser);
     const profile = await api.getUser();
     this.profiles.push(profile);
+    const favorites = await api.getFavorites(5);
+    console.log(favorites);
+    for(let i = 0; i< favorites.total; i++){
+      const restaurants = favorites.items[i].restaurants;
+      for(let y = 0; y < restaurants.length; y++){
+        console.log(restaurants[i])
+        this.restaurants.push(restaurants[i]);
+      }
+      this.favorites_restaurants.push(favorites.items[i]);
+    }
     // console.log(api.getUser().id);
     // this.profiles.id = randomUser.id;
     // console.log(this.profiles.id);
@@ -149,12 +149,20 @@ body {
   padding: 10px 0 0;
 }
 
-#app-user .profile-button {
-  bottom: 0;
+/*#app-user .profile-button {*/
+/*  width: 100%;*/
+/*  border-radius: 35px;*/
+/*  background-color: #4b9ffd;*/
+/*  bottom: 0;*/
+/*}*/
+.list_inputOK{
+  position: absolute;
+  left: 60vw;
+  top: 40vh;
+  height: 5vh;
+  width: auto;
 }
-
 #app-user button {
-  width: 100%;
   border-radius: 35px;
   background-color: #4b9ffd;
   bottom: 0;
@@ -276,6 +284,12 @@ body {
 
 #app-user input {
   font-weight: bold;
+}
+.list_input{
+  position: absolute;
+  left: 50vw;
+  top: 40vh;
+  height: 5vh;
 }
 .meter progress {
   background-image: -webkit-linear-gradient(

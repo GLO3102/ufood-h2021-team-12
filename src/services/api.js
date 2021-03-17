@@ -18,7 +18,7 @@ export default class Api {
   async getRandomUser(){
     const response = await fetch(`${this.baseURL}?limit=20`);
     const listUsers = await response.json();
-    return listUsers.items[1];
+    return listUsers.items[10];
   }
   async getUser(){
     const response = await fetch(`${this.baseURL}/${this.user.id}`);
@@ -42,7 +42,7 @@ export default class Api {
     );
     const json = await response.json();
 
-    return json.items;
+    return json;
   }
   // async getTask() {
   //   const response = await fetch(`${this.baseURL}/${this.user.id}/tasks`);
