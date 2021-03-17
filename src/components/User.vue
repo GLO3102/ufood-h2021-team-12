@@ -47,11 +47,20 @@
           :key="id"
         >
           Name: {{ favorite.name }}
-          <button type="button" v-on:click="addingRestaurant = !addingRestaurant">
+          <button type="button" v-on:click="updateName = !updateName">
+            Change name
+          </button>
+          <button
+            type="button"
+            v-on:click="addingRestaurant = !addingRestaurant"
+          >
             Add a restaurant
           </button>
           <button type="button" v-on:click="setView(favorite)">
             view all restaurant
+          </button>
+          <button type="button" v-on:click="deleteList(favorite.id)">
+            Delete this list
           </button>
           <input
             v-model="list_name"
@@ -60,6 +69,13 @@
             class="list_input"
             placeholder="Enter a new restaurant"
           />
+          <input
+            v-model="list_name"
+            v-if="updateName"
+            type="text"
+            class="list_input"
+            placeholder="Change name"
+          />
           <button
             type="button"
             v-if="addingRestaurant"
@@ -67,6 +83,14 @@
             class="list_inputOK"
           >
             Add a new restaurant to list
+          </button>
+          <button
+            type="button"
+            v-if="updateName"
+            v-on:click="updateRestaurant(favorite)"
+            class="list_inputOK"
+          >
+            OK
           </button>
         </div>
         <!--        <div class="information">followers: {{ profile.followers.length }}</div>-->
@@ -131,7 +155,7 @@ export default {
     list_name: "",
     addingList: false,
     addingRestaurant: false,
-    currentSee: ""
+    updateName: false
   }),
   methods: {
     async setRestaurant(listId, name) {
@@ -142,6 +166,20 @@ export default {
       const favorite = await api.createFavorite(name);
       this.favorites_restaurants.push(favorite);
     },
+    async onDelete(listId) {
+      await api.deleteFavorite(listId);
+      this.favorites_restaurants = this.favorites_restaurants.filter(
+        restaurant => restaurant.id !== listId
+      );
+    },
+    async onUpdate(listId, name) { //Can update this if I can use Es6 function
+      const favorite = await api.updateFavorite(listId, name);
+      for(let i = 0; i < favorite.length; i++){
+        if(this.favorites_restaurants[i].id === listId){
+          this.favorites_restaurants[i] = favorite;
+        }
+      }
+    },
     addList() {
       if (this.list_name.trim() === "") {
         this.addingList = false;
@@ -150,6 +188,9 @@ export default {
       this.onCreate(this.list_name);
       this.list_name = "";
       this.addingList = false;
+    },
+    deleteList(id) {
+      this.onDelete(id);
     },
     addRestaurant(favorite) {
       if (this.list_name.trim() === "") {
@@ -168,7 +209,15 @@ export default {
         this.restaurants.push(restaurants[y]);
       }
     },
-
+    updateRestaurant(favorite) {
+      if (this.list_name.trim() === "") {
+        this.updateName = false;
+        return;
+      }
+      this.onUpdate(favorite.id, this.list_name);
+      this.list_name = "";
+      this.updateName = false;
+    }
   },
   async created() {
     const randomUser = await api.getRandomUser();
@@ -243,7 +292,7 @@ body {
 
 .profile .information {
   width: 100%;
-  height: 8vh;
+  height: 12vh;
   border: 2px solid lightgray;
   padding-top: 2vh;
   font-weight: bold;

@@ -72,6 +72,21 @@ export default class Api {
     return response.json();
   }
 
+  async updateFavorite(listId,name) {
+    const response = await fetch(`${this.baseURL}/favorites/${listId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: `${name}`,
+        owner: `${this.user.email}`
+      })
+    });
+
+    return response.json();
+  }
+
   async createRestaurant(listId, name) {
     const response = await fetch(
       `${this.baseURL}/favorites/${listId}/restaurants`,
@@ -89,27 +104,15 @@ export default class Api {
 
     return response.json();
   }
+
+  async deleteFavorite(listId) {
+    return fetch(`${this.baseURL}/favorites/${listId}`, {
+      method: "DELETE"
+    });
+  }
+  async deleteRestaurant(listId, restaurantId) {
+    return fetch(`${this.baseURL}/${listId}/restaurants/${restaurantId}`, {
+      method: "DELETE"
+    });
+  }
 }
-  //
-  // async updateTask(taskId, name) {
-  //   const response = await fetch(
-  //     `${this.baseURL}/${this.user.id}/tasks/${taskId}`,
-  //     {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //         name
-  //       })
-  //     }
-  //   );
-  //
-  //   return response.json();
-  // }
-  //
-  // async deleteTask(taskId) {
-  //   return fetch(`${this.baseURL}/${this.user.id}/tasks/${taskId}`, {
-  //     method: "DELETE"
-  //   });
-  // }
