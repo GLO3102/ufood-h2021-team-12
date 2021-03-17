@@ -1,5 +1,5 @@
 <template>
-    <modal name="example">
+    <modal name="example" draggable="draggable" resizable="resizable" adaptive="adaptive" >
        <a  style="color:black; display:flex; flex-direction: column" > <div>
          <button style="float: right" @click="close">
         ❌
@@ -29,6 +29,13 @@ export default {
     name: 'MyComponent',
     mounted () {
         this.$modal.show('example')
+    },
+    data: () => {
+    return {
+        draggable: true,
+        resizable: true,
+        adaptive: true
+    };
     },
     methods: {
       close() {

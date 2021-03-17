@@ -116,7 +116,7 @@ export default {
       window.location.href = `/#/restaurant?id=${id}`;
     },
     modal: function() {
-      this.$modal.show(Modal);
+      this.$modal.show(Modal, {draggable: true, resizable: true } );
     },
     bottom: function() {
       document.getElementById("list").scrollIntoView({ behavior: "smooth" });
