@@ -22,7 +22,9 @@
         <h3 class="restaurant-review-name"></h3>
       </div>
       <div class="restaurant-review-content">
-        {{this.review.comment}}
+        <div class="restaurant-review-content-text">
+          {{ this.review.comment }}
+        </div>
       </div>
     </div>
   </div>

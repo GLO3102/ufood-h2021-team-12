@@ -206,6 +206,7 @@ body {
 }
 
 .google-maps-embed {
+  margin: 30px 0;
   height: 50vh;
   width: 100%;
 }
@@ -275,10 +276,18 @@ body {
 }
 
 .restaurant-review-content {
+  width: 100%;
   text-align: left;
   padding: 3px;
   min-height: 100px;
   background-color: darkgray;
+  word-wrap: break-word;
+}
+
+.restaurant-review-content-text {
+  display: inline;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .page-not-found {

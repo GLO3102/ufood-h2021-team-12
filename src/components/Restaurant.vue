@@ -55,7 +55,6 @@
             class="restaurantDescriptorTag"
             v-for="tag in this.fetched.genres"
             v-bind:key="tag"
-            :href="tag.href"
             >{{ tag }}|</a
           >
         </div>
