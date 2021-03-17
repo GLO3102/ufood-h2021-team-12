@@ -2,7 +2,7 @@
   <div id="restaurantContent">
     <div class="restaurant" v-if="this.canDisplayRestaurantData">
       <div class="restaurant-banner-core">
-        <h1 class="restaurant-banner-name">{{ this.rawApiInfo.name }}</h1>
+        <h1 class="restaurant-banner-name">{{ this.fetched.name }}</h1>
         <div class="restaurant-banner-address-info">
           <div class="restaurant-banner-address-info-upper">
             <div>
@@ -11,15 +11,15 @@
                   'https://www.google.com/maps/search/?api=1&query=' +
                     this.address_formatted +
                     '&query_place_id=' +
-                    this.rawApiInfo.place_id
+                    this.fetched.place_id
                 "
-                >{{ this.rawApiInfo.address }}</a
+                >{{ this.fetched.address }}</a
               >
             </div>
             <div class="flex-separator"></div>
             <div>
               <a :href="'callto:' + this.telHref"
-                >call {{ this.rawApiInfo.tel }}</a
+                >call {{ this.fetched.tel }}</a
               >
             </div>
           </div>
@@ -32,7 +32,7 @@
             >
               <h3 class="rating-header">Restaurant rating</h3>
               <div class="rating-element-format">
-                {{ this.rawApiInfo.rating.toFixed(2) }}
+                {{ this.fetched.rating.toFixed(2) }}
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
             >
               <h3 class="rating-header">Cost rating</h3>
               <div class="rating-element-format">
-                {{ this.rawApiInfo.price_range.toFixed(2) }}
+                {{ this.fetched.price_range.toFixed(2) }}
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
         <div class="restaurant-banner-tags content-flex-centered">
           |<a
             class="restaurantDescriptorTag"
-            v-for="tag in this.rawApiInfo.genres"
+            v-for="tag in this.fetched.genres"
             v-bind:key="tag"
             :href="tag.href"
             >{{ tag }}|</a
@@ -80,7 +80,7 @@
                 <div class="restaurant-hours-time-table content-flex-centered">
                   <div
                     class="restaurant-hours-time-slot"
-                    v-for="(hourTimeSlot, day) in this.rawApiInfo.opening_hours"
+                    v-for="(hourTimeSlot, day) in this.fetched.opening_hours"
                     v-bind:key="day"
                   >
                     <div class="restaurant-hours-day-of-the-week">{{ day }}</div>
@@ -96,79 +96,35 @@
           class="google-maps-embed"
           :src="
             'https://www.google.com/maps/embed/v1/place?key=AIzaSyDTekFbXJ_GdKSznFTcQ5Nvgo9-6MeJzaI&q=place_id:' +
-              rawApiInfo.place_id
+              fetched.place_id
           "
         ></iframe>
       </div>
       <!-- Hardcoded social directly in the template for now, it will pull data from another location-->
       <div class="restaurant-social-core">
         <div class="restaurant-review-core">
-          <div class="restaurant-review-block color-scheme-friend">
-            <div class="restaurant-review">
-              <div
-                class="restaurant-review-profile-icon-holder content-flex-centered"
-              >
-                <img
-                  class="restaurant-review-profile-icon"
-                  src="@/assets/defaultIcon.png"
-                  alt="Profile Icon"
-                />
-              </div>
-              <div class="restaurant-review-right">
-                <div class="restaurant-review-header">
-                  <h3 class="restaurant-review-profile-name">My best friend</h3>
-                  <div class="restaurant-review-spacer1"></div>
-                  <h3 class="restaurant-review-name">★★★★★</h3>
-                  <div class="restaurant-review-spacer2"></div>
-                  <h3 class="restaurant-review-name">Best dine-in EVER!</h3>
-                </div>
-                <div class="restaurant-review-content">
-                  Never I have ever tasted better!
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="restaurant-review-block color-scheme-global">
-            <div class="restaurant-review">
-              <div
-                class="restaurant-review-profile-icon-holder content-flex-centered"
-              >
-                <img
-                  class="restaurant-review-profile-icon"
-                  src="@/assets/defaultIcon.png"
-                  alt="Profile Icon"
-                />
-              </div>
-              <div class="restaurant-review-right">
-                <div class="restaurant-review-header">
-                  <h3 class="restaurant-review-profile-name">Terry</h3>
-                  <div class="restaurant-review-spacer1"></div>
-                  <h3 class="restaurant-review-name">★</h3>
-                  <div class="restaurant-review-spacer2"></div>
-                  <h3 class="restaurant-review-name">Laaaaaame</h3>
-                </div>
-                <div class="restaurant-review-content">
-                  The food is bland
-                </div>
-              </div>
-            </div>
-          </div>
+          <CommentSection v-bind:id="this.id" />
         </div>
       </div>
       <!-- endOf Hardcoded social -->
     </div>
-    <div class="page-not-found" v-if="!this.canDisplayRestaurantData && !loading">
-      <h1>This is not the restaurant you're looking for</h1>
+    <div class="page-not-found" v-if="!this.canDisplayRestaurantData">
+      <h1>Sorry, we can't show you this restaurant at this time.</h1>
     </div>
   </div>
 </template>
 <script>
+import CommentSection from "@/components/CommentSection";
+import UFoodApi from "@/services/UFoodApi";
 export default {
+  components: { CommentSection },
   data: () => {
     return {
       canDisplayRestaurantData: null,
       loading: true,
-      rawApiInfo: null,
+      fetched: null,
+      items: null,
+      id: "",
       formattedPhoto: [],
       telHref: "",
       adress_formatted: ""
@@ -182,40 +138,27 @@ export default {
       .split("?")
       .pop();
     const urlParams = new URLSearchParams(query);
-    this.rawApiInfo = await fetch(
-      "https://ufoodapi.herokuapp.com/unsecure/restaurants/" +
-        urlParams.get("id")
-    )
-      .then(async response => {
-        const data = await response.json();
-        if (!response.ok) {
-          this.canDisplayRestaurantData = false;
-          this.error = (data && data.message) || response.statusText;
-        } else {
-          this.canDisplayRestaurantData = true;
-          this.rawApiInfo = data;
-          let array = this.rawApiInfo.pictures;
-          var i,
-            j,
-            temparray,
-            chunk = 3;
-          this.formattedPhoto = [];
-          for (i = 0, j = array.length; i < j; i += chunk) {
-            temparray = array.slice(i, i + chunk);
-            this.formattedPhoto.push(temparray);
-          }
+    this.id = urlParams.get("id");
+    this.fetched = await UFoodApi.betterFetch("restaurants/" + this.id, false);
+    if (this.fetched === undefined) {
+      this.canDisplayRestaurantData = false;
+    } else {
+      let array = this.fetched.pictures;
+      var i,
+        j,
+        temparray,
+        chunk = 3;
+      this.formattedPhoto = [];
+      for (i = 0, j = array.length; i < j; i += chunk) {
+        temparray = array.slice(i, i + chunk);
+        this.formattedPhoto.push(temparray);
+      }
 
-          this.telHref = ("" + this.rawApiInfo.tel).replace(/\D/g, "");
+      this.telHref = ("" + this.fetched.tel).replace(/\D/g, "");
 
-          this.address_formatted = this.rawApiInfo.address.replace(" ", "+");
-        }
-        this.loading = false;
-      })
-      .catch(function(error) {
-        console.log(
-          "Something has gone terribly wrong while fetching the API:"+error
-        );
-      });
+      this.address_formatted = this.fetched.address.replace(" ", "+");
+      this.canDisplayRestaurantData = true;
+    }
   }
 };
 </script>
