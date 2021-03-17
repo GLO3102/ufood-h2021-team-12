@@ -163,7 +163,7 @@ export default {
   }),
   methods: {
     async setRestaurant(listId) {
-      const restaurant = await api.createRestaurant(listId);
+      await api.createRestaurant(listId);
       const aRestaurant = await api.getRestaurant();
       this.restaurants.push(aRestaurant);
     },
