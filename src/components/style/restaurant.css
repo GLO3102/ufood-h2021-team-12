@@ -20,6 +20,16 @@ body {
   background-color: darkgray;
 }
 
+.favorite-bar {
+  display: flex;
+  align-items: center;
+}
+
+.favorite-selector {
+  display: flex;
+  flex-grow: 1;
+}
+
 .restaurant-banner-food-chain-block .content-flex-centered{
   flex-direction: row;
 }

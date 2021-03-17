@@ -8,6 +8,7 @@
       <div class="flex-separator"></div>
       <div class="param-info">Review per page:</div>
       <v-select
+        class="favorite-selector"
         v-model="reviewPerPage"
         :options="[10, 20, 30, 40, 50]"
         @input="fetchAgain"

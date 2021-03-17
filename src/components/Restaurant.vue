@@ -3,6 +3,15 @@
     <div class="restaurant" v-if="this.canDisplayRestaurantData">
       <div class="restaurant-banner-core">
         <h1 class="restaurant-banner-name">{{ this.fetched.name }}</h1>
+        <div class="favorite-bar">
+          <div>Favorites:</div>
+          <v-select
+            multiple
+            v-model="favoriteList"
+            :options="['My Dummy List', 'My Dummiest List', '+ Add New List']"
+            @input="updateFavoriteList"
+          />
+        </div>
         <div class="restaurant-banner-address-info">
           <div class="restaurant-banner-address-info-upper">
             <div>
@@ -62,7 +71,7 @@
       <div class="restaurant-info-core">
         <div class="restaurant-info-dual-panel">
           <div class="restaurant-photo-gallery-core">
-            <div class="row" v-for="photoRow in this.formattedPhoto" v-bind:key="photoRow">
+            <div class="row" v-for="(photoRow, idx) in this.formattedPhoto" v-bind:key="idx">
               <div class="column" v-for="photoColumn in photoRow" v-bind:key="photoColumn">
                 <img :src="photoColumn" :alt="''" />
               </div>
@@ -99,13 +108,11 @@
           "
         ></iframe>
       </div>
-      <!-- Hardcoded social directly in the template for now, it will pull data from another location-->
       <div class="restaurant-social-core">
         <div class="restaurant-review-core">
           <CommentSection v-bind:id="this.id" />
         </div>
       </div>
-      <!-- endOf Hardcoded social -->
     </div>
     <div class="page-not-found" v-if="!this.canDisplayRestaurantData">
       <h1>Sorry, we can't show you this restaurant at this time.</h1>
@@ -115,6 +122,11 @@
 <script>
 import CommentSection from "@/components/CommentSection";
 import UFoodApi from "@/services/UFoodApi";
+import Vue from "vue";
+import vSelect from "vue-select";
+
+Vue.component("v-select", vSelect);
+
 export default {
   components: { CommentSection },
   data: () => {
@@ -126,7 +138,8 @@ export default {
       id: "",
       formattedPhoto: [],
       telHref: "",
-      adress_formatted: ""
+      address_formatted: "",
+      favoriteList: ""
     };
   },
   async created() {
@@ -157,6 +170,16 @@ export default {
 
       this.address_formatted = this.fetched.address.replace(" ", "+");
       this.canDisplayRestaurantData = true;
+    }
+  },
+  methods: {
+    updateFavoriteList() {
+      if (this.favoriteList[this.favoriteList.length - 1] !== "+ Add New List") {
+        console.log("Now in " + this.favoriteList);
+      } else {
+        this.favoriteList.pop();
+        console.log("TODO: show prompt and add to list");
+      }
     }
   }
 };
