@@ -90,13 +90,13 @@ export default {
     addingList: false,
   }),
   methods: {
-    // async onCreate(name){
-    //   const task = await api.createTask(name);
-    //   this.tasks.push(task);
-    // },
+    async onCreate(name){
+      const favorite = await api.createFavorite(name);
+      this.favorites_restaurants.push(favorite);
+    },
     addList(){
       if(this.list_name.trim() === "") {return ;}
-      // this.onCreate(this.list_name);
+      this.onCreate(this.list_name);
       this.list_name = "";
       this.addingList = false;
     }

@@ -1,6 +1,6 @@
 export default class Api {
   constructor() {
-    this.baseURL = "https://ufoodapi.herokuapp.com/unsecure/users";
+    this.baseURL = "https://ufoodapi.herokuapp.com/unsecure";
   }
 
   // async createUser(){
@@ -12,33 +12,33 @@ export default class Api {
   //   return response.json();
   // }
 
-  registerUser(user){
-    this.user = user
+  registerUser(user) {
+    this.user = user;
   }
-  async getRandomUser(){
-    const response = await fetch(`${this.baseURL}?limit=20`);
+  async getRandomUser() {
+    const response = await fetch(`${this.baseURL}/users?limit=20`);
     const listUsers = await response.json();
     return listUsers.items[10];
   }
-  async getUser(){
-    const response = await fetch(`${this.baseURL}/${this.user.id}`);
+  async getUser() {
+    const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     return await response.json();
   }
   async getFollowers() {
-    const response = await fetch(`${this.baseURL}/${this.user.id}`);
+    const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     const json = await response.json();
 
     return json.followers;
   }
   async getFollowing() {
-    const response = await fetch(`${this.baseURL}/${this.user.id}`);
+    const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     const json = await response.json();
 
     return json.following;
   }
   async getFavorites(max) {
     const response = await fetch(
-      `${this.baseURL}/${this.user.id}/favorites?limit=${max}`
+      `${this.baseURL}/users/${this.user.id}/favorites?limit=${max}`
     );
     const json = await response.json();
 
@@ -51,19 +51,20 @@ export default class Api {
   //   return json.tasks;
   // }
   //
-  // async createTask(name) {
-  //   const response = await fetch(`${this.baseURL}/${this.user.id}/tasks`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       name
-  //     })
-  //   });
-  //
-  //   return response.json();
-  // }
+  async createFavorite(name) {
+    const response = await fetch(`${this.baseURL}/favorites`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: `${name}`,
+        owner: `${this.user.email}`
+      })
+    });
+
+    return response.json();
+  }
   //
   // async updateTask(taskId, name) {
   //   const response = await fetch(
