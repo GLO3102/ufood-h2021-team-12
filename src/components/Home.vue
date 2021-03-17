@@ -69,7 +69,7 @@
                   class="take-visit-button"
                   v-on:click="modal"
                 >
-                  Visit this restaurant's page
+                  Leave a review
                 </button>
               </div>
               <div class="level-left">
