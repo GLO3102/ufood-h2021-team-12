@@ -121,7 +121,7 @@
           <div class="media">
             <div class="media-left">
               <div class="image">
-                <img :src="restaurant.img" alt="Image" />
+                <img :src="restaurant.pictures[0]" alt="Image" />
               </div>
             </div>
             <div class="media-content">
@@ -168,7 +168,8 @@ export default {
   methods: {
     async setRestaurant(listId) {
       const restaurant = await api.createRestaurant(listId);
-      this.restaurants.push(restaurant);
+      const aRestaurant = await api.getRestaurant();
+      this.restaurants.push(aRestaurant);
     },
     async onCreate(name) {
       const favorite = await api.createFavorite(name);

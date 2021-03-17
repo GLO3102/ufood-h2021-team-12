@@ -26,8 +26,8 @@ export default class Api {
     const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
     return await response.json();
   }
-  async getRestaurant(id) {
-    const response = await fetch(`${this.baseURL}/restaurants/${id}`);
+  async getRestaurant() {
+    const response = await fetch(`${this.baseURL}/restaurants/${this.restaurantId}`);
     return await response.json();
   }
   async getFollowers() {
@@ -91,6 +91,7 @@ export default class Api {
   }
 
   async createRestaurant(listId) {
+    this.restaurantId = "5f31fc8655d7790550c08b07";
     const response = await fetch(
       `${this.baseURL}/favorites/${listId}/restaurants`,
       {
@@ -99,7 +100,7 @@ export default class Api {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          id: "5f31fc8655d7790550c08b07"
+          id: `${this.restaurantId}`
         })
       }
     );
