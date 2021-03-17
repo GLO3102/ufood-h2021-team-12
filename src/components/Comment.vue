@@ -38,12 +38,14 @@ export default {
   props: ["review"],
   data: () => {
     return {
-      name: null
+      name: "unknown"
     };
   },
   async created() {
     let fetched = await UFoodApi.betterFetch("users/" + this.review.user_id, false);
-    this.name = fetched.name;
+    if (fetched !== undefined) {
+      this.name = fetched.name;
+    }
   }
 }
 </script>
