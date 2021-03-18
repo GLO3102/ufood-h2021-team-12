@@ -5,6 +5,16 @@ Le restaurant se trouve à l'addresse https://\<ip\>:\<port\>/#/restaurant/
 
 Directions vers le restaurant <- cliquez sur la map
 
+# Pour livrable 2:
+Installer et lancer l'application avec npm. Suivre le Design Document
+
+packages supplémentaires à installer en cas d'erreur de dépendance besoin:
+```bash
+npm install vue-select
+npm install vue-js-modal
+npm install vue-simple-search-dropdown
+```
+
 # vue-starter
 
 Kit de départ préconfiguré utilisant [vue-cli](https://cli.vuejs.org/), [ESLint](https://eslint.org/) avec [Prettier](https://prettier.io/) et [Jest](https://jestjs.io/).
