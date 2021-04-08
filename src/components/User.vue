@@ -100,15 +100,6 @@
           <button>More</button>
         </div>
       </div>
-      <div class="user-type">
-        <div class="image">
-          <img src="@/assets/star.png" alt="Image" />
-        </div>
-        <div class="user-type-text">Beginner user</div>
-        <div class="profile-button">
-          <button v-on:click="counter += 1">Share</button>
-        </div>
-      </div>
     </div>
     <h1>Restaurant of favorite list</h1>
     <div class="container">
@@ -246,19 +237,8 @@ export default {
     const favorites = await api.getFavorites(5);
     console.log(favorites);
     for (let i = 0; i < favorites.total; i++) {
-      // const restaurants = favorites.items[i].restaurants;
-      // for (let y = 0; y < restaurants.length; y++) {
-      //   console.log(restaurants[i]);
-      //   this.restaurants.push(restaurants[i]);
-      // }
       this.favorites_restaurants.push(favorites.items[i]);
     }
-    // console.log(api.getUser().id);
-    // this.profiles.id = randomUser.id;
-    // console.log(this.profiles.id);
-    // this.profiles.email = randomUser.email;
-    // console.log(this.profiles.email);
-    // this.profiles.rating = randomUser.rating;
   }
 };
 </script>
@@ -286,12 +266,6 @@ body {
   padding: 10px 0 0;
 }
 
-/*#app-user .profile-button {*/
-/*  width: 100%;*/
-/*  border-radius: 35px;*/
-/*  background-color: #4b9ffd;*/
-/*  bottom: 0;*/
-/*}*/
 .list_inputOK {
   position: absolute;
   left: 60vw;
@@ -327,13 +301,6 @@ body {
   border: 5px solid green;
   border-radius: 35px;
   display: block;
-}
-
-#app-user .user-type .user-type-text {
-  font-size: 4vh;
-  color: #e70c2b;
-  font-family: "Agency FB", serif;
-  font-weight: bold;
 }
 
 #app-user h1 {
