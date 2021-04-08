@@ -1,15 +1,7 @@
 <template>
   <div id="app-user">
+    <avatar />
     <div class="user-information">
-      <div class="image">
-        <img src="@/assets/user.png" alt="Image" />
-        <div class="meter">
-          <div class="meter-text">
-            Progress Bar
-          </div>
-          <progress max="100" value="40"></progress>
-        </div>
-      </div>
       <input
         v-model="list_name"
         v-if="addingList"
@@ -132,10 +124,11 @@
 </template>
 <script>
 import Api from "@/services/api";
-import UserInformation from "@/components/UserInformation";
+import UserInformation from "@/components/user/UserInformation";
+import Avatar from "@/components/user/Avatar";
 const api = new Api();
 export default {
-  components: { UserInformation },
+  components: {Avatar, UserInformation },
   data: () => ({
     profiles: [],
     favorites_restaurants: [],
@@ -290,14 +283,6 @@ body {
   background-color: #4b73e9;
 }
 
-#app-user .user-type {
-  width: 20vw;
-  margin-left: 2vw;
-  border: 5px solid green;
-  border-radius: 35px;
-  display: block;
-}
-
 #app-user h1 {
   margin-top: 4vh;
   text-decoration: underline;
@@ -389,38 +374,5 @@ body {
   left: 50vw;
   top: 40vh;
   height: 5vh;
-}
-.meter progress {
-  background-image: -webkit-linear-gradient(
-      -45deg,
-      transparent 33%,
-      rgba(0, 0, 0, 0.1) 33%,
-      rgba(0, 0, 0, 0.1) 66%,
-      transparent 66%
-    ),
-    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
-    -webkit-linear-gradient(left, #09c, #f44);
-
-  border-radius: 2px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
-}
-.meter progress[value]::-webkit-progress-value {
-  background-image: -webkit-linear-gradient(
-      -45deg,
-      transparent 33%,
-      rgba(0, 0, 0, 0.1) 33%,
-      rgba(0, 0, 0, 0.1) 66%,
-      transparent 66%
-    ),
-    -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
-    -webkit-linear-gradient(left, #09c, #f44);
-
-  border-radius: 2px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
-}
-
-.meter .meter-text {
-  margin-top: 2vh;
-  margin-bottom: 0;
 }
 </style>
