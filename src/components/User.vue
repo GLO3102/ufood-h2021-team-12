@@ -25,17 +25,7 @@
       >
         Create a new list
       </button>
-      <div class="profile" v-for="(profile, id) in profiles" :key="id">
-        <div class="identification">Personal information</div>
-        <div class="information">{{ profile.name }}</div>
-        <div class="information">Following: {{ profile.following.length }}</div>
-        <div class="information">followers: {{ profile.followers.length }}</div>
-        <div class="information">User rate: {{ profile.rating }}</div>
-        <div class="information">{{ profile.email }}</div>
-        <div class="profile-button">
-          <button v-on:click="counter += 1">Edit Information</button>
-        </div>
-      </div>
+      <user-information />
       <div class="profile">
         <div class="identification">Favorite list</div>
         <button type="button" v-on:click="addingList = !addingList">
@@ -114,9 +104,12 @@
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>{{ restaurant.name }}</strong
+                  <strong>{{ restaurant.name }}</strong>
+                  <button
+                    type="button"
+                    v-if="activeDeletion"
+                    v-on:click="deleteRestaurants(restaurant.id)"
                   >
-                  <button type="button" v-if="activeDeletion" v-on:click="deleteRestaurants(restaurant.id)">
                     Delete this Restaurant
                   </button>
                   <br />
@@ -139,8 +132,10 @@
 </template>
 <script>
 import Api from "@/services/api";
+import UserInformation from "@/components/UserInformation";
 const api = new Api();
 export default {
+  components: { UserInformation },
   data: () => ({
     profiles: [],
     favorites_restaurants: [],
@@ -150,7 +145,7 @@ export default {
     addingRestaurant: false,
     updateName: false,
     activeDeletion: false,
-    currentFavorite: false,
+    currentFavorite: false
   }),
   methods: {
     async setRestaurant(listId) {
@@ -168,10 +163,11 @@ export default {
         restaurant => restaurant.id !== listId
       );
     },
-    async onUpdate(listId, name) { //Can update this if I can use Es6 function
+    async onUpdate(listId, name) {
+      //Can update this if I can use Es6 function
       const favorite = await api.updateFavorite(listId, name);
-      for(let i = 0; i < favorite.length; i++){
-        if(this.favorites_restaurants[i].id === listId){
+      for (let i = 0; i < favorite.length; i++) {
+        if (this.favorites_restaurants[i].id === listId) {
           this.favorites_restaurants[i] = favorite;
         }
       }
@@ -217,7 +213,7 @@ export default {
       this.list_name = "";
       this.updateName = false;
     },
-    async onDeleteRestaurant(restaurantId){
+    async onDeleteRestaurant(restaurantId) {
       await api.deleteRestaurant(this.currentFavorite, restaurantId);
       this.restaurants = this.restaurants.filter(
         restaurant => restaurant.id !== restaurantId
@@ -226,8 +222,7 @@ export default {
     setDeleteActive(favoriteId) {
       this.activeDeletion = !this.activeDeletion;
       this.currentFavorite = favoriteId;
-    },
-
+    }
   },
   async created() {
     const randomUser = await api.getRandomUser();
