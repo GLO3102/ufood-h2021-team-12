@@ -1,34 +1,17 @@
 <template>
   <div id="app-user">
     <avatar />
-    <div class="user-information">
-      <input
-        v-model="list_name"
-        v-if="addingList"
-        type="text"
-        class="list_input"
-        placeholder="Enter a new list ..."
-      />
-      <button
-        type="button"
-        v-if="addingList"
-        v-on:click="addList"
-        class="list_inputOK"
-      >
-        Create a new list
-      </button>
-      <user-information />
-      <FavoriteList
-        v-bind:favorites_restaurants="favorites_restaurants"
-        v-bind:on-update="onUpdate"
-        v-bind:deleteList="deleteList"
-        v-bind:setDeleteActive="setDeleteActive"
-        v-bind:setView="setView"
-        v-bind:add-list="addList"
-        v-bind:add-restaurant="addRestaurant"
-        v-bind:update-restaurant="updateRestaurant"
-      />
-    </div>
+    <user-information />
+    <FavoriteList
+      v-bind:favorites_restaurants="favorites_restaurants"
+      v-bind:on-update="onUpdate"
+      v-bind:deleteList="deleteList"
+      v-bind:setDeleteActive="setDeleteActive"
+      v-bind:setView="setView"
+      v-bind:add-list="addList"
+      v-bind:add-restaurant="addRestaurant"
+      v-bind:update-restaurant="updateRestaurant"
+    />
     <h1>Restaurant of favorite list</h1>
     <div class="container">
       <div class="restaurant" v-for="(restaurant, id) in restaurants" :key="id">
@@ -174,47 +157,12 @@ body {
   padding-top: 10px;
 }
 
-#app-user .user-information {
-  margin-top: 5vh;
-  display: flex;
-  padding-left: 0;
-}
 
-#app-user .profile {
-  width: 20vw;
-  margin-left: 2vw;
-  border: 5px solid black;
-  border-radius: 35px;
-  padding: 10px 0 0;
-}
 
-.list_inputOK {
-  position: absolute;
-  left: 60vw;
-  top: 40vh;
-  height: 5vh;
-  width: auto;
-}
 #app-user button {
   border-radius: 35px;
   background-color: #4b9ffd;
   bottom: 0;
-}
-.profile .identification {
-  margin-bottom: 3vh;
-  color: blue;
-}
-
-.profile .information {
-  width: 100%;
-  height: 15vh;
-  border: 2px solid lightgray;
-  padding-top: 2vh;
-  font-weight: bold;
-}
-
-.profile .information:hover {
-  background-color: #4b73e9;
 }
 
 #app-user h1 {
@@ -234,26 +182,12 @@ body {
   display: table;
 }
 
-#app-user .box {
-  width: 98%;
-  height: 100%;
-  border: 3px solid darkgrey;
-  background-color: darkgrey;
-  margin-bottom: 0;
-  border-radius: 0;
-  display: grid;
-}
-
 #app-user .box:hover {
   background-color: #73cb73;
 }
 
 #app-user .content {
   margin-top: 5vh;
-}
-#app-user .content small {
-  color: #e70c2b;
-  float: right;
 }
 
 #app-user .user-type img {
@@ -281,12 +215,6 @@ body {
   display: flex;
 }
 
-#app-user .level-item {
-  padding-left: 10px;
-  color: #f60334;
-  float: right;
-}
-
 #app-user .level-left {
   width: 10vw;
   float: right;
@@ -302,11 +230,5 @@ body {
 
 #app-user input {
   font-weight: bold;
-}
-.list_input {
-  position: absolute;
-  left: 50vw;
-  top: 40vh;
-  height: 5vh;
 }
 </style>
