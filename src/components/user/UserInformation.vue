@@ -24,7 +24,7 @@
         <v-col
           v-for="information in userInformation"
           :key="information.title"
-          :cols="information.flex"
+          :cols="6"
         >
           <v-card class="d-flex justify-center">
             <h3>{{ information.title }}</h3>
@@ -40,7 +40,7 @@
         </v-btn>
 
         <v-btn icon>
-          <v-icon>mdi-bookmark</v-icon>
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
 
         <v-btn icon>

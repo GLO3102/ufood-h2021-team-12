@@ -18,70 +18,16 @@
         Create a new list
       </button>
       <user-information />
-      <div class="profile">
-        <div class="identification">Favorite list</div>
-        <button type="button" v-on:click="addingList = !addingList">
-          Add a new list
-        </button>
-        <div
-          class="information"
-          v-for="(favorite, id) in favorites_restaurants"
-          :key="id"
-        >
-          Name: {{ favorite.name }}
-          <button type="button" v-on:click="updateName = !updateName">
-            Change name
-          </button>
-          <button
-            type="button"
-            v-on:click="addingRestaurant = !addingRestaurant"
-          >
-            Add a restaurant
-          </button>
-          <button type="button" v-on:click="setView(favorite)">
-            view all restaurant
-          </button>
-          <button type="button" v-on:click="deleteList(favorite.id)">
-            Delete this list
-          </button>
-          <button type="button" v-on:click="setDeleteActive(favorite.id)">
-            Active Deletion of a restaurant
-          </button>
-          <input
-            v-model="list_name"
-            v-if="addingRestaurant"
-            type="text"
-            class="list_input"
-            placeholder="Enter a new restaurant"
-          />
-          <input
-            v-model="list_name"
-            v-if="updateName"
-            type="text"
-            class="list_input"
-            placeholder="Change name"
-          />
-          <button
-            type="button"
-            v-if="addingRestaurant"
-            v-on:click="addRestaurant(favorite)"
-            class="list_inputOK"
-          >
-            Add a new restaurant to list
-          </button>
-          <button
-            type="button"
-            v-if="updateName"
-            v-on:click="updateRestaurant(favorite)"
-            class="list_inputOK"
-          >
-            OK
-          </button>
-        </div>
-        <div class="profile-button">
-          <button>More</button>
-        </div>
-      </div>
+      <FavoriteList
+        v-bind:favorites_restaurants="favorites_restaurants"
+        v-bind:on-update="onUpdate"
+        v-bind:deleteList="deleteList"
+        v-bind:setDeleteActive="setDeleteActive"
+        v-bind:setView="setView"
+        v-bind:add-list="addList"
+        v-bind:add-restaurant="addRestaurant"
+        v-bind:update-restaurant="updateRestaurant"
+      />
     </div>
     <h1>Restaurant of favorite list</h1>
     <div class="container">
@@ -126,17 +72,14 @@
 import Api from "@/services/api";
 import UserInformation from "@/components/user/UserInformation";
 import Avatar from "@/components/user/Avatar";
+import FavoriteList from "@/components/user/FavoriteList";
 const api = new Api();
 export default {
-  components: {Avatar, UserInformation },
+  components: { FavoriteList, Avatar, UserInformation },
   data: () => ({
     profiles: [],
     favorites_restaurants: [],
     restaurants: [],
-    list_name: "",
-    addingList: false,
-    addingRestaurant: false,
-    updateName: false,
     activeDeletion: false,
     currentFavorite: false
   }),
@@ -165,14 +108,12 @@ export default {
         }
       }
     },
-    addList() {
-      if (this.list_name.trim() === "") {
-        this.addingList = false;
+    // eslint-disable-next-line no-unused-vars
+    addList(list_name) {
+      if (list_name.trim() === "") {
         return;
       }
-      this.onCreate(this.list_name);
-      this.list_name = "";
-      this.addingList = false;
+      this.onCreate(list_name);
     },
     deleteList(id) {
       this.onDelete(id);
@@ -180,14 +121,9 @@ export default {
     deleteRestaurants(restaurantId) {
       this.onDeleteRestaurant(restaurantId);
     },
+    // eslint-disable-next-line no-unused-vars
     addRestaurant(favorite) {
-      if (this.list_name.trim() === "") {
-        this.addingRestaurant = false;
-        return;
-      }
       this.setRestaurant(favorite.id);
-      this.list_name = "";
-      this.addingRestaurant = false;
     },
     setView(favorite) {
       this.restaurants = [];
@@ -197,14 +133,12 @@ export default {
         this.restaurants.push(restaurants[y]);
       }
     },
-    updateRestaurant(favorite) {
-      if (this.list_name.trim() === "") {
-        this.updateName = false;
+    // eslint-disable-next-line no-unused-vars
+    updateRestaurant(favorite, list_name) {
+      if (list_name.trim() === "") {
         return;
       }
-      this.onUpdate(favorite.id, this.list_name);
-      this.list_name = "";
-      this.updateName = false;
+      this.onUpdate(favorite.id, list_name);
     },
     async onDeleteRestaurant(restaurantId) {
       await api.deleteRestaurant(this.currentFavorite, restaurantId);
