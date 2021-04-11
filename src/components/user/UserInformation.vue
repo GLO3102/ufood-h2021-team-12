@@ -18,6 +18,13 @@
             <h3>{{ followers.title }}</h3>
           </v-card>
           <p>{{ followers.data }}</p>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn icon>
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </v-card-actions>
         </v-col>
       </v-row>
       <v-row>
@@ -83,4 +90,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+button {
+  background-color: #4b9ffd;
+}
+</style>
