@@ -82,16 +82,21 @@ export default {
     deleteRestaurants(restaurantId) {
       this.onDeleteRestaurant(restaurantId);
     },
-    addRestaurant(favorite) {
-      this.setRestaurant(favorite.id);
+    //TODO check this to remove async
+    async addRestaurant(favorite) {
+      await this.setRestaurant(favorite.id);
     },
-    setView(favorite) {
-      this.restaurants = [];
-      const restaurants = favorite.restaurants;
-      for (let y = 0; y < restaurants.length; y++) {
-        console.log(restaurants[y]);
-        this.restaurants.push(restaurants[y]);
+    async setView(favorite) {
+      this.restaurants.splice(0, this.restaurants.length);
+      for (let y = 0; y < favorite.restaurants.length; y++) {
+        const aRestaurant = await api.getRestaurant(favorite.restaurants[y].id);
+        this.restaurants.push(aRestaurant);
       }
+      // this.restaurants = [];
+      // const restaurants = favorite.restaurants;
+      // for (let y = 0; y < restaurants.length; y++) {
+      //   this.restaurants.push(restaurants[y]);
+      // }
     },
     // eslint-disable-next-line no-unused-vars
     updateRestaurant(favorite, list_name) {
@@ -119,6 +124,12 @@ export default {
     const favorites = await api.getFavorites(5);
     console.log(favorites);
     for (let i = 0; i < favorites.total; i++) {
+      for (let y = 0; y < favorites.items[i].restaurants.length; y++) {
+        const aRestaurant = await api.getRestaurant(
+          favorites.items[i].restaurants[y].id
+        );
+        this.restaurants.push(aRestaurant);
+      }
       this.favorites_restaurants.push(favorites.items[i]);
     }
   }
@@ -129,80 +140,9 @@ html,
 body {
   text-align: center;
 }
-#app-user .image {
-  top: 6vh;
-  padding-top: 10px;
-}
-
-
-
-#app-user button {
-  border-radius: 35px;
-  background-color: #4b9ffd;
-  bottom: 0;
-}
-
-#app-user h1 {
-  margin-top: 4vh;
-  text-decoration: underline;
-  color: #3070ff;
-}
-
-#app-user .container {
-  display: block;
-}
-
-#app-user .restaurant {
-  width: 100vw;
-  height: 10vh;
-  padding: 5px 5px 4px;
-  display: table;
-}
-
-#app-user .box:hover {
-  background-color: #73cb73;
-}
-
-#app-user .content {
-  margin-top: 5vh;
-}
-
-#app-user .user-type img {
-  border-radius: 0;
-  box-shadow: none;
-}
-
-#app-user .user-type .image {
-  margin: auto;
-  padding: 10px;
-}
-
-#app-user .image {
-  margin: auto;
-  padding: 10px;
-  float: left;
-}
-
-#app-user img {
-  width: 20vh;
-  height: 100%;
-  border-radius: 50vw;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
-  /*transition: width 1s;*/
-  display: flex;
-}
-
-#app-user .level-left {
-  width: 10vw;
-  float: right;
-}
 
 #app-user input:focus {
   border-color: #00d1b2;
-}
-
-#app-user .visits {
-  padding: 0 8px;
 }
 
 #app-user input {

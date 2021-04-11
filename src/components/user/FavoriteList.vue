@@ -4,7 +4,7 @@
       <v-row dense>
         <v-col
           v-for="favorite in favorites_restaurants"
-          :key="favorite.name"
+          :key="favorite.id"
           :cols="6"
         >
           <v-card>
@@ -35,7 +35,10 @@
 
               <RestaurantList
                 v-bind:restaurants="restaurants"
-                v-on:click="currentFavorite = !currentFavorite"
+                @click="
+                  setView(favorite);
+                  currentFavorite = !currentFavorite;
+                "
                 v-model="currentFavorite"
               />
               <v-btn icon v-on:click="deleteList(favorite.id)">
@@ -73,8 +76,8 @@ export default {
     "onUpdate",
     "deleteList",
     "setDeleteActive",
-    "restaurants",
     "setView",
+    "restaurants",
     "addList",
     "addRestaurant",
     "updateRestaurant",
@@ -99,7 +102,8 @@ export default {
     addingRestaurant: false,
     updateName: false,
     activeDeletion: false,
-    currentFavorite: false
+    currentFavorite: false,
+    currentRestaurants: []
   }),
   methods: {
     randomImg() {

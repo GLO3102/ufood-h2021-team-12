@@ -7,7 +7,7 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title>Select Country</v-card-title>
+        <v-card-title>Restaurant list</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <v-list three-line>
@@ -20,7 +20,7 @@
 
               <v-divider :key="index"></v-divider>
 
-              <v-list-item :key="restaurant.name">
+              <v-list-item :key="restaurant.id">
                 <v-list-item-avatar>
                   <v-img :src="restaurant.pictures[0]"></v-img>
                 </v-list-item-avatar>

@@ -31,8 +31,8 @@ export default class Api {
     const listRestaurant = await response.json();
     return listRestaurant.items;
   }
-  async getRestaurant() {
-    const response = await fetch(`${this.baseURL}/restaurants/${this.restaurantId}`);
+  async getRestaurant(restaurantId = this.restaurantId) {
+    const response = await fetch(`${this.baseURL}/restaurants/${restaurantId}`);
     return await response.json();
   }
   async getFollowers() {
