@@ -20,14 +20,24 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <addInput v-bind:addRestaurant="addRestaurant" v-bind:favorite="favorite" v-on:click="addingRestaurant = !addingRestaurant" v-model="addingRestaurant"/>
-              <v-btn icon v-on:click="updateName = !updateName">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
+              <addInput
+                v-bind:addRestaurant="addRestaurant"
+                v-bind:favorite="favorite"
+                v-on:click="addingRestaurant = !addingRestaurant"
+                v-model="addingRestaurant"
+              />
+              <updateList
+                v-bind:updateRestaurant="updateRestaurant"
+                v-bind:favorite="favorite"
+                v-on:click="updateName = !updateName"
+                v-model="updateName"
+              />
 
-              <v-btn icon v-on:click="setView(favorite)">
-                <v-icon>mdi-format-list-bulleted-square</v-icon>
-              </v-btn>
+              <RestaurantList
+                v-bind:restaurants="restaurants"
+                v-on:click="currentFavorite = !currentFavorite"
+                v-model="currentFavorite"
+              />
               <v-btn icon v-on:click="deleteList(favorite.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
@@ -36,63 +46,15 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-          <input
-            v-model="list_name"
-            v-if="addingRestaurant"
-            type="text"
-            class="list_input"
-            placeholder="Enter a new restaurant"
-          />
-          <input
-            v-model="list_name"
-            v-if="updateName"
-            type="text"
-            class="list_input"
-            placeholder="Change name"
-          />
-          <button
-            type="button"
-            v-if="addingRestaurant"
-            v-on:click="
-              addRestaurant(
-                favorite,
-                list_name
-              )((addingRestaurant = !addingRestaurant))(this.clean)
-            "
-            class="list_inputOK"
-          >
-            Add a new restaurant to list
-          </button>
-          <button
-            type="button"
-            v-if="updateName"
-            v-on:click="
-              updateRestaurant(favorite, list_name)((updateName = !updateName))
-            "
-            class="list_inputOK"
-          >
-            OK
-          </button>
         </v-col>
       </v-row>
-      <input
-        v-model="list_name"
-        v-if="addingList"
-        type="text"
-        class="list_input"
-        placeholder="Enter a new list ..."
-      />
-      <button
-        type="button"
-        v-if="addingList"
-        v-on:click="addList(list_name)((addingList = !addingList))"
-        class="list_inputOK"
-      >
-        Create a new list
-      </button>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <addList v-on:click="addingList = !addingList" v-model="addingList"/>
+        <addList
+          v-bind:addList="addList"
+          v-on:click="addingList = !addingList"
+          v-model="addingList"
+        />
       </v-card-actions>
     </v-container>
   </v-card>
@@ -101,18 +63,21 @@
 <script>
 import AddInput from "@/components/user/addInput";
 import AddList from "@/components/user/addList";
+import UpdateList from "@/components/user/updateList";
+import RestaurantList from "@/components/user/RestaurantList";
 export default {
   name: "FavoriteList",
-  components: {AddList, AddInput},
+  components: { RestaurantList, UpdateList, AddList, AddInput },
   props: [
     "favorites_restaurants",
     "onUpdate",
     "deleteList",
     "setDeleteActive",
+    "restaurants",
     "setView",
     "addList",
     "addRestaurant",
-    "updateRestaurant"
+    "updateRestaurant",
   ],
   data: () => ({
     listImages: [
@@ -133,7 +98,8 @@ export default {
     addingList: false,
     addingRestaurant: false,
     updateName: false,
-    activeDeletion: false
+    activeDeletion: false,
+    currentFavorite: false
   }),
   methods: {
     randomImg() {
@@ -141,35 +107,12 @@ export default {
         Math.floor(Math.random() * this.listImages.length)
       ];
     },
-    clean() {
-      this.list_name = "";
-    }
   }
 };
 </script>
 
 <style scoped>
-.list_inputOK {
-  position: absolute;
-  left: 60vw;
-  top: 40vh;
-  height: 5vh;
-  width: auto;
-  z-index: 1;
-}
-.list_input {
-  position: absolute;
-  left: 50vw;
-  top: 40vh;
-  height: 5vh;
-  z-index: 1;
-}
-input {
-  font-weight: bold;
-}
 button {
-  border-radius: 35px;
   background-color: #4b9ffd;
-  bottom: 0;
 }
 </style>

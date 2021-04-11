@@ -1,55 +1,33 @@
 <template>
-  <div id="app-user">
-    <avatar />
-    <user-information />
-    <FavoriteList
-      v-bind:favorites_restaurants="favorites_restaurants"
-      v-bind:on-update="onUpdate"
-      v-bind:deleteList="deleteList"
-      v-bind:setDeleteActive="setDeleteActive"
-      v-bind:setView="setView"
-      v-bind:add-list="addList"
-      v-bind:addRestaurant="addRestaurant"
-      v-bind:updateRestaurant="updateRestaurant"
-    />
-    <h1>Restaurant of favorite list</h1>
-    <div class="container">
-      <div class="restaurant" v-for="(restaurant, id) in restaurants" :key="id">
-        <div class="box">
-          <div class="media">
-            <div class="media-left">
-              <div class="image">
-                <img :src="restaurant.pictures[0]" alt="Image" />
-              </div>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>{{ restaurant.name }}</strong>
-                  <button
-                    type="button"
-                    v-if="activeDeletion"
-                    v-on:click="deleteRestaurants(restaurant.id)"
-                  >
-                    Delete this Restaurant
-                  </button>
-                  <br />
-                  <br />
-                  Address: {{ restaurant.address }}
-                </p>
-              </div>
-              <div class="level-left">
-                <a class="level-item">
-                  <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                  <span class="visits">{{ restaurant.visit }}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-card class="d-flex justify-center mb-10">
+    <v-container>
+      <v-row>
+        <v-col sm="3">
+          <v-card class="d-flex left">
+            <avatar />
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6">
+          <user-information />
+        </v-col>
+        <v-col cols="6">
+          <FavoriteList
+            v-bind:favorites_restaurants="favorites_restaurants"
+            v-bind:on-update="onUpdate"
+            v-bind:deleteList="deleteList"
+            v-bind:setDeleteActive="setDeleteActive"
+            v-bind:setView="setView"
+            v-bind:restaurants="restaurants"
+            v-bind:add-list="addList"
+            v-bind:add-restaurant="addRestaurant"
+            v-bind:update-restaurant="updateRestaurant"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
 <script>
 import Api from "@/services/api";
@@ -91,6 +69,7 @@ export default {
         }
       }
     },
+    // eslint-disable-next-line no-unused-vars
     addList(list_name) {
       if (list_name.trim() === "") {
         return;
@@ -114,6 +93,7 @@ export default {
         this.restaurants.push(restaurants[y]);
       }
     },
+    // eslint-disable-next-line no-unused-vars
     updateRestaurant(favorite, list_name) {
       if (list_name.trim() === "") {
         return;
@@ -156,11 +136,11 @@ body {
 
 
 
-/*#app-user button {*/
-/*  border-radius: 35px;*/
-/*  background-color: #4b9ffd;*/
-/*  bottom: 0;*/
-/*}*/
+#app-user button {
+  border-radius: 35px;
+  background-color: #4b9ffd;
+  bottom: 0;
+}
 
 #app-user h1 {
   margin-top: 4vh;
@@ -168,9 +148,9 @@ body {
   color: #3070ff;
 }
 
-/*#app-user .container {*/
-/*  display: block;*/
-/*}*/
+#app-user .container {
+  display: block;
+}
 
 #app-user .restaurant {
   width: 100vw;
@@ -179,9 +159,9 @@ body {
   display: table;
 }
 
-/*#app-user .box:hover {*/
-/*  background-color: #73cb73;*/
-/*}*/
+#app-user .box:hover {
+  background-color: #73cb73;
+}
 
 #app-user .content {
   margin-top: 5vh;
@@ -223,5 +203,9 @@ body {
 
 #app-user .visits {
   padding: 0 8px;
+}
+
+#app-user input {
+  font-weight: bold;
 }
 </style>
