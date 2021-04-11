@@ -58,7 +58,7 @@ export default {
   data: () => ({
     dialog: false,
     list_name: ""
-  })
+  }),
 };
 </script>
 

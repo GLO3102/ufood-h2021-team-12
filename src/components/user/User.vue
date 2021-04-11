@@ -140,12 +140,4 @@ html,
 body {
   text-align: center;
 }
-
-#app-user input:focus {
-  border-color: #00d1b2;
-}
-
-#app-user input {
-  font-weight: bold;
-}
 </style>
