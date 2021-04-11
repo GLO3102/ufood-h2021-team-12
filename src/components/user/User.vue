@@ -9,8 +9,8 @@
       v-bind:setDeleteActive="setDeleteActive"
       v-bind:setView="setView"
       v-bind:add-list="addList"
-      v-bind:add-restaurant="addRestaurant"
-      v-bind:update-restaurant="updateRestaurant"
+      v-bind:addRestaurant="addRestaurant"
+      v-bind:updateRestaurant="updateRestaurant"
     />
     <h1>Restaurant of favorite list</h1>
     <div class="container">
@@ -91,7 +91,6 @@ export default {
         }
       }
     },
-    // eslint-disable-next-line no-unused-vars
     addList(list_name) {
       if (list_name.trim() === "") {
         return;
@@ -104,7 +103,6 @@ export default {
     deleteRestaurants(restaurantId) {
       this.onDeleteRestaurant(restaurantId);
     },
-    // eslint-disable-next-line no-unused-vars
     addRestaurant(favorite) {
       this.setRestaurant(favorite.id);
     },
@@ -116,7 +114,6 @@ export default {
         this.restaurants.push(restaurants[y]);
       }
     },
-    // eslint-disable-next-line no-unused-vars
     updateRestaurant(favorite, list_name) {
       if (list_name.trim() === "") {
         return;
@@ -159,11 +156,11 @@ body {
 
 
 
-#app-user button {
-  border-radius: 35px;
-  background-color: #4b9ffd;
-  bottom: 0;
-}
+/*#app-user button {*/
+/*  border-radius: 35px;*/
+/*  background-color: #4b9ffd;*/
+/*  bottom: 0;*/
+/*}*/
 
 #app-user h1 {
   margin-top: 4vh;
@@ -171,9 +168,9 @@ body {
   color: #3070ff;
 }
 
-#app-user .container {
-  display: block;
-}
+/*#app-user .container {*/
+/*  display: block;*/
+/*}*/
 
 #app-user .restaurant {
   width: 100vw;
@@ -182,9 +179,9 @@ body {
   display: table;
 }
 
-#app-user .box:hover {
-  background-color: #73cb73;
-}
+/*#app-user .box:hover {*/
+/*  background-color: #73cb73;*/
+/*}*/
 
 #app-user .content {
   margin-top: 5vh;
@@ -226,9 +223,5 @@ body {
 
 #app-user .visits {
   padding: 0 8px;
-}
-
-#app-user input {
-  font-weight: bold;
 }
 </style>

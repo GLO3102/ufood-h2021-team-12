@@ -9,7 +9,7 @@
         >
           <v-card>
             <v-img
-              :src="randomImg"
+              :src="randomImg.src"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
@@ -20,10 +20,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn icon v-on:click="addingRestaurant = !addingRestaurant">
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-
+              <addInput v-bind:addRestaurant="addRestaurant" v-bind:favorite="favorite" v-on:click="addingRestaurant = !addingRestaurant" v-model="addingRestaurant"/>
               <v-btn icon v-on:click="updateName = !updateName">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
@@ -56,7 +53,12 @@
           <button
             type="button"
             v-if="addingRestaurant"
-            v-on:click="addRestaurant(favorite, list_name) (addingRestaurant = !addingRestaurant) (this.clean) "
+            v-on:click="
+              addRestaurant(
+                favorite,
+                list_name
+              )((addingRestaurant = !addingRestaurant))(this.clean)
+            "
             class="list_inputOK"
           >
             Add a new restaurant to list
@@ -65,7 +67,7 @@
             type="button"
             v-if="updateName"
             v-on:click="
-              updateRestaurant(favorite, list_name) (updateName = !updateName);
+              updateRestaurant(favorite, list_name)((updateName = !updateName))
             "
             class="list_inputOK"
           >
@@ -83,25 +85,25 @@
       <button
         type="button"
         v-if="addingList"
-        v-on:click="addList(list_name) (addingList = !addingList)"
+        v-on:click="addList(list_name)((addingList = !addingList))"
         class="list_inputOK"
       >
         Create a new list
       </button>
       <v-card-actions>
         <v-spacer></v-spacer>
-
-        <v-btn icon v-on:click="addingList = !addingList">
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
+        <addList v-on:click="addingList = !addingList" v-model="addingList"/>
       </v-card-actions>
     </v-container>
   </v-card>
 </template>
 
 <script>
+import AddInput from "@/components/user/addInput";
+import AddList from "@/components/user/addList";
 export default {
   name: "FavoriteList",
+  components: {AddList, AddInput},
   props: [
     "favorites_restaurants",
     "onUpdate",
@@ -135,8 +137,9 @@ export default {
   }),
   methods: {
     randomImg() {
-      return this.listImages[Math.floor(Math.random() * this.listImages.length)]
-        .src;
+      return this.listImages[
+        Math.floor(Math.random() * this.listImages.length)
+      ];
     },
     clean() {
       this.list_name = "";
@@ -152,11 +155,21 @@ export default {
   top: 40vh;
   height: 5vh;
   width: auto;
+  z-index: 1;
 }
 .list_input {
   position: absolute;
   left: 50vw;
   top: 40vh;
   height: 5vh;
+  z-index: 1;
+}
+input {
+  font-weight: bold;
+}
+button {
+  border-radius: 35px;
+  background-color: #4b9ffd;
+  bottom: 0;
 }
 </style>
