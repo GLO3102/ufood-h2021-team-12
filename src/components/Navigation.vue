@@ -33,6 +33,12 @@ import Logout from "../services/Logout";
 import SearchBar from "./SearchBar";
 export default {
   components: { SearchBar },
+  async created() {
+    //      if(!Cookies.get('name')){
+    //window.location.href = `/#/login`;
+    //window.location.reload(true)
+    //}
+  },
   methods: {
     logout() {
       const token = "";
