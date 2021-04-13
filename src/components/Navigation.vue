@@ -7,7 +7,8 @@
       >
       <div>
         <a>
-        <s href="#"><SearchBar class="searchbar"> </SearchBar></s></a>
+          <s href="#"><SearchBar class="searchbar"> </SearchBar></s
+        ></a>
       </div>
 
       <div class="dropdown">
@@ -18,7 +19,9 @@
         </button>
         <div class="dropdown-content">
           <router-link to="/user" tag="div"><a>Profile</a> </router-link>
-          <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
+          <router-link to="/login" tag="div"
+            ><a v-on:click="logout">Disconnect</a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -26,9 +29,17 @@
 </template>
 
 <script>
+import Logout from "../services/Logout";
 import SearchBar from "./SearchBar";
 export default {
-  components: { SearchBar }
+  components: { SearchBar },
+  methods: {
+    logout() {
+      const token = "";
+      //const token  = Cookies.get('name');
+      Logout.logout(token);
+    }
+  }
 };
 </script>
 
@@ -44,8 +55,7 @@ body {
 .navbar {
   width: 100%;
   background-color: #555;
-  overflow:visible;
-  
+  overflow: visible;
 }
 
 .navbar s {
