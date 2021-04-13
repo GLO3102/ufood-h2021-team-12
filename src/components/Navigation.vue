@@ -34,7 +34,7 @@ import SearchBar from "./SearchBar";
 export default {
   components: { SearchBar },
   async created() {
-    //      if(!Cookies.get('name')){
+    //     if(!Cookies.get('name') && location.href.search("/login" >=0)){
     //window.location.href = `/#/login`;
     //window.location.reload(true)
     //}
