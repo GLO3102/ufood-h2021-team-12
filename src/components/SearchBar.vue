@@ -1,11 +1,11 @@
 <template>
-  <v-select
+  <vue-select
     class="searchbar"
     label="name"
     :options="this.nameList"
     :value="selected"
     @input="setSelected"
-  ></v-select>
+  ></vue-select>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ import RestaurantList from "../services/RestaurantList";
 import Vue from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
-Vue.component("v-select", vSelect);
+Vue.component("vue-select", vSelect);
 export default {
   data: () => ({
     name: "",

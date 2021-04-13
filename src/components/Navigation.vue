@@ -6,7 +6,8 @@
         ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
       >
       <div>
-        <s href="#"><SearchBar class="searchbar"> </SearchBar></s>
+        <a>
+        <s href="#"><SearchBar class="searchbar"> </SearchBar></s></a>
       </div>
 
       <div class="dropdown">
@@ -43,24 +44,17 @@ body {
 .navbar {
   width: 100%;
   background-color: #555;
-  overflow: auto;
+  overflow:visible;
+  
 }
-.navbar u {
-  float: left;
-  padding: 12px;
-  color: white;
-  text-decoration: none;
-  font-size: 17px;
-  width: 16.5%;
-  text-align: center;
-}
+
 .navbar s {
   float: left;
-  padding: 1px;
+  padding: 0px;
   color: white;
   text-decoration: none;
-  font-size: 17px;
-  width: 33%;
+  font-size: 10px;
+  width: 100%;
   text-align: center;
 }
 .navbar a {

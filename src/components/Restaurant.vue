@@ -112,11 +112,13 @@
         <div class="restaurant-review-core">
           <CommentSection v-bind:id="this.id" />
         </div>
+        
       </div>
     </div>
     <div class="page-not-found" v-if="!this.canDisplayRestaurantData">
       <h1>Sorry, we can't show you this restaurant at this time.</h1>
     </div>
+    <SuggestionList :currentRestaurantGenre="this.fetched.genres[0]" :currentRestaurantName="this.fetched.name" class="suggested"/>
   </div>
 </template>
 <script>
@@ -124,11 +126,12 @@ import CommentSection from "@/components/CommentSection";
 import UFoodApi from "@/services/UFoodApi";
 import Vue from "vue";
 import vSelect from "vue-select";
+import SuggestionList from "./SuggestionList";
 
 Vue.component("v-select", vSelect);
 
 export default {
-  components: { CommentSection },
+  components: { CommentSection, SuggestionList },
   data: () => {
     return {
       canDisplayRestaurantData: null,
@@ -139,7 +142,8 @@ export default {
       formattedPhoto: [],
       telHref: "",
       address_formatted: "",
-      favoriteList: ""
+      favoriteList: "",
+      currentRestaurantGenre: ""
     };
   },
   async created() {
