@@ -35,7 +35,7 @@ import SearchBar from "./SearchBar";
 export default {
   components: { SearchBar },
   async created() {
-    if (!Cookies.get("token") && location.href.search("/login" >= 0)) {
+    if (!Cookies.get("token")) {
       //var nav = document.getElementById("navbar")
       //nav.hidden(true)
       //window.location.href = `/#/login`;

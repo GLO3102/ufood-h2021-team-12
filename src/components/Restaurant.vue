@@ -135,6 +135,7 @@
   </div>
 </template>
 <script>
+
 import CommentSection from "@/components/CommentSection";
 import UFoodApi from "@/services/UFoodApi";
 import Vue from "vue";

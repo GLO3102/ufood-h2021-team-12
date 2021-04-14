@@ -6,7 +6,6 @@
 </template>
 
 <script>
-
 //import Cookies from 'js-cookie'
 import Navigation from "@/components/Navigation";
 export default {
