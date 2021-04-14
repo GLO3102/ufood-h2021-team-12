@@ -16,11 +16,11 @@
           <p>{{ followers.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <addFollowers v-model="dialog" v-bind:users="users"/>
+            <addFollowers v-model="dialog" v-bind:users="users" />
             <v-btn icon>
               <v-icon>mdi-minus</v-icon>
             </v-btn>
-            <followList v-model="dialog" v-bind:follow="followers.data"/>
+            <followList v-model="dialog" v-bind:follow="followers.data" />
           </v-card-actions>
         </v-col>
         <v-col :cols="6">
@@ -30,7 +30,7 @@
           <p>{{ following.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <followList v-model="dialog" v-bind:follow="following.data"/>
+            <followList v-model="dialog" v-bind:follow="following.data" />
           </v-card-actions>
         </v-col>
       </v-row>
@@ -73,38 +73,38 @@ import FollowList from "@/components/user/followList";
 const api = new Api();
 export default {
   name: "UserInformation",
-  components: {FollowList, AddFollowers},
+  components: { FollowList, AddFollowers },
   data: () => ({
-    followers: [],
-    following: [],
+    followers: {},
+    following: {},
     userName: String,
     userInformation: [],
     users: [],
     dialog: false
   }),
   async created() {
-    const token = this.$cookies.get("token")
+    const token = this.$cookies.get("token");
     const user = await api.getUser(token);
-    api.registerToken(token)
+    api.registerToken(token);
     api.registerUser(user);
     //setting user name
     this.userName = user.name;
     //setting user information
-    const followers = await api.getFollowers()
-    this.followers.push({
+    const followers = await api.getFollowers();
+    this.followers = {
       title: "followers",
       data: followers,
       length: user.followers.length
-    });
-    const following = await api.getFollowing()
-    this.following.push({
+    };
+    const following = await api.getFollowing();
+    this.following = {
       title: "following",
       data: following,
       length: user.following.length
-    });
-    console.log("iccc")
-    console.log(user.following)
-    console.log(followers)
+    };
+    console.log("iccc");
+    console.log(user.following);
+    console.log(followers);
     this.userInformation.push({ title: "User rates", data: user.rating });
     this.userInformation.push({ title: "email", data: user.email });
     //set users

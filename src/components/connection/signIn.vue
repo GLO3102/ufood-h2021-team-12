@@ -74,7 +74,7 @@ export default {
         }
         else {
           const { token } = user;
-          this.$cookies.set("token", token, 2000);
+          this.$cookies.set("token", token, 200000);
           console.log(token)
           this.dialog = false;
         }

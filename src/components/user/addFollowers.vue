@@ -23,8 +23,10 @@
           <v-row>
             <v-col cols="12" sm="12">
               <v-autocomplete
+                v-model="selectUsers"
                 :items="users"
                 label="Users"
+                return-object
                 multiple
               ></v-autocomplete>
             </v-col>
@@ -37,7 +39,7 @@
         <v-btn color="blue darken-1" text @click="dialog = false">
           Close
         </v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false; addRestaurant(favorite, list_name)">
+        <v-btn color="blue darken-1" text @click="dialog = false; followUsers">
           Save
         </v-btn>
       </v-card-actions>
@@ -50,8 +52,14 @@ export default {
   name: "addFollowers",
   props: ['users'],
   data: () =>({
-    dialog: false
-  })
+    dialog: false,
+    selectUsers: []
+  }),
+  methods: {
+    followUsers(){
+      console.log(this.selectUsers)
+    }
+  }
 }
 </script>
 
