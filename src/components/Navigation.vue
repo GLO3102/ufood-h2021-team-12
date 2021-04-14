@@ -1,7 +1,7 @@
 <template>
   <nav>
     <!-- The navigation menu -->
-    <div class="navbar">
+    <div class="navbar" id="navbar">
       <router-link to="/" tag="div"
         ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
       >
@@ -29,15 +29,18 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 import Logout from "../services/Logout";
 import SearchBar from "./SearchBar";
 export default {
   components: { SearchBar },
   async created() {
-    //     if(!Cookies.get('name') && location.href.search("/login" >=0)){
-    //window.location.href = `/#/login`;
-    //window.location.reload(true)
-    //}
+    if (!Cookies.get("token") && location.href.search("/login" >= 0)) {
+      //var nav = document.getElementById("navbar")
+      //nav.hidden(true)
+      //window.location.href = `/#/login`;
+      //window.location.reload(true)
+    }
   },
   methods: {
     logout() {
