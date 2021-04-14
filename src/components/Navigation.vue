@@ -1,12 +1,14 @@
 <template>
   <nav>
     <!-- The navigation menu -->
-    <div class="navbar">
+    <div class="navbar" id="navbar">
       <router-link to="/" tag="div"
         ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
       >
       <div>
-        <s href="#"><SearchBar class="searchbar"> </SearchBar></s>
+        <a>
+          <s href="#"><SearchBar class="searchbar"> </SearchBar></s
+        ></a>
       </div>
 
       <div class="dropdown">
@@ -17,7 +19,9 @@
         </button>
         <div class="dropdown-content">
           <router-link to="/user" tag="div"><a>Profile</a> </router-link>
-          <router-link to="/" tag="div"><a>Disconnect</a> </router-link>
+          <router-link to="/login" tag="div"
+            ><a v-on:click="logout">Disconnect</a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -25,9 +29,26 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
+import Logout from "../services/Logout";
 import SearchBar from "./SearchBar";
 export default {
-  components: { SearchBar }
+  components: { SearchBar },
+  async created() {
+    if (!Cookies.get("token")) {
+      //var nav = document.getElementById("navbar")
+      //nav.hidden(true)
+      //window.location.href = `/#/login`;
+      //window.location.reload(true)
+    }
+  },
+  methods: {
+    logout() {
+      const token = "";
+      //const token  = Cookies.get('name');
+      Logout.logout(token);
+    }
+  }
 };
 </script>
 
@@ -43,24 +64,16 @@ body {
 .navbar {
   width: 100%;
   background-color: #555;
-  overflow: auto;
+  overflow: visible;
 }
-.navbar u {
-  float: left;
-  padding: 12px;
-  color: white;
-  text-decoration: none;
-  font-size: 17px;
-  width: 16.5%;
-  text-align: center;
-}
+
 .navbar s {
   float: left;
-  padding: 1px;
+  padding: 0px;
   color: white;
   text-decoration: none;
-  font-size: 17px;
-  width: 33%;
+  font-size: 10px;
+  width: 100%;
   text-align: center;
 }
 .navbar a {
