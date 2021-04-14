@@ -1,6 +1,6 @@
 <template>
   <v-card class="d-flex justify-center mb-10">
-    <signIn v-model="connection" v-bind:token="token" v-if="validToken"/>
+    <signIn v-model="connection" v-if="!validToken" />
     <v-container>
       <v-row>
         <v-col sm="3">
@@ -47,16 +47,9 @@ export default {
     activeDeletion: false,
     currentFavorite: false,
     connection: true,
-    token: ""
+    validToken: false
   }),
   methods: {
-    async validToken(){
-      const user = await api.getUser(this.token);
-      if(user.json.errorCode === "ACCESS_DENIED"){
-        return false;
-      }
-      return true;
-    },
     async setRestaurant(listId) {
       await api.createRestaurant(listId);
       const aRestaurant = await api.getRestaurant();
@@ -129,8 +122,14 @@ export default {
     }
   },
   async created() {
+    const token = this.$cookies.get("token");
+    const user = await api.getUser(token);
+    this.validToken = user !== "Unauthorized";
+    api.registerToken(token);
+    console.log(this.validToken);
+
     //Check if the token is still available if not dispaly the connection menu
-    const user = await api.getUser(this.token);
+    // const user = await api.getUser(this.token);
     api.registerUser(user);
     // const profile = await api.getUser();
     this.profiles.push(user);

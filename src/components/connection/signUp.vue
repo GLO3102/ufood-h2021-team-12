@@ -116,7 +116,7 @@ export default {
     },
     validUserInformation() {
       if ((this.validFirstName() && this.validLastName() && this.validEmail() && this.validPassword())) {
-        const full_name  = this.first_name + this.last_name;
+        const full_name  = this.first_name + " " + this.last_name;
         api.createUser(full_name, this.email, this.password);
         console.log(full_name);
         this.dialog = false;

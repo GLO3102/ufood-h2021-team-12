@@ -44,7 +44,6 @@ const api = new Api();
 export default {
   name: "signIn",
   components: { SignUp},
-  props: ["token"],
   data: () => ({
     dialog: true,
     email: "",
@@ -75,8 +74,8 @@ export default {
         }
         else {
           const { token } = user;
-          this.token = token
-          console.log(this.token)
+          this.$cookies.set("token", token, 2000);
+          console.log(token)
           this.dialog = false;
         }
       }
