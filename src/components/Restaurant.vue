@@ -71,16 +71,8 @@
       <div class="restaurant-info-core">
         <div class="restaurant-info-dual-panel">
           <div class="restaurant-photo-gallery-core">
-            <div
-              class="row"
-              v-for="(photoRow, idx) in this.formattedPhoto"
-              v-bind:key="idx"
-            >
-              <div
-                class="column"
-                v-for="photoColumn in photoRow"
-                v-bind:key="photoColumn"
-              >
+            <div class="row" v-for="(photoRow, idx) in this.formattedPhoto" v-bind:key="idx">
+              <div class="column" v-for="photoColumn in photoRow" v-bind:key="photoColumn">
                 <img :src="photoColumn" :alt="''" />
               </div>
             </div>
@@ -99,9 +91,7 @@
                     v-for="(hourTimeSlot, day) in this.fetched.opening_hours"
                     v-bind:key="day"
                   >
-                    <div class="restaurant-hours-day-of-the-week">
-                      {{ day }}
-                    </div>
+                    <div class="restaurant-hours-day-of-the-week">{{ day }}</div>
                     <div class="flex-separator"></div>
                     <div class="restaurant-hours-open">{{ hourTimeSlot }}</div>
                   </div>
@@ -122,20 +112,16 @@
         <div class="restaurant-review-core">
           <CommentSection v-bind:id="this.id" />
         </div>
+        
       </div>
     </div>
     <div class="page-not-found" v-if="!this.canDisplayRestaurantData">
       <h1>Sorry, we can't show you this restaurant at this time.</h1>
     </div>
-    <SuggestionList
-      :currentRestaurantGenre="this.fetched.genres[0]"
-      :currentRestaurantName="this.fetched.name"
-      class="suggested"
-    />
+    <SuggestionList :currentRestaurantGenre="this.fetched.genres[0]" :currentRestaurantName="this.fetched.name" class="suggested"/>
   </div>
 </template>
 <script>
-
 import CommentSection from "@/components/CommentSection";
 import UFoodApi from "@/services/UFoodApi";
 import Vue from "vue";
@@ -192,9 +178,7 @@ export default {
   },
   methods: {
     updateFavoriteList() {
-      if (
-        this.favoriteList[this.favoriteList.length - 1] !== "+ Add New List"
-      ) {
+      if (this.favoriteList[this.favoriteList.length - 1] !== "+ Add New List") {
         console.log("Now in " + this.favoriteList);
       } else {
         this.favoriteList.pop();

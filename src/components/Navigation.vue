@@ -3,10 +3,10 @@
     <!-- The navigation menu -->
     <div class="navbar" id="navbar">
       <router-link to="/" tag="div"
-        ><a href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
+        ><a class="item_nav" href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
       >
       <div>
-        <a>
+        <a class="item_nav">
           <s href="#"><SearchBar class="searchbar"> </SearchBar></s
         ></a>
       </div>
@@ -18,9 +18,9 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <router-link to="/user" tag="div"><a>Profile</a> </router-link>
+          <router-link to="/user" tag="div"><a class="item_nav">Profile</a> </router-link>
           <router-link to="/login" tag="div"
-            ><a v-on:click="logout">Disconnect</a>
+            ><a class="item_nav" v-on:click="logout">Disconnect</a>
           </router-link>
         </div>
       </div>
@@ -69,14 +69,14 @@ body {
 
 .navbar s {
   float: left;
-  padding: 0px;
+
   color: white;
   text-decoration: none;
-  font-size: 10px;
+  font-size: 9px;
   width: 100%;
   text-align: center;
 }
-.navbar a {
+.navbar .item_nav {
   float: left;
   padding: 12px;
   color: white;
@@ -91,7 +91,7 @@ body {
   width: inherit;
 }
 
-.navbar a:hover {
+.navbar .item_nav:hover {
   background-color: #000;
 }
 .navbar u:hover {
@@ -102,6 +102,7 @@ body {
   float: initial;
   text-align: center;
   overflow: hidden;
+
 }
 .dropdown:hover {
   background-color: #000;
@@ -125,9 +126,8 @@ body {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-.dropdown-content a {
+.dropdown-content .item_nav {
   float: left;
-  color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -139,7 +139,7 @@ body {
   display: block;
 }
 @media screen and (max-width: 500px) {
-  .navbar a {
+  .navbar .item_nav {
     float: none;
     display: block;
     width: 100%;
