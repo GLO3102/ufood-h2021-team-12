@@ -1,29 +1,61 @@
 export default class Api {
   constructor() {
-    this.baseURL = "https://ufoodapi.herokuapp.com/unsecure";
+    this.baseURL = "https://ufoodapi.herokuapp.com";
   }
 
-  // async createUser(){
-  //   //Post /users
-  //   const response = await fetch(`${this.baseURL}/users`, {
-  //     method: 'POST',
-  //   });
-  //
-  //   return response.json();
-  // }
+  async createUser(name, email, password) {
+    //Post /users
+    const response = await fetch(`${this.baseURL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        name,
+        email,
+        password
+      })
+    });
+
+    return response.text();
+  }
 
   registerUser(user) {
     this.user = user;
   }
 
-  async getRandomUser() {
-    const response = await fetch(`${this.baseURL}/users?limit=20`);
-    const listUsers = await response.json();
-    return listUsers.items[10];
+  // async getRandomUser() {
+  //   const response = await fetch(`${this.baseURL}/users?limit=20`);
+  //   const listUsers = await response.json();
+  //   return listUsers.items[10];
+  // }
+
+  //this check if user exist and get token
+  async connectUser(email, password) {
+    const response = await fetch(`${this.baseURL}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        email,
+        password
+      })
+    });
+
+    return response.json();
   }
 
-  async getUser() {
-    const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
+  // async getUser() {
+  //   const response = await fetch(`${this.baseURL}/users/${this.user.id}`);
+  //   return await response.json();
+  // }
+  async getUser(token) {
+    const response = await fetch(`${this.baseURL}/tokenInfo`, {
+      headers: {
+        authorization: `${token}`
+      }
+    });
     return await response.json();
   }
   async getRestaurants() {
@@ -80,7 +112,7 @@ export default class Api {
     return response.json();
   }
 
-  async updateFavorite(listId,name) {
+  async updateFavorite(listId, name) {
     const response = await fetch(`${this.baseURL}/favorites/${listId}`, {
       method: "PUT",
       headers: {
@@ -120,8 +152,11 @@ export default class Api {
     });
   }
   async deleteRestaurant(listId, restaurantId) {
-    return fetch(`${this.baseURL}/favorites/${listId}/restaurants/${restaurantId}`, {
-      method: "DELETE"
-    });
+    return fetch(
+      `${this.baseURL}/favorites/${listId}/restaurants/${restaurantId}`,
+      {
+        method: "DELETE"
+      }
+    );
   }
 }

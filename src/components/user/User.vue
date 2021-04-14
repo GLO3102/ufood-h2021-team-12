@@ -1,5 +1,6 @@
 <template>
   <v-card class="d-flex justify-center mb-10">
+    <signIn v-model="connection" v-bind:token="token" v-if="validToken"/>
     <v-container>
       <v-row>
         <v-col sm="3">
@@ -34,17 +35,28 @@ import Api from "@/services/api";
 import UserInformation from "@/components/user/UserInformation";
 import Avatar from "@/components/user/Avatar";
 import FavoriteList from "@/components/user/FavoriteList";
+import SignIn from "@/components/connection/signIn";
 const api = new Api();
 export default {
-  components: { FavoriteList, Avatar, UserInformation },
+  name: "User",
+  components: { SignIn, FavoriteList, Avatar, UserInformation },
   data: () => ({
     profiles: [],
     favorites_restaurants: [],
     restaurants: [],
     activeDeletion: false,
-    currentFavorite: false
+    currentFavorite: false,
+    connection: true,
+    token: ""
   }),
   methods: {
+    async validToken(){
+      const user = await api.getUser(this.token);
+      if(user.json.errorCode === "ACCESS_DENIED"){
+        return false;
+      }
+      return true;
+    },
     async setRestaurant(listId) {
       await api.createRestaurant(listId);
       const aRestaurant = await api.getRestaurant();
@@ -117,10 +129,11 @@ export default {
     }
   },
   async created() {
-    const randomUser = await api.getRandomUser();
-    api.registerUser(randomUser);
-    const profile = await api.getUser();
-    this.profiles.push(profile);
+    //Check if the token is still available if not dispaly the connection menu
+    const user = await api.getUser(this.token);
+    api.registerUser(user);
+    // const profile = await api.getUser();
+    this.profiles.push(user);
     const favorites = await api.getFavorites(5);
     console.log(favorites);
     for (let i = 0; i < favorites.total; i++) {
