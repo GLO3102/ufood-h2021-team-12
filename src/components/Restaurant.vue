@@ -1,6 +1,6 @@
 <template>
   <div id="restaurantContent">
-    <div class="restaurant" v-if="this.canDisplayRestaurantData">
+    <div class="restaurant-data" v-if="this.canDisplayRestaurantData">
       <div class="restaurant-banner-core">
         <h1 class="restaurant-banner-name">{{ this.fetched.name }}</h1>
         <div class="favorite-bar">
@@ -108,17 +108,17 @@
           "
         ></iframe>
       </div>
+      <SuggestionList :currentRestaurantGenre="this.fetched.genres[0]" :currentRestaurantName="this.fetched.name" class="suggested"/>
       <div class="restaurant-social-core">
         <div class="restaurant-review-core">
           <CommentSection v-bind:id="this.id" />
         </div>
-        
+
       </div>
     </div>
     <div class="page-not-found" v-if="!this.canDisplayRestaurantData">
       <h1>Sorry, we can't show you this restaurant at this time.</h1>
     </div>
-    <SuggestionList :currentRestaurantGenre="this.fetched.genres[0]" :currentRestaurantName="this.fetched.name" class="suggested"/>
   </div>
 </template>
 <script>
