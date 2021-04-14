@@ -1,6 +1,6 @@
 <template>
   <div id="restaurantContent">
-    <div class="restaurant" v-if="this.canDisplayRestaurantData">
+    <div class="restaurant-entry" v-if="this.canDisplayRestaurantData">
       <div class="restaurant-banner-core">
         <h1 class="restaurant-banner-name">{{ this.fetched.name }}</h1>
         <div class="favorite-bar">
