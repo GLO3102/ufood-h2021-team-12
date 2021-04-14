@@ -2,7 +2,7 @@
   <div>
     Restaurant similaire :
     <div
-      class="restaurant"
+      class="restaurantSuggested"
       v-for="restaurant in this.filteredList"
       v-bind:key="restaurant.id"
     >
@@ -58,13 +58,10 @@ export default {
   background-color: #555;
   border-block-start: solid 5px #333;
   font-family: Arial, Helvetica, sans-serif;
-
 }
-.restaurant {
- 
- border-left: solid 5px #333;
- border-right: solid 5px #333;
+.restaurantSuggested {
+  border-left: solid 5px #333;
+  border-right: solid 5px #333;
   cursor: pointer;
 }
-
 </style>
