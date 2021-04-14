@@ -9,21 +9,28 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col
-          v-for="followers in followerInformation"
-          :key="followers.title"
-          :cols="followers.flex"
-        >
+        <v-col :cols="6">
           <v-card class="d-flex justify-center">
             <h3>{{ followers.title }}</h3>
           </v-card>
-          <p>{{ followers.data }}</p>
+          <p>{{ followers.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-                <addFollowers v-model="dialog" v-bind:users="users"/>
-<!--            <v-btn icon>-->
-<!--              <v-icon>mdi-plus</v-icon>-->
-<!--            </v-btn>-->
+            <addFollowers v-model="dialog" v-bind:users="users"/>
+            <v-btn icon>
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
+            <followList v-model="dialog" v-bind:follow="followers.data"/>
+          </v-card-actions>
+        </v-col>
+        <v-col :cols="6">
+          <v-card class="d-flex justify-center">
+            <h3>{{ following.title }}</h3>
+          </v-card>
+          <p>{{ following.length }}</p>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <followList v-model="dialog" v-bind:follow="following.data"/>
           </v-card-actions>
         </v-col>
       </v-row>
@@ -61,13 +68,15 @@
 <script>
 import Api from "@/services/api";
 import AddFollowers from "@/components/user/addFollowers";
+import FollowList from "@/components/user/followList";
 
 const api = new Api();
 export default {
   name: "UserInformation",
-  components: {AddFollowers},
+  components: {FollowList, AddFollowers},
   data: () => ({
-    followerInformation: [],
+    followers: [],
+    following: [],
     userName: String,
     userInformation: [],
     users: [],
@@ -81,22 +90,29 @@ export default {
     //setting user name
     this.userName = user.name;
     //setting user information
-    this.followerInformation.push({
+    const followers = await api.getFollowers()
+    this.followers.push({
       title: "followers",
-      data: user.followers.length
+      data: followers,
+      length: user.followers.length
     });
-    this.followerInformation.push({
+    const following = await api.getFollowing()
+    this.following.push({
       title: "following",
-      data: user.following.length
+      data: following,
+      length: user.following.length
     });
+    console.log("iccc")
+    console.log(user.following)
+    console.log(followers)
     this.userInformation.push({ title: "User rates", data: user.rating });
     this.userInformation.push({ title: "email", data: user.email });
     //set users
     const users = await api.getUsers();
     for (let i = 0; i < users.items.length; i++) {
       this.users.push(users.items[i].name);
-      console.log("userssssss")
-      console.log(users.items[i])
+      // console.log("userssssss")
+      // console.log(users.items[i])
     }
   }
 };
