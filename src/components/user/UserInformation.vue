@@ -16,7 +16,6 @@
           <p>{{ followers.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <addFollowers v-model="dialog" v-bind:users="users" />
             <v-btn icon>
               <v-icon>mdi-minus</v-icon>
             </v-btn>
@@ -30,6 +29,15 @@
           <p>{{ following.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
+            <addFollowers
+              v-model="dialog"
+              v-bind:users="users"
+              v-bind:followUsers="followUsers"
+              v-bind:following="following"
+            />
+            <v-btn icon>
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
             <followList v-model="dialog" v-bind:follow="following.data" />
           </v-card-actions>
         </v-col>
@@ -82,6 +90,15 @@ export default {
     users: [],
     dialog: false
   }),
+  methods: {
+    async followUsers() {
+      console.log("iciciciiiiiiiiii")
+      console.log(this.following.data)
+      for (let i = 0; i < this.following.data.length; i++) {
+        await api.followUser(this.following.data[i].id);
+      }
+    }
+  },
   async created() {
     const token = this.$cookies.get("token");
     const user = await api.getUser(token);
@@ -102,15 +119,15 @@ export default {
       data: following,
       length: user.following.length
     };
-    console.log("iccc");
-    console.log(user.following);
-    console.log(followers);
+    // console.log("iccc");
+    // console.log(user.following);
+    // console.log(followers);
     this.userInformation.push({ title: "User rates", data: user.rating });
     this.userInformation.push({ title: "email", data: user.email });
     //set users
     const users = await api.getUsers();
     for (let i = 0; i < users.items.length; i++) {
-      this.users.push(users.items[i].name);
+      this.users.push(users.items[i]);
       // console.log("userssssss")
       // console.log(users.items[i])
     }

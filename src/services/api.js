@@ -24,8 +24,8 @@ export default class Api {
     this.user = user;
   }
 
-  registerToken(token){
-    this.token = token
+  registerToken(token) {
+    this.token = token;
   }
 
   // async getRandomUser() {
@@ -51,7 +51,7 @@ export default class Api {
   }
 
   async getUsers() {
-    const response = await fetch(`${this.baseURL}/users`,{
+    const response = await fetch(`${this.baseURL}/users`, {
       headers: {
         authorization: `${this.token}`
       }
@@ -76,11 +76,14 @@ export default class Api {
     return listRestaurant.items;
   }
   async getRestaurant(restaurantId = this.restaurantId) {
-    const response = await fetch(`${this.baseURL}/restaurants/${restaurantId}`, {
-      headers: {
-        authorization: `${this.token}`
+    const response = await fetch(
+      `${this.baseURL}/restaurants/${restaurantId}`,
+      {
+        headers: {
+          authorization: `${this.token}`
+        }
       }
-    });
+    );
     return await response.json();
   }
   async getFollowers() {
@@ -95,7 +98,7 @@ export default class Api {
   }
 
   async getFollowing() {
-    const response = await fetch(`${this.baseURL}/users/${this.user.id}`,{
+    const response = await fetch(`${this.baseURL}/users/${this.user.id}`, {
       headers: {
         authorization: `${this.token}`
       }
@@ -107,7 +110,8 @@ export default class Api {
 
   async getFavorites(max) {
     const response = await fetch(
-      `${this.baseURL}/users/${this.user.id}/favorites?limit=${max}`,{
+      `${this.baseURL}/users/${this.user.id}/favorites?limit=${max}`,
+      {
         headers: {
           authorization: `${this.token}`
         }
@@ -182,7 +186,7 @@ export default class Api {
       method: "DELETE",
       headers: {
         authorization: `${this.token}`
-      },
+      }
     });
   }
   async deleteRestaurant(listId, restaurantId) {
@@ -192,8 +196,23 @@ export default class Api {
         method: "DELETE",
         headers: {
           authorization: `${this.token}`
-        },
+        }
       }
     );
+  }
+
+  async followUser(userId) {
+    const response = await fetch(`${this.baseURL}/follow`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `${this.token}`
+      },
+      body: JSON.stringify({
+        id: userId
+      })
+    });
+
+    return response.json();
   }
 }

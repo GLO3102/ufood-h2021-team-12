@@ -7,7 +7,7 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title>Restaurant list</v-card-title>
+        <v-card-title>Users list</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <v-list three-line>
@@ -16,7 +16,8 @@
 
               <v-list-item :key="follow.id">
                 <v-list-item-avatar>
-                  <v-img :src="follow.pictures[0]"></v-img>
+                  {{ getAvatar(follow.name) }}
+<!--                  <v-img :src="follow.pictures[0]"></v-img>-->
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -48,7 +49,15 @@ export default {
   props: ["follow"],
   data: () => ({
     dialog: false
-  })
+  }),
+  methods: {
+    getAvatar(name){
+      if(name.length < 3){
+        return "AV";
+      }
+      return name.substring(1, 3)
+    }
+  }
 }
 </script>
 
