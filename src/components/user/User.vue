@@ -1,5 +1,6 @@
 <template>
   <v-card class="d-flex justify-center mb-10">
+    <signIn v-model="connection" v-if="unvalidToken" />
     <v-container>
       <v-row>
         <v-col sm="3">
@@ -34,15 +35,19 @@ import Api from "@/services/api";
 import UserInformation from "@/components/user/UserInformation";
 import Avatar from "@/components/user/Avatar";
 import FavoriteList from "@/components/user/FavoriteList";
+import SignIn from "@/components/connection/signIn";
 const api = new Api();
 export default {
-  components: { FavoriteList, Avatar, UserInformation },
+  name: "User",
+  components: { SignIn, FavoriteList, Avatar, UserInformation },
   data: () => ({
     profiles: [],
     favorites_restaurants: [],
     restaurants: [],
     activeDeletion: false,
-    currentFavorite: false
+    currentFavorite: false,
+    connection: true,
+    unvalidToken: true
   }),
   methods: {
     async setRestaurant(listId) {
@@ -117,12 +122,23 @@ export default {
     }
   },
   async created() {
-    const randomUser = await api.getRandomUser();
-    api.registerUser(randomUser);
-    const profile = await api.getUser();
-    this.profiles.push(profile);
+    const token = this.$cookies.get("token");
+    const user = await api.getUser(token);
+
+    console.log(user);
+    api.registerToken(token);
+    //Check if the token is still available if not dispaly the connection menu
+    // const user = await api.getUser(this.token)
+    api.registerUser(user);
+    if (user.id.length > 0) {
+      this.unvalidToken = false;
+    }
+    else{
+      this.unvalidToken = true;
+    }
+    // const profile = await api.getUser();
+    this.profiles.push(user);
     const favorites = await api.getFavorites(5);
-    console.log(favorites);
     for (let i = 0; i < favorites.total; i++) {
       for (let y = 0; y < favorites.items[i].restaurants.length; y++) {
         const aRestaurant = await api.getRestaurant(

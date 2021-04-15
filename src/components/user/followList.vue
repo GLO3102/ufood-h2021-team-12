@@ -7,24 +7,25 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title>Restaurant list</v-card-title>
+        <v-card-title>Users list</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <v-list three-line>
-            <template v-for="(restaurant, index) in restaurants">
+            <template v-for="(follow, index) in follow">
               <v-divider :key="index"></v-divider>
 
-              <v-list-item :key="restaurant.id">
+              <v-list-item :key="follow.id">
                 <v-list-item-avatar>
-                  <v-img :src="restaurant.pictures[0]"></v-img>
+                  {{ getAvatar(follow.name) }}
+<!--                  <v-img :src="follow.pictures[0]"></v-img>-->
                 </v-list-item-avatar>
 
                 <v-list-item-content>
                   <v-list-item-title
-                    v-html="restaurant.name"
+                    v-html="follow.name"
                   ></v-list-item-title>
                   <v-list-item-subtitle
-                    v-html="restaurant.address"
+                    v-html="follow.email"
                   ></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -36,9 +37,6 @@
           <v-btn color="blue darken-1" text @click="dialog = false">
             Close
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
-            Save
-          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -47,12 +45,22 @@
 
 <script>
 export default {
-  name: "RestaurantList",
-  props: ["restaurants"],
+  name: "followList",
+  props: ["follow"],
   data: () => ({
     dialog: false
-  })
-};
+  }),
+  methods: {
+    getAvatar(name){
+      if(name.length < 3){
+        return "AV";
+      }
+      return name.substring(1, 3)
+    }
+  }
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

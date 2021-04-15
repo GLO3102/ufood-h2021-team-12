@@ -9,21 +9,35 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col
-          v-for="followers in followerInformation"
-          :key="followers.title"
-          :cols="followers.flex"
-        >
+        <v-col :cols="6">
           <v-card class="d-flex justify-center">
             <h3>{{ followers.title }}</h3>
           </v-card>
-          <p>{{ followers.data }}</p>
+          <p>{{ followers.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-
-            <v-btn icon>
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
+            <followList v-model="dialog" v-bind:follow="followers.data" />
+          </v-card-actions>
+        </v-col>
+        <v-col :cols="6">
+          <v-card class="d-flex justify-center">
+            <h3>{{ following.title }}</h3>
+          </v-card>
+          <p>{{ following.length }}</p>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <addFollowers
+              v-model="dialog"
+              v-bind:users="users"
+              v-bind:followUsers="followUsers"
+              v-bind:following="following"
+            />
+            <removeFollowers
+              v-model="dialog"
+              v-bind:following="following"
+              v-bind:removeFriends="removeFriends"
+            />
+            <followList v-model="dialog" v-bind:follow="following.data" />
           </v-card-actions>
         </v-col>
       </v-row>
@@ -42,8 +56,8 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn icon>
-          <v-icon>mdi-information</v-icon>
+        <v-btn icon :style="`backgroundColor: #FF0000`" v-on:click="logOut">
+          <v-icon>mdi-close</v-icon>
         </v-btn>
 
         <v-btn icon>
@@ -60,32 +74,70 @@
 
 <script>
 import Api from "@/services/api";
+import AddFollowers from "@/components/user/addFollowers";
+import FollowList from "@/components/user/followList";
+import RemoveFollowers from "@/components/user/removeFollowers";
 
 const api = new Api();
 export default {
   name: "UserInformation",
+  components: { RemoveFollowers, FollowList, AddFollowers },
   data: () => ({
-    followerInformation: [],
+    followers: {},
+    following: {},
     userName: String,
-    userInformation: []
+    userInformation: [],
+    users: [],
+    dialog: false
   }),
+  methods: {
+    async followUsers() {
+      for (let i = 0; i < this.following.data.length; i++) {
+        await api.followUser(this.following.data[i].id);
+      }
+    },
+    async removeFriends() {
+      for (let i = 0; i < this.following.data.length; i++) {
+        await api.removeUser(this.following.data[i].id);
+      }
+    },
+    async logOut(){
+      await api.logOut();
+      this.$cookies.remove("token");
+    }
+  },
   async created() {
-    const randomUser = await api.getRandomUser();
-    api.registerUser(randomUser);
-    const profile = await api.getUser();
+    const token = this.$cookies.get("token");
+    const user = await api.getUser(token);
+    api.registerToken(token);
+    api.registerUser(user);
     //setting user name
-    this.userName = profile.name;
+    this.userName = user.name;
     //setting user information
-    this.followerInformation.push({
+    const followers = await api.getFollowers();
+    this.followers = {
       title: "followers",
-      data: profile.followers.length
-    });
-    this.followerInformation.push({
+      data: followers,
+      length: user.followers.length
+    };
+    const following = await api.getFollowing();
+    this.following = {
       title: "following",
-      data: profile.following.length
-    });
-    this.userInformation.push({ title: "User rates", data: profile.rating });
-    this.userInformation.push({ title: "email", data: profile.email });
+      data: following,
+      length: user.following.length
+    };
+    // console.log("iccc");
+    // console.log(user.following);
+    // console.log(followers);
+    this.userInformation.push({ title: "User rates", data: user.rating });
+    this.userInformation.push({ title: "email", data: user.email });
+    //set users
+    const users = await api.getUsers();
+    for (let i = 0; i < users.items.length; i++) {
+      this.users.push(users.items[i]);
+      // console.log("userssssss")
+      // console.log(users.items[i])
+    }
   }
 };
 </script>

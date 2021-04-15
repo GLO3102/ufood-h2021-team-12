@@ -3,7 +3,9 @@
     <!-- The navigation menu -->
     <div class="navbar" id="navbar">
       <router-link to="/" tag="div"
-        ><a class="item_nav" href="#"><i class="fa fa-fw fa-home"></i> Home</a></router-link
+        ><a class="item_nav" href="#"
+          ><i class="fa fa-fw fa-home"></i> Home</a
+        ></router-link
       >
       <div>
         <a class="item_nav">
@@ -13,13 +15,15 @@
 
       <div class="dropdown">
         <button class="dropbtn">
-          User
+          {{ this.username }}
           <i class="fa fa-fw fa-user"></i>
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <router-link to="/user" tag="div"><a class="item_nav">Profile</a> </router-link>
-          <router-link to="/login" tag="div"
+          <router-link to="/user" tag="div"
+            ><a class="item_nav">Profile</a>
+          </router-link>
+          <router-link to="/" tag="div"
             ><a class="item_nav" v-on:click="logout">Disconnect</a>
           </router-link>
         </div>
@@ -29,23 +33,25 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
+import Api from "@/services/api";
+import Cookies from "js-cookie";
 import Logout from "../services/Logout";
 import SearchBar from "./SearchBar";
 export default {
+  data: () => ({
+    username: ""
+  }),
   components: { SearchBar },
   async created() {
-    if (!Cookies.get("token")) {
-      //var nav = document.getElementById("navbar")
-      //nav.hidden(true)
-      //window.location.href = `/#/login`;
-      //window.location.reload(true)
+    const api = new Api();
+    if (Cookies.get("token")) {
+      const user = await api.getUser(Cookies.get("token"));
+      this.username = user.name;
     }
   },
   methods: {
     logout() {
-      const token = "";
-      //const token  = Cookies.get('name');
+      const token = this.$cookies.get("token");
       Logout.logout(token);
     }
   }
@@ -102,7 +108,6 @@ body {
   float: initial;
   text-align: center;
   overflow: hidden;
-
 }
 .dropdown:hover {
   background-color: #000;
