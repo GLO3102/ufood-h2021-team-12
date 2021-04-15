@@ -36,12 +36,27 @@
             </select>
           </label>
         </div>
-        <button class="list-shortcut-button" v-on:click="bottom">
-          View the restaurant list
-        </button>
+        <div class="search-options-inputs">
+          <button class="list-shortcut-button" v-on:click="bottom">
+            View the restaurant {{ mapChecked ? "map" : "list" }}
+          </button>
+          <label>
+            Map mode
+            <input
+              class="map-checkbox"
+              type="checkbox"
+              id="mapCheckbox"
+              v-model="mapChecked"
+            />
+          </label>
+        </div>
       </div>
     </div>
-    <div class="restaurant-list" id="list">
+    <div
+      v-bind:style="mapChecked ? 'display: none' : 'display: block'"
+      class="restaurant-list"
+      id="list"
+    >
       <div
         class="restaurant-entry"
         v-for="(restaurant, id) in restaurantSample"
@@ -88,27 +103,70 @@
         </div>
       </div>
     </div>
+    <div
+      v-bind:style="mapChecked ? 'display: block' : 'display: none'"
+      class="home-map"
+      id="homeMap"
+    ></div>
   </div>
 </template>
 <script>
 import Modal from "./Modal";
 import VModal from "vue-js-modal";
 import Vue from "vue";
+import { Loader } from "@googlemaps/js-api-loader";
 Vue.use(VModal);
 import RestaurantList from "../services/RestaurantList";
 export default {
   data: () => {
     return {
+      map: null,
+      gmapLoader: new Loader({
+        apiKey: "AIzaSyDTekFbXJ_GdKSznFTcQ5Nvgo9-6MeJzaI",
+        version: "weekly",
+        libraries: ["places"]
+      }),
+      markers: [],
+      latLng: { lat: 46.8164419, lng: -71.336886 },
+      locationMarker: null,
       restaurantSample: [],
       genreList: [],
       price: 0,
-      genre: ""
+      genre: "",
+      mapChecked: false
     };
   },
   async created() {
     const response = await RestaurantList.getRestaurantList();
     this.restaurantSample = response.items;
+    await this.setMarkersToSamples();
   },
+
+  async mounted() {
+    await this.getLocation();
+    console.log(this.latLng);
+    let latLng = this.latLng;
+    console.log(latLng);
+    try {
+      this.gmapLoader.load().then(() => {
+        // eslint-disable-next-line no-undef
+        this.map = new google.maps.Map(document.getElementById("homeMap"), {
+          center: latLng,
+          zoom: 12
+        });
+        // eslint-disable-next-line no-undef
+        this.locationMarker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          title: "Your location",
+          icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+        });
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
   methods: {
     visitRestaurant: function(id) {
       window.location.href = `/#/restaurant?id=${id}`;
@@ -117,7 +175,7 @@ export default {
       this.$modal.show(Modal);
     },
     bottom: function() {
-      document.getElementById("list").scrollIntoView({ behavior: "smooth" });
+      document.getElementById(this.mapChecked? "homeMap" : "list").scrollIntoView({ behavior: "smooth" });
       if (this.restaurantSample.length === 0)
         alert("Unfortunately, no restaurant fits this price range and genre.");
     },
@@ -137,6 +195,7 @@ export default {
         });
       if (this.restaurantSample.length === 0)
         alert("Unfortunately, no restaurant fits this price range and genre.");
+      await this.setMarkersToSamples();
     },
     async genreChange(event) {
       const response = await RestaurantList.getRestaurantList();
@@ -154,6 +213,101 @@ export default {
         });
       if (this.restaurantSample.length === 0)
         alert("Unfortunately, no restaurant fits this price range and genre.");
+      await this.setMarkersToSamples();
+    },
+    async getLocation() {
+      if (navigator.geolocation) {
+        await navigator.geolocation.getCurrentPosition(this.addLocation);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    },
+    addLocation(position) {
+      this.latLng.lat = position.coords.latitude;
+      this.latLng.lng = position.coords.longitude;
+    },
+    async setMarkersToSamples() {
+      let map = this.map;
+      let visitRestaurant = this.visitRestaurant;
+      let generateContentString = this.generateContentString;
+      for (let i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(null);
+      }
+      this.markers = [];
+      let markers = this.markers;
+      this.gmapLoader.load().then(() => {
+        // eslint-disable-next-line no-undef
+        var service = new google.maps.places.PlacesService(map);
+        this.restaurantSample.forEach(restaurant => {
+          service.getDetails(
+            {
+              placeId: restaurant.place_id
+            },
+            // eslint-disable-next-line no-unused-vars
+            function(result, status) {
+              let marker =
+                // eslint-disable-next-line no-undef
+                new google.maps.Marker({
+                  map: map,
+                  place: {
+                    placeId: restaurant.place_id,
+                    location: result.geometry.location
+                  },
+                  title: restaurant.name
+                });
+              // eslint-disable-next-line no-undef
+              let infowindow = new google.maps.InfoWindow({
+                content: generateContentString(restaurant)
+              });
+              // eslint-disable-next-line no-undef
+              google.maps.event.addListener(marker, "mouseover", function() {
+                infowindow.open(map, marker);
+              });
+              // eslint-disable-next-line no-undef
+              google.maps.event.addListener(marker, "mouseout", function() {
+                infowindow.close();
+              });
+              // eslint-disable-next-line no-undef
+              google.maps.event.addListener(marker, "click", function() {
+                visitRestaurant(restaurant.id);
+              });
+              markers.push(marker);
+            }
+          );
+        });
+      });
+    },
+    generateContentString(restaurant) {
+      const imgSrc = restaurant.pictures[0]
+      return `<div class="restaurant-entry-small">
+      <div class="media-left">
+        <img
+          class="restaurant-image"
+        :src="${imgSrc}"
+           alt="Restaurant Image"
+      />
+    </div>
+      <div class="media-content">
+        <h1>
+          ${restaurant.name}
+        </h1>
+        <div class="info-brackets">
+          price range: ${restaurant.price_range} , rating:
+          ${restaurant.rating.toFixed(2)}
+        </div>
+        <div class="genreText">
+          ${restaurant.genres}
+        </div>
+        <div class="level-left">
+            <a class="level-item">
+                <p>
+                <span class="adressText">${restaurant.address}</span>
+                </p>
+            </a>
+        </div>
+      </div>
+    </div>
+    </div>`;
     }
   }
 };

@@ -9,7 +9,9 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.11.3",
     "core-js": "^3.6.5",
+    "gmaps": "^0.4.25",
     "js-cookie": "^2.2.1",
     "vue": "^2.6.12",
     "vue-js-modal": "^2.0.0-rc.6",
