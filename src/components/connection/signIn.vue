@@ -4,6 +4,14 @@
       <v-card>
         <v-card-title>
           <span class="headline">User Profile</span>
+          <v-alert
+            dense
+            outlined
+            type="error"
+            v-show="valid"
+          >
+            Wrong password or email
+          </v-alert>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -48,7 +56,8 @@ export default {
     dialog: true,
     email: "",
     password: "",
-    colors: ["#4b9ffd", "#4b9ffd", "#4b9ffd"]
+    colors: ["#4b9ffd", "#4b9ffd", "#4b9ffd"],
+    valid: false
   }),
   methods: {
     validEmail() {
@@ -67,19 +76,21 @@ export default {
     },
     async connect(){
       if(this.validEmail() && this.validPassword()){
-        const user = await api.connectUser(this.email, this.password);
-        if (user === "Unauthorized"){
-          this.colors[2] = "#FF0000"
-          return;
-        }
-        else {
+        try{
+          const user = await api.connectUser(this.email, this.password);
+          console.log(user)
           const { token } = user;
           this.$cookies.set("token", token, 200000);
           console.log(token)
           this.dialog = false;
         }
+        catch (err){
+          this.colors[2] = "#FF0000";
+          this.valid = true;
+        }
       }
       this.colors[2] = "#FF0000"
+      this.valid = true;
     }
   }
 }

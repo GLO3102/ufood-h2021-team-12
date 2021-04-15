@@ -55,7 +55,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <small :style="`Color: red`">Already have an account</small>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn :style="`backgroundColor: #4b9ffd`" text @click="dialog = false">
             <signIn />
             Sign <in></in>
           </v-btn>
