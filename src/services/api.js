@@ -51,12 +51,12 @@ export default class Api {
   }
 
   async getUsers() {
-    const response = await fetch(`${this.baseURL}/users`, {
+    const response = await fetch(`${this.baseURL}/users?limit=100`, {
       headers: {
         authorization: `${this.token}`
       }
     });
-    return await response.json(); //Todo we"ll need to add some stuff here to get the specific element
+    return await response.json();
   }
   async getUser(token) {
     const response = await fetch(`${this.baseURL}/tokenInfo`, {
