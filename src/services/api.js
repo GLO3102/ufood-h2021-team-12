@@ -224,4 +224,10 @@ export default class Api {
       }
     });
   }
+
+  async logOut(){
+    return fetch(`${this.baseURL}/logOut`, {
+      method: "POST"
+    });
+  }
 }

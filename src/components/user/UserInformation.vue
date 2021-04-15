@@ -56,8 +56,8 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn icon>
-          <v-icon>mdi-information</v-icon>
+        <v-btn icon :style="`backgroundColor: #FF0000`" v-on:click="logOut">
+          <v-icon>mdi-close</v-icon>
         </v-btn>
 
         <v-btn icon>
@@ -100,6 +100,10 @@ export default {
       for (let i = 0; i < this.following.data.length; i++) {
         await api.removeUser(this.following.data[i].id);
       }
+    },
+    async logOut(){
+      await api.logOut();
+      this.$cookies.remove("token");
     }
   },
   async created() {
