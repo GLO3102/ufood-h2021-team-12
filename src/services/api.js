@@ -51,7 +51,7 @@ export default class Api {
   }
 
   async getUsers() {
-    const response = await fetch(`${this.baseURL}/users?limit=100`, {
+    const response = await fetch(`${this.baseURL}/users?limit=600`, {
       headers: {
         authorization: `${this.token}`
       }
