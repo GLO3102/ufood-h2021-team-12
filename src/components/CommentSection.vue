@@ -2,7 +2,7 @@
   <div class="comment-section">
     <div class="comment-selection">
       <div class="flex-separator"></div>
-      <button class="take-visit-button" v-on:click="modal">
+      <button class="visit-button" v-on:click="modal">
         Leave a review
       </button>
       <div class="flex-separator"></div>
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style scoped>
-.take-visit-button {
+.visit-button {
   background-color: #333;
   color: cyan;
   border: 1px solid cyan;
