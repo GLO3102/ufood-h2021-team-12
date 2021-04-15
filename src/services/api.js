@@ -215,4 +215,13 @@ export default class Api {
 
     return response.json();
   }
+
+  async removeUser(userId) {
+    return fetch(`${this.baseURL}/follow/${userId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `${this.token}`
+      }
+    });
+  }
 }

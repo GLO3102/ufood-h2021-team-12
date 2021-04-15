@@ -16,9 +16,6 @@
           <p>{{ followers.length }}</p>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn icon>
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
             <followList v-model="dialog" v-bind:follow="followers.data" />
           </v-card-actions>
         </v-col>
@@ -35,9 +32,11 @@
               v-bind:followUsers="followUsers"
               v-bind:following="following"
             />
-            <v-btn icon>
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
+            <removeFollowers
+              v-model="dialog"
+              v-bind:following="following"
+              v-bind:removeFriends="removeFriends"
+            />
             <followList v-model="dialog" v-bind:follow="following.data" />
           </v-card-actions>
         </v-col>
@@ -77,11 +76,12 @@
 import Api from "@/services/api";
 import AddFollowers from "@/components/user/addFollowers";
 import FollowList from "@/components/user/followList";
+import RemoveFollowers from "@/components/user/removeFollowers";
 
 const api = new Api();
 export default {
   name: "UserInformation",
-  components: { FollowList, AddFollowers },
+  components: { RemoveFollowers, FollowList, AddFollowers },
   data: () => ({
     followers: {},
     following: {},
@@ -92,10 +92,13 @@ export default {
   }),
   methods: {
     async followUsers() {
-      console.log("iciciciiiiiiiiii")
-      console.log(this.following.data)
       for (let i = 0; i < this.following.data.length; i++) {
         await api.followUser(this.following.data[i].id);
+      }
+    },
+    async removeFriends() {
+      for (let i = 0; i < this.following.data.length; i++) {
+        await api.removeUser(this.following.data[i].id);
       }
     }
   },

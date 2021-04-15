@@ -2,19 +2,19 @@
   <v-dialog v-model="dialog" scrollable max-width="300px">
     <template v-slot:activator="{ on, attrs }">
       <v-btn icon v-bind="attrs" v-on="on" :style="`backgroundColor: #4b9ffd`">
-        <v-icon>mdi-plus</v-icon>
+        <v-icon>mdi-minus</v-icon>
       </v-btn>
     </template>
     <v-card>
       <v-card-title>
-        <span class="headline">Add new friend</span>
+        <span class="headline">Remove friends</span>
       </v-card-title>
       <v-card-text>
         <v-container>
           <v-row>
             <v-col cols="12" sm="12">
               <v-autocomplete
-                :items="users"
+                :items="following.data"
                 label="Users"
                 item-text="name"
                 item-value="id"
@@ -30,15 +30,15 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="dialog = false">
-          Cancel
+          Close
         </v-btn>
         <v-btn
           color="blue darken-1"
           text
-          v-on:click="this.followUsers"
+          v-on:click="deleteFriends"
           @click="dialog = false"
         >
-          Follow users
+          Save
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -47,14 +47,19 @@
 
 <script>
 export default {
-  name: "addFollowers",
-  props: ["users", "followUsers", "following"],
+  name: "removeFollowers",
+  props: ["removeFriends", "following"],
   data: () => ({
-    dialog: false
+    dialog: false,
+    removeList: []
   }),
   methods: {
     getUsers(selectUsers) {
-      this.following.data = selectUsers;
+      this.removeList = selectUsers;
+    },
+    deleteFriends() {
+      this.following.data = this.removeList;
+      this.removeFriends();
     }
   }
 };
