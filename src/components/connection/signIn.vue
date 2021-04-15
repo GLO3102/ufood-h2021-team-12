@@ -83,6 +83,7 @@ export default {
           this.$cookies.set("token", token, 200000);
           console.log(token)
           this.dialog = false;
+          location.reload();
         }
         catch (err){
           this.colors[2] = "#FF0000";

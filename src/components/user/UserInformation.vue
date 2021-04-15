@@ -104,6 +104,7 @@ export default {
     async logOut(){
       await api.logOut();
       this.$cookies.remove("token");
+      location.reload();
     }
   },
   async created() {

@@ -35,8 +35,8 @@
 <script>
 import Api from "@/services/api";
 import Cookies from "js-cookie";
-import Logout from "../services/Logout";
 import SearchBar from "./SearchBar";
+const api = new Api()
 export default {
   data: () => ({
     username: ""
@@ -50,9 +50,10 @@ export default {
     }
   },
   methods: {
-    logout() {
-      const token = this.$cookies.get("token");
-      Logout.logout(token);
+    async logout(){
+      await api.logOut();
+      this.$cookies.remove("token");
+      location.reload();
     }
   }
 };
