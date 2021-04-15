@@ -16,7 +16,7 @@ body {
 .search-container {
   display: flex;
   background-image: url("../../assets/homePicture.jpg");
-  height: 100vh;
+  height: 90vh;
   align-items: center;
   justify-content: center;
 }
@@ -31,6 +31,17 @@ body {
   align-items: center;
   bottom: 10%;
   left: 40%;
+}
+
+.search-options-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-checkbox {
+  width: 4vw;
+  height: 4vh;
 }
 
 .list-shortcut-button {
@@ -64,6 +75,17 @@ body {
   position: relative;
 }
 
+.restaurant-entry-small {
+  padding: 5px 5px 4px;
+  display: flex;
+  height: 20vh;
+  border: 3px solid grey;
+  background-color: darkgrey;
+  margin-bottom: 0;
+  border-radius: 0;
+  position: relative;
+}
+
 .restaurant-entry:hover {
   background-color: #444;
 }
@@ -78,8 +100,8 @@ body {
 .restaurant-image {
   margin: 0;
   padding: 10px;
-  max-height:100%;
-  max-width:100%;
+  max-height: 100%;
+  max-width: 100%;
   border-radius: 50vw;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
   /*transition: width 1s;*/
@@ -141,4 +163,9 @@ input {
   height: 25%;
   width: 30%;
   background-color: #facb20;
+}
+
+.home-map {
+  width: 100%;
+  height: 80vh;
 }
