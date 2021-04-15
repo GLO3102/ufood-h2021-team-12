@@ -95,11 +95,13 @@ export default {
       for (let i = 0; i < this.following.data.length; i++) {
         await api.followUser(this.following.data[i].id);
       }
+      location.reload();
     },
     async removeFriends() {
       for (let i = 0; i < this.following.data.length; i++) {
         await api.removeUser(this.following.data[i].id);
       }
+      location.reload();
     },
     async logOut(){
       await api.logOut();

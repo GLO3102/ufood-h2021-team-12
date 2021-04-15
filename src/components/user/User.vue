@@ -90,6 +90,7 @@ export default {
     //TODO check this to remove async
     async addRestaurant(favorite) {
       await this.setRestaurant(favorite.id);
+      location.reload();
     },
     async setView(favorite) {
       this.restaurants.splice(0, this.restaurants.length);
