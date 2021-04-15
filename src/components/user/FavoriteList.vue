@@ -80,7 +80,7 @@ export default {
     "restaurants",
     "addList",
     "addRestaurant",
-    "updateRestaurant",
+    "updateRestaurant"
   ],
   data: () => ({
     listImages: [
@@ -110,7 +110,7 @@ export default {
       return this.listImages[
         Math.floor(Math.random() * this.listImages.length)
       ];
-    },
+    }
   }
 };
 </script>
