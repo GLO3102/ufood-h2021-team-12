@@ -2,7 +2,12 @@
   <div id="app" data-app>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on" :style="`backgroundColor: #4b9ffd`">
+        <v-btn
+          icon
+          v-bind="attrs"
+          v-on="on"
+          :style="`backgroundColor: #4b9ffd`"
+        >
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </template>
@@ -14,7 +19,11 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Name*" required v-model="list_name"></v-text-field>
+                <v-text-field
+                  label="Name*"
+                  required
+                  v-model="list_name"
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -25,7 +34,14 @@
           <v-btn color="blue darken-1" text @click="dialog = false">
             Close
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false; updateRestaurant(favorite, list_name)">
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="
+              dialog = false;
+              updateRestaurant(favorite, list_name);
+            "
+          >
             Save
           </v-btn>
         </v-card-actions>
@@ -42,9 +58,5 @@ export default {
     dialog: false,
     list_name: ""
   })
-}
+};
 </script>
-
-<style scoped>
-
-</style>

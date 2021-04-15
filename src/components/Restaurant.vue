@@ -1,5 +1,6 @@
 <template>
   <div id="restaurantContent">
+    <signIn v-model="connection" v-if="unvalidToken" />
     <div class="restaurant-data" v-if="this.canDisplayRestaurantData">
       <div class="restaurant-banner-core">
         <h1 class="restaurant-banner-name">{{ this.fetched.name }}</h1>
@@ -127,11 +128,13 @@ import UFoodApi from "@/services/UFoodApi";
 import Vue from "vue";
 import vSelect from "vue-select";
 import SuggestionList from "./SuggestionList";
+import Api from "@/services/api";
+import SignIn from "@/components/connection/signIn";
 
 Vue.component("v-select", vSelect);
-
+const api = new Api();
 export default {
-  components: { CommentSection, SuggestionList },
+  components: {SignIn, CommentSection, SuggestionList },
   data: () => {
     return {
       canDisplayRestaurantData: null,
@@ -143,7 +146,9 @@ export default {
       telHref: "",
       address_formatted: "",
       favoriteList: "",
-      currentRestaurantGenre: ""
+      currentRestaurantGenre: "",
+      connection: true,
+      unvalidToken: true
     };
   },
   async created() {
@@ -174,6 +179,15 @@ export default {
 
       this.address_formatted = this.fetched.address.replace(" ", "+");
       this.canDisplayRestaurantData = true;
+    }
+    //get user with token and check if id is present
+    const token = this.$cookies.get("token");
+    const user = await api.getUser(token);
+    if (user.id.length > 0) {
+      this.unvalidToken = false;
+    }
+    else {
+      this.unvalidToken = true;
     }
   },
   methods: {

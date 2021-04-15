@@ -1,5 +1,6 @@
 <template>
   <div id="app-home">
+    <signIn v-model="connection" v-if="unvalidToken" />
     <div class="search-container">
       <div class="search-options">
         <div class="select-div">
@@ -116,8 +117,12 @@ import VModal from "vue-js-modal";
 import Vue from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
 Vue.use(VModal);
+const api = new Api();
 import RestaurantList from "../services/RestaurantList";
+import SignIn from "@/components/connection/signIn";
+import Api from "@/services/api";
 export default {
+  components: { SignIn },
   data: () => {
     return {
       map: null,
@@ -133,13 +138,23 @@ export default {
       genreList: [],
       price: 0,
       genre: "",
-      mapChecked: false
+      mapChecked: false,
+      connection: true,
+      unvalidToken: true
     };
   },
   async created() {
     const response = await RestaurantList.getRestaurantList();
     this.restaurantSample = response.items;
     await this.setMarkersToSamples();
+    //get user with token and check if id is present
+    const token = this.$cookies.get("token");
+    const user = await api.getUser(token);
+    if (user.id.length > 0) {
+      this.unvalidToken = false;
+    } else {
+      this.unvalidToken = true;
+    }
   },
 
   async mounted() {
@@ -159,7 +174,8 @@ export default {
           position: latLng,
           map: this.map,
           title: "Your location",
-          icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
+          icon:
+            "https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png"
         });
       });
     } catch (error) {
@@ -175,7 +191,9 @@ export default {
       this.$modal.show(Modal);
     },
     bottom: function() {
-      document.getElementById(this.mapChecked? "homeMap" : "list").scrollIntoView({ behavior: "smooth" });
+      document
+        .getElementById(this.mapChecked ? "homeMap" : "list")
+        .scrollIntoView({ behavior: "smooth" });
       if (this.restaurantSample.length === 0)
         alert("Unfortunately, no restaurant fits this price range and genre.");
     },
@@ -278,7 +296,7 @@ export default {
       });
     },
     generateContentString(restaurant) {
-      const imgSrc = restaurant.pictures[0]
+      const imgSrc = restaurant.pictures[0];
       return `<div class="restaurant-entry-small">
       <div class="media-left">
         <img

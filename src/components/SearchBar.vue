@@ -18,7 +18,7 @@ export default {
   data: () => ({
     name: "",
     nameList: [],
-    selected:""
+    selected: ""
   }),
   async created() {
     const response = await RestaurantList.getRestaurantList();
