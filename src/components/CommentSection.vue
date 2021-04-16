@@ -2,7 +2,7 @@
   <div class="comment-section">
     <div class="comment-selection">
       <div class="flex-separator"></div>
-      <button class="visit-button" v-on:click="modal">
+      <button class="visit-button" v-on:click="modal(currentRestaurantId)">
         Leave a review
       </button>
       <div class="flex-separator"></div>
@@ -45,7 +45,7 @@ Vue.use(VModal);
 export default {
   name: "CommentSection",
   components: { Comment },
-  props: ["id"],
+  props: ["id", "currentRestaurantId"],
   data: () => {
     return {
       items: null,
@@ -58,8 +58,8 @@ export default {
     await this.fetchAgain();
   },
   methods: {
-    modal: function() {
-      this.$modal.show(Modal);
+    modal: function(currentRestaurantId) {
+      this.$modal.show(Modal, { restaurantid: currentRestaurantId });
     },
     generatePageOptions: function(page) {
       let page_options = [];

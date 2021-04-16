@@ -222,9 +222,31 @@ export default class Api {
     });
   }
 
-  async logOut(){
+  async logOut() {
     return fetch(`${this.baseURL}/logOut`, {
       method: "POST"
     });
+  }
+
+  async leaveReview(token, userId, restaurantId, review, rating, date) {
+    console.log(token);
+    const response = await fetch(
+      `${this.baseURL}/users/${userId}/restaurants/visits`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token
+        },
+        body: JSON.stringify({
+          restaurant_id: restaurantId,
+          comment: review,
+          rating: rating,
+          date: date
+        })
+      }
+    );
+    console.log(response);
+    return response.json();
   }
 }
