@@ -11,7 +11,7 @@
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <v-list three-line>
-            <template v-for="(restaurant, index) in restaurants">
+            <template v-for="(restaurant, index) in currentRestaurants">
               <v-divider :key="index"></v-divider>
 
               <v-list-item :key="restaurant.id">
@@ -48,10 +48,17 @@
 <script>
 export default {
   name: "RestaurantList",
-  props: ["restaurants"],
+  props: ["restaurants", "favorite"],
   data: () => ({
-    dialog: false
-  })
+    dialog: false,
+    currentRestaurants: []
+  }),
+  created() {
+    const currentRestaurants = this.restaurants.filter(x => x.favorite === this.favorite.id);
+    for(let i = 0; i < currentRestaurants.length; i++) {
+      this.currentRestaurants.push(currentRestaurants[i].data);
+      }
+  }
 };
 </script>
 

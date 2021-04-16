@@ -18,12 +18,13 @@
             v-bind:favorites_restaurants="favorites_restaurants"
             v-bind:on-update="onUpdate"
             v-bind:deleteList="deleteList"
-            v-bind:setDeleteActive="setDeleteActive"
+            v-bind:deleteRestaurants="deleteRestaurants"
             v-bind:setView="setView"
             v-bind:restaurants="restaurants"
             v-bind:add-list="addList"
             v-bind:add-restaurant="addRestaurant"
             v-bind:update-restaurant="updateRestaurant"
+            v-bind:allRestaurants="allRestaurants"
           />
         </v-col>
       </v-row>
@@ -47,13 +48,17 @@ export default {
     activeDeletion: false,
     currentFavorite: false,
     connection: true,
-    unvalidToken: true
+    unvalidToken: true,
+    allRestaurants: []
   }),
   methods: {
-    async setRestaurant(listId) {
-      await api.createRestaurant(listId);
-      const aRestaurant = await api.getRestaurant();
-      this.restaurants.push(aRestaurant);
+    async setRestaurant(listId, restaurantList) {
+      for(let i=0; i < restaurantList.length; i++){
+        await api.createRestaurant(listId, restaurantList[i].id);
+        const aRestaurant = await api.getRestaurant(restaurantList[i].id);
+        this.restaurants.push(aRestaurant);
+      }
+      location.reload();
     },
     async onCreate(name) {
       const favorite = await api.createFavorite(name);
@@ -73,6 +78,7 @@ export default {
           this.favorites_restaurants[i] = favorite;
         }
       }
+      location.reload();
     },
     // eslint-disable-next-line no-unused-vars
     addList(list_name) {
@@ -84,17 +90,20 @@ export default {
     deleteList(id) {
       this.onDelete(id);
     },
-    deleteRestaurants(restaurantId) {
-      this.onDeleteRestaurant(restaurantId);
+    deleteRestaurants(favorite , list_restaurant) {
+      for (let i = 0; i < list_restaurant.length; i++) {
+        this.onDeleteRestaurant(favorite, list_restaurant[i].id);
+      }
     },
     //TODO check this to remove async
-    async addRestaurant(favorite) {
-      await this.setRestaurant(favorite.id);
+    async addRestaurant(favorite, restaurantList) {
+      await this.setRestaurant(favorite.id, restaurantList);
       location.reload();
     },
     async setView(favorite) {
       this.restaurants.splice(0, this.restaurants.length);
       for (let y = 0; y < favorite.restaurants.length; y++) {
+        console.log(favorite.restaurants[y].id);
         const aRestaurant = await api.getRestaurant(favorite.restaurants[y].id);
         this.restaurants.push(aRestaurant);
       }
@@ -111,11 +120,12 @@ export default {
       }
       this.onUpdate(favorite.id, list_name);
     },
-    async onDeleteRestaurant(restaurantId) {
-      await api.deleteRestaurant(this.currentFavorite, restaurantId);
+    async onDeleteRestaurant(favorite,restaurantId) {
+      await api.deleteRestaurant(favorite.id, restaurantId);
       this.restaurants = this.restaurants.filter(
         restaurant => restaurant.id !== restaurantId
       );
+      location.reload();
     },
     setDeleteActive(favoriteId) {
       this.activeDeletion = !this.activeDeletion;
@@ -145,10 +155,18 @@ export default {
         const aRestaurant = await api.getRestaurant(
           favorites.items[i].restaurants[y].id
         );
-        this.restaurants.push(aRestaurant);
+        this.restaurants.push({
+          favorite: favorites.items[i].id,
+          data: aRestaurant
+        });
       }
       this.favorites_restaurants.push(favorites.items[i]);
     }
+    const allRestaurants = await api.getRestaurants();
+    for(let i = 0; i < allRestaurants.items.length; i++) {
+      this.allRestaurants.push(allRestaurants.items[i]);
+    }
+
   }
 };
 </script>

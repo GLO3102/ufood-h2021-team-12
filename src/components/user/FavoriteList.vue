@@ -23,6 +23,7 @@
               <addInput
                 v-bind:addRestaurant="addRestaurant"
                 v-bind:favorite="favorite"
+                v-bind:allRestaurants="allRestaurants"
                 v-on:click="addingRestaurant = !addingRestaurant"
                 v-model="addingRestaurant"
               />
@@ -35,8 +36,8 @@
 
               <RestaurantList
                 v-bind:restaurants="restaurants"
+                v-bind:favorite="favorite"
                 @click="
-                  setView(favorite);
                   currentFavorite = !currentFavorite;
                 "
                 v-model="currentFavorite"
@@ -44,9 +45,7 @@
               <v-btn icon v-on:click="deleteList(favorite.id)">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
-              <v-btn icon v-on:click="setDeleteActive(favorite.id)">
-                <v-icon>mdi-minus</v-icon>
-              </v-btn>
+              <removeRestaurants v-bind:favorite="favorite" v-bind:restaurants="restaurants" v-bind:deleteRestaurants="deleteRestaurants"  />
             </v-card-actions>
           </v-card>
         </v-col>
@@ -68,19 +67,21 @@ import AddInput from "@/components/user/addInput";
 import AddList from "@/components/user/addList";
 import UpdateList from "@/components/user/updateList";
 import RestaurantList from "@/components/user/RestaurantList";
+import RemoveRestaurants from "@/components/user/removeRestaurants";
 export default {
   name: "FavoriteList",
-  components: { RestaurantList, UpdateList, AddList, AddInput },
+  components: {RemoveRestaurants, RestaurantList, UpdateList, AddList, AddInput },
   props: [
     "favorites_restaurants",
     "onUpdate",
     "deleteList",
-    "setDeleteActive",
+    "deleteRestaurants",
     "setView",
     "restaurants",
     "addList",
     "addRestaurant",
-    "updateRestaurant"
+    "updateRestaurant",
+    "allRestaurants"
   ],
   data: () => ({
     listImages: [
@@ -104,14 +105,7 @@ export default {
     activeDeletion: false,
     currentFavorite: false,
     currentRestaurants: []
-  }),
-  methods: {
-    randomImg() {
-      return this.listImages[
-        Math.floor(Math.random() * this.listImages.length)
-      ];
-    }
-  }
+  })
 };
 </script>
 

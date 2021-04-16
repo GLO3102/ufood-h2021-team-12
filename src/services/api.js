@@ -67,15 +67,14 @@ export default class Api {
     return await response.json();
   }
   async getRestaurants() {
-    const response = await fetch(`${this.baseURL}/restaurants`, {
+    const response = await fetch(`${this.baseURL}/restaurants?limit=200`, {
       headers: {
         authorization: `${this.token}`
       }
     });
-    const listRestaurant = await response.json();
-    return listRestaurant.items;
+    return await response.json();
   }
-  async getRestaurant(restaurantId = this.restaurantId) {
+  async getRestaurant(restaurantId) {
     const response = await fetch(
       `${this.baseURL}/restaurants/${restaurantId}`,
       {
@@ -161,9 +160,7 @@ export default class Api {
     return response.json();
   }
 
-  async createRestaurant(listId) {
-    const items = await this.getRestaurants();
-    this.restaurantId = items[Math.floor(Math.random() * items.length)].id;
+  async createRestaurant(listId, restaurantId) {
     const response = await fetch(
       `${this.baseURL}/favorites/${listId}/restaurants`,
       {
@@ -173,7 +170,7 @@ export default class Api {
           authorization: `${this.token}`
         },
         body: JSON.stringify({
-          id: `${this.restaurantId}`
+          id: `${restaurantId}`
         })
       }
     );

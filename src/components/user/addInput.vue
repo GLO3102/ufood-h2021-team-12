@@ -18,27 +18,14 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  label="Name*"
-                  required
-                  v-model="list_name"
-                ></v-text-field>
-              </v-col>
               <v-col cols="12" sm="12">
                 <v-autocomplete
-                  :items="[
-                    'Skiing',
-                    'Ice hockey',
-                    'Soccer',
-                    'Basketball',
-                    'Hockey',
-                    'Reading',
-                    'Writing',
-                    'Coding',
-                    'Basejump'
-                  ]"
+                  :items="allRestaurants"
                   label="Restaurants"
+                  item-text="name"
+                  item-value="id"
+                  @input="getRestaurants"
+                  return-object
                   multiple
                 ></v-autocomplete>
               </v-col>
@@ -54,9 +41,9 @@
           <v-btn
             color="blue darken-1"
             text
+            v-on:click="addNewRestaurants"
             @click="
               dialog = false;
-              addRestaurant(favorite, list_name);
             "
           >
             Save
@@ -70,11 +57,20 @@
 <script>
 export default {
   name: "addInput",
-  props: ["addRestaurant", "favorite"],
+  props: ["addRestaurant", "favorite", "allRestaurants"],
   data: () => ({
     dialog: false,
-    list_name: ""
-  })
+    list_name: "",
+    add_list: []
+  }),
+  methods: {
+    getRestaurants(selectedRestaurant) {
+      this.add_list = selectedRestaurant;
+    },
+    addNewRestaurants(){
+      this.addRestaurant(this.favorite, this.add_list);
+    }
+  },
 };
 </script>
 
