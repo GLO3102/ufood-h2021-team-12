@@ -90,7 +90,7 @@
             >
               Visit this restaurant's page
             </button>
-            <button class="visit-button" v-on:click="modal">
+            <button class="visit-button" v-on:click="modal(restaurant.id)">
               Leave a review
             </button>
           </div>
@@ -187,8 +187,8 @@ export default {
     visitRestaurant: function(id) {
       window.location.href = `/#/restaurant?id=${id}`;
     },
-    modal: function() {
-      this.$modal.show(Modal);
+    modal: function(id) {
+      this.$modal.show(Modal,{restaurantid: id});
     },
     bottom: function() {
       document
