@@ -144,5 +144,25 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+@media screen and (max-width: 300px) {
+  .navbar .item_nav {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .dropdown{
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .dropdown-content {
+    width: 100%;
+  }
+.navbar .s:hover {
+  background-color: #555;
+}
 
+}
 </style>
