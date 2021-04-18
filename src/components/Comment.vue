@@ -31,7 +31,9 @@
 </template>
 
 <script>
-import UFoodApi from "@/services/UFoodApi";
+import Api from "@/services/api";
+
+const api = new Api();
 
 export default {
   name: "Comment",
@@ -42,12 +44,13 @@ export default {
     };
   },
   async created() {
-    let fetched = await UFoodApi.betterFetch("users/" + this.review.user_id, false);
+    api.registerToken(this.$cookies.get("token"));
+    let fetched = await api.getUser(this.review.user_id);
     if (fetched !== undefined) {
       this.name = fetched.name;
     }
   }
-}
+};
 </script>
 
 <style scoped>
