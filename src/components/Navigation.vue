@@ -45,7 +45,7 @@ export default {
   async created() {
     const api = new Api();
     if (Cookies.get("token")) {
-      const user = await api.getUser(Cookies.get("token"));
+      const user = await api.getTokenInfo(Cookies.get("token"));
       this.username = user.name;
     }
   },

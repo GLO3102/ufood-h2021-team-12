@@ -1,19 +1,18 @@
 <template>
-  <modal name="example">
-    <a style="color:black; display:flex; flex-direction: column">
-      <div>
-        <button style="float: right" @click="close">
+  <modal class="reviewModal" name="review">
+    <div class="review-box">
+      <div class="review-top">
+        <button class="review-close-button" @click="close">
           ❌
         </button>
+        <h1 class="review-header">Review</h1>
       </div>
-      <h1 style="color:black;">Review</h1>
-
       <div>
         Rating :
         <select
+          class="review-selector"
           id="rating"
           style="width:10%;"
-          v-on:change="priceRangeChange($event)"
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -22,12 +21,12 @@
           <option value="5">5</option>
         </select>
       </div>
-      <div style="padding-top: 25px">Leave a comment :</div>
-      <div><textarea rows="4" cols="50" id="comment" /></div>
-      <div style="padding-top: 25px">
-        <button v-on:click="submit">Submit</button>
+      <div>Leave a comment :</div>
+      <div><textarea class="review-text-area" rows="4" cols="50" id="comment" /></div>
+      <div class="weird-flex-but-ok">
+        <button class="modal-submit-button" v-on:click="submit">Submit</button>
       </div>
-    </a>
+    </div>
   </modal>
 </template>
 
@@ -37,7 +36,7 @@ export default {
   name: "MyComponent",
   props: ["restaurantid"],
   mounted() {
-    this.$modal.show("example");
+    this.$modal.show("review");
   },
   methods: {
     close() {
@@ -46,7 +45,7 @@ export default {
     async submit() {
       const api = new Api();
       const token = this.$cookies.get("token");
-      const tokeninfo = await api.getUser(token);
+      const tokeninfo = await api.getTokenInfo(token);
       const userId = tokeninfo.id;
       let now = new Date();
 
@@ -58,14 +57,46 @@ export default {
         document.getElementById("rating").value,
         now.toJSON()
       );
+      //I'm so sorry, this was the quickest way to refresh the comment section on a short time constraint
+      location.reload();
       this.$emit("close");
     }
   }
 };
 </script>
 <style>
-.modal {
-  text: black;
+.reviewModal {
+  width: 100%;
+}
+.review-selector {
+  background-color: #ddd;
+}
+.review-box {
   color: black;
+  display: flex;
+  flex-direction: column;
+  background-color: darkgrey;
+}
+.review-close-button {
+  float: right;
+}
+.review-text-area {
+  border: 1px solid;
+}
+
+.weird-flex-but-ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-submit-button {
+  width: 50%;
+  border-radius: 35px;
+  font-weight: bold;
+  font-size: 15px;
+  bottom: 0;
+  background-color: #555;
+  color: white;
 }
 </style>

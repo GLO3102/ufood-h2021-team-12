@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import RestaurantList from "../services/RestaurantList";
+import Api from "@/services/api";
+const api = new Api();
 import Vue from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
@@ -21,8 +22,16 @@ export default {
     selected: ""
   }),
   async created() {
-    const response = await RestaurantList.getRestaurantList();
-    this.nameList = response.items;
+    const token = await this.$cookies.get("token");
+    const user = await api.getTokenInfo(token);
+    if (user && user.id.length > 0) {
+      api.registerToken(token);
+      this.invalidToken = false;
+      const response = await api.getRestaurants();
+      this.nameList = response.items;
+    } else {
+      this.unvalidToken = true;
+    }
   },
   methods: {
     setSelected(selected) {

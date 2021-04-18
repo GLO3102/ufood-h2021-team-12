@@ -6,7 +6,7 @@
         Leave a review
       </button>
       <div class="flex-separator"></div>
-      <div class="param-info">Review per page:</div>
+      <div class="param-info">Review per page (oldest to newest):</div>
       <v-select
         class="favorite-selector"
         v-model="reviewPerPage"
@@ -15,6 +15,7 @@
       />
       <div class="param-info">Page:</div>
       <v-select
+        class="favorite-selector"
         v-model="page"
         :options="this.generatePageOptions(page)"
         @input="fetchAgain"
@@ -32,13 +33,14 @@
 </template>
 
 <script>
-import UFoodApi from "@/services/UFoodApi";
 import Comment from "@/components/Comment";
 import Modal from "./Modal";
 import VModal from "vue-js-modal";
 import Vue from "vue";
 import vSelect from "vue-select";
+import Api from "@/services/api";
 
+const api = new Api();
 Vue.component("v-select", vSelect);
 Vue.use(VModal);
 
@@ -48,6 +50,7 @@ export default {
   props: ["id", "currentRestaurantId"],
   data: () => {
     return {
+      invalidToken: true,
       items: null,
       page: 0,
       reviewPerPage: 10
@@ -55,7 +58,18 @@ export default {
   },
 
   async created() {
-    await this.fetchAgain();
+    const token = await this.$cookies.get("token");
+
+    const user = await api.getTokenInfo(token);
+    if (user.id.length > 0) {
+      this.invalidToken = false;
+      api.registerToken(token);
+
+      await this.fetchAgain();
+    } else {
+      this.invalidToken = true;
+      this.hasSignedIn = false;
+    }
   },
   methods: {
     modal: function(currentRestaurantId) {
@@ -71,17 +85,16 @@ export default {
       return page_options;
     },
     fetchAgain: async function() {
-      let fetched = await UFoodApi.betterFetch(
-        "restaurants/" +
-          this.id +
-          "/visits" +
-          "?limit=" +
-          this.reviewPerPage +
-          "&page=" +
-          this.page,
-        false
+      let response = await api.getReviews(
+        this.id,
+        this.reviewPerPage,
+        this.page
       );
-      this.items = fetched.items;
+      //I WOULD reverse this list to get reviews by date written, but the api serves them from oldest to newest
+      //this means I wouldn't be able to granularly fetch them page by page (unless I have info on page size and review count)
+      //without a bunch of boilerplate that I can't be hassled to work on at 6AM. you can reverse it if you like and play
+      //with the page size, it's incredibly ugly. So we're serving oldest to newest with no option: it's a feature, not a bug
+      this.items = response.items;
     }
   }
 };

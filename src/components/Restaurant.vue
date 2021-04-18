@@ -1,6 +1,6 @@
 <template>
   <div id="restaurantContent">
-    <signIn v-model="connection" v-if="unvalidToken" />
+    <signIn v-model="connection" v-if="!hasSignedIn" />
     <div class="restaurant-data" v-if="this.canDisplayRestaurantData">
       <div class="restaurant-banner-core">
         <h1 class="restaurant-banner-name">{{ this.fetched.name }}</h1>
@@ -140,7 +140,6 @@
 </template>
 <script>
 import CommentSection from "@/components/CommentSection";
-import UFoodApi from "@/services/UFoodApi";
 import Vue from "vue";
 import vSelect from "vue-select";
 import SuggestionList from "./SuggestionList";
@@ -165,45 +164,49 @@ export default {
       currentRestaurantGenre: "",
       currentRestaurantId: "",
       connection: true,
-      unvalidToken: true
+      invalidToken: true,
+      hasSignedIn: true
     };
   },
   async created() {
-    const queryString = window.location.href;
-    const query = queryString
-      .split("/")
-      .pop()
-      .split("?")
-      .pop();
-    const urlParams = new URLSearchParams(query);
-    this.id = urlParams.get("id");
-    this.fetched = await UFoodApi.betterFetch("restaurants/" + this.id, false);
-    if (this.fetched === undefined) {
-      this.canDisplayRestaurantData = false;
-    } else {
-      let array = this.fetched.pictures;
-      var i,
-        j,
-        temparray,
-        chunk = 3;
-      this.formattedPhoto = [];
-      for (i = 0, j = array.length; i < j; i += chunk) {
-        temparray = array.slice(i, i + chunk);
-        this.formattedPhoto.push(temparray);
-      }
-
-      this.telHref = ("" + this.fetched.tel).replace(/\D/g, "");
-
-      this.address_formatted = this.fetched.address.replace(" ", "+");
-      this.canDisplayRestaurantData = true;
-    }
     //get user with token and check if id is present
     const token = this.$cookies.get("token");
-    const user = await api.getUser(token);
-    if (user.id.length > 0) {
-      this.unvalidToken = false;
+    const user = await api.getTokenInfo(token);
+    if (user && user.id.length > 0) {
+      api.registerToken(token);
+      this.invalidToken = false;
+
+      const queryString = window.location.href;
+      const query = queryString
+        .split("/")
+        .pop()
+        .split("?")
+        .pop();
+      const urlParams = new URLSearchParams(query);
+      this.id = urlParams.get("id");
+      this.fetched = await api.getRestaurant(this.id);
+      if (this.fetched === undefined) {
+        this.canDisplayRestaurantData = false;
+      } else {
+        let array = this.fetched.pictures;
+        var i,
+          j,
+          temparray,
+          chunk = 3;
+        this.formattedPhoto = [];
+        for (i = 0, j = array.length; i < j; i += chunk) {
+          temparray = array.slice(i, i + chunk);
+          this.formattedPhoto.push(temparray);
+        }
+
+        this.telHref = ("" + this.fetched.tel).replace(/\D/g, "");
+
+        this.address_formatted = this.fetched.address.replace(" ", "+");
+        this.canDisplayRestaurantData = true;
+      }
     } else {
-      this.unvalidToken = true;
+      this.invalidToken = true;
+      this.hasSignedIn = false;
     }
   },
   methods: {

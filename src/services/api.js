@@ -58,13 +58,19 @@ export default class Api {
     });
     return await response.json();
   }
-  async getUser(token) {
-    const response = await fetch(`${this.baseURL}/tokenInfo`, {
+  async getTokenInfo(token) {
+    return await fetch(`${this.baseURL}/tokenInfo`, {
       headers: {
         authorization: `${token}`
       }
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        console.log("Couldn't get token info");
+        return null;
+      }
     });
-    return await response.json();
   }
   async getRestaurants() {
     const response = await fetch(`${this.baseURL}/restaurants?limit=200`, {
@@ -74,6 +80,20 @@ export default class Api {
     });
     return await response.json();
   }
+
+  async getRestaurantsFromLocation(lat, lng, zoom) {
+    //Why do I feel I'm using the Google Map's api trough proxy?
+    const response = await fetch(
+      `${this.baseURL}/restaurants?limit=50?lon=${lng}?lat=${lat}?z=${zoom}`,
+      {
+        headers: {
+          authorization: `${this.token}`
+        }
+      }
+    );
+    return await response.json();
+  }
+
   async getRestaurant(restaurantId) {
     const response = await fetch(
       `${this.baseURL}/restaurants/${restaurantId}`,
@@ -209,7 +229,6 @@ export default class Api {
         id: userId
       })
     });
-
     return response.json();
   }
 
@@ -246,7 +265,29 @@ export default class Api {
         })
       }
     );
-    console.log(response);
     return response.json();
+  }
+  async getReviews(restaurantID, reviewPerPage, page) {
+    const response = await fetch(
+      `${this.baseURL}/restaurants/${restaurantID}/visits?limit=${reviewPerPage}&page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: this.token
+        }
+      }
+    );
+    const json = await response.json();
+    return json;
+  }
+  async getUser(id) {
+    const response = await fetch(`${this.baseURL}/users/${id}`, {
+      method: "GET",
+      headers: {
+        authorization: `${this.token}`
+      }
+    });
+    const json = await response.json();
+    return json;
   }
 }

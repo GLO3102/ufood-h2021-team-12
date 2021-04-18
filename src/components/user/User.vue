@@ -134,7 +134,7 @@ export default {
   },
   async created() {
     const token = this.$cookies.get("token");
-    const user = await api.getUser(token);
+    const user = await api.getTokenInfo(token);
 
     console.log(user);
     api.registerToken(token);
