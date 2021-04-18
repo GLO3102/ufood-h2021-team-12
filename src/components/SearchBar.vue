@@ -52,4 +52,5 @@ export default {
   text-transform: lowercase;
   font-variant: small-caps;
 }
+
 </style>
