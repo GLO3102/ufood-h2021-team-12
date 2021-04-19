@@ -16,7 +16,7 @@ npm install vue-simple-search-dropdown
 ```
 
 # Pour livrable 3:
-Installer et lanceer l'application avec yarn. Suivre le design document
+Installer et lancer l'application avec yarn. Suivre le design document
 ```bash
 npm install --global yarn
 yarn install
