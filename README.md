@@ -15,6 +15,23 @@ npm install vue-js-modal
 npm install vue-simple-search-dropdown
 ```
 
+# Pour livrable 3:
+Installer et lanceer l'application avec yarn. Suivre le design document
+```bash
+npm install --global yarn
+yarn install
+yarn run serve
+```
+Dans le pire cas (conflit de package npm et yarn):
+
+-manuellement delete node_modules
+-manuellement delete package-lock.json
+-manuellement delete yarn.lock
+```bash
+yarn install
+yarn run serve
+```
+
 # vue-starter
 
 Kit de départ préconfiguré utilisant [vue-cli](https://cli.vuejs.org/), [ESLint](https://eslint.org/) avec [Prettier](https://prettier.io/) et [Jest](https://jestjs.io/).
