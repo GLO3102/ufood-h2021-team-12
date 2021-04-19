@@ -1,20 +1,3 @@
-# Pour livrable 1:
-Le restaurant se trouve à l'addresse https://\<ip\>:\<port\>/#/restaurant/
-
-(attention au /#/)
-
-Directions vers le restaurant <- cliquez sur la map
-
-# Pour livrable 2:
-Installer et lancer l'application avec npm. Suivre le Design Document
-
-packages supplémentaires à installer en cas d'erreur de dépendance besoin:
-```bash
-npm install vue-select
-npm install vue-js-modal
-npm install vue-simple-search-dropdown
-```
-
 # Pour livrable 3:
 Installer et lancer l'application avec yarn. Suivre le design document
 ```bash
