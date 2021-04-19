@@ -186,31 +186,7 @@ export default {
         .pop();
       const urlParams = new URLSearchParams(query);
       this.id = urlParams.get("id");
-
-      let tempfavoriteOptions = (await api.getFavorites(200)).items;
-      tempfavoriteOptions.forEach(option => {
-        option.label = option.name;
-      });
-      let restaurantId = this.id;
-      this.favoriteOptions = tempfavoriteOptions;
-      let filtered = this.favoriteOptions.filter(list => {
-        let found = false;
-        list.restaurants.forEach(restaurant => {
-          if (restaurant.id === restaurantId) {
-            found = true;
-          }
-        });
-        return found;
-      });
-      console.log(filtered);
-      this.favoriteList = filtered;
-      this.favoriteList.forEach(f =>
-        this.favoriteOptions.splice(
-          this.favoriteOptions.findIndex(e => e.id === f.id),
-          1
-        )
-      );
-      this.lastState = this.favoriteList;
+      await this.populateFavoriteList();
       this.fetched = await api.getRestaurant(this.id);
       if (this.fetched === undefined) {
         this.canDisplayRestaurantData = false;
@@ -237,19 +213,44 @@ export default {
     }
   },
   methods: {
-    modifyFavorites() {
+    async modifyFavorites() {
       if (this.lastState.length > this.favoriteList.length) {
         let tempFavoriteList = this.favoriteList;
         let removed = this.lastState.filter(function(v) {
           return tempFavoriteList.indexOf(v) === -1;
         });
-        api.deleteRestaurant(removed[0].id, this.id);
+        await api.deleteRestaurant(removed[0].id, this.id);
       } else {
-        api.createRestaurant(
+        await api.createRestaurant(
           this.favoriteList[this.favoriteList.length - 1].id,
           this.id
         );
       }
+      await this.populateFavoriteList();
+    },
+    async populateFavoriteList() {
+      let tempfavoriteOptions = (await api.getFavorites(200)).items;
+      tempfavoriteOptions.forEach(option => {
+        option.label = option.name;
+      });
+      let restaurantId = this.id;
+      this.favoriteOptions = tempfavoriteOptions;
+      let filtered = this.favoriteOptions.filter(list => {
+        let found = false;
+        list.restaurants.forEach(restaurant => {
+          if (restaurant.id === restaurantId) {
+            found = true;
+          }
+        });
+        return found;
+      });
+      this.favoriteList = filtered;
+      this.favoriteList.forEach(f =>
+        this.favoriteOptions.splice(
+          this.favoriteOptions.findIndex(e => e.id === f.id),
+          1
+        )
+      );
       this.lastState = this.favoriteList;
     }
   }
