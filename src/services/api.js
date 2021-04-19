@@ -248,7 +248,6 @@ export default class Api {
   }
 
   async leaveReview(token, userId, restaurantId, review, rating, date) {
-    console.log(token);
     const response = await fetch(
       `${this.baseURL}/users/${userId}/restaurants/visits`,
       {

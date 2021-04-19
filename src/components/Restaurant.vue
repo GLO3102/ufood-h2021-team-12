@@ -9,8 +9,8 @@
           <v-select
             multiple
             v-model="favoriteList"
-            :options="['My Dummy List', 'My Dummiest List', '+ Add New List']"
-            @input="updateFavoriteList"
+            :options="favoriteOptions"
+            @input="modifyFavorites"
           />
         </div>
         <div class="restaurant-banner-address-info">
@@ -160,7 +160,9 @@ export default {
       formattedPhoto: [],
       telHref: "",
       address_formatted: "",
-      favoriteList: "",
+      favoriteList: [],
+      favoriteOptions: [],
+      lastState:[],
       currentRestaurantGenre: "",
       currentRestaurantId: "",
       connection: true,
@@ -175,7 +177,7 @@ export default {
     if (user && user.id.length > 0) {
       api.registerToken(token);
       this.invalidToken = false;
-
+      api.registerUser(user);
       const queryString = window.location.href;
       const query = queryString
         .split("/")
@@ -184,6 +186,7 @@ export default {
         .pop();
       const urlParams = new URLSearchParams(query);
       this.id = urlParams.get("id");
+      await this.populateFavoriteList();
       this.fetched = await api.getRestaurant(this.id);
       if (this.fetched === undefined) {
         this.canDisplayRestaurantData = false;
@@ -210,15 +213,45 @@ export default {
     }
   },
   methods: {
-    updateFavoriteList() {
-      if (
-        this.favoriteList[this.favoriteList.length - 1] !== "+ Add New List"
-      ) {
-        console.log("Now in " + this.favoriteList);
+    async modifyFavorites() {
+      if (this.lastState.length > this.favoriteList.length) {
+        let tempFavoriteList = this.favoriteList;
+        let removed = this.lastState.filter(function(v) {
+          return tempFavoriteList.indexOf(v) === -1;
+        });
+        await api.deleteRestaurant(removed[0].id, this.id);
       } else {
-        this.favoriteList.pop();
-        console.log("TODO: show prompt and add to list");
+        await api.createRestaurant(
+          this.favoriteList[this.favoriteList.length - 1].id,
+          this.id
+        );
       }
+      await this.populateFavoriteList();
+    },
+    async populateFavoriteList() {
+      let tempfavoriteOptions = (await api.getFavorites(200)).items;
+      tempfavoriteOptions.forEach(option => {
+        option.label = option.name;
+      });
+      let restaurantId = this.id;
+      this.favoriteOptions = tempfavoriteOptions;
+      let filtered = this.favoriteOptions.filter(list => {
+        let found = false;
+        list.restaurants.forEach(restaurant => {
+          if (restaurant.id === restaurantId) {
+            found = true;
+          }
+        });
+        return found;
+      });
+      this.favoriteList = filtered;
+      this.favoriteList.forEach(f =>
+        this.favoriteOptions.splice(
+          this.favoriteOptions.findIndex(e => e.id === f.id),
+          1
+        )
+      );
+      this.lastState = this.favoriteList;
     }
   }
 };
